@@ -1,0 +1,9 @@
+Version 2.1.1 - 28 August 21 
+============================
+
+1. Fixed: Minor CSS Issues
+
+Version 1.0 - 	4 December 18
+===================================
+
+1. Initial release                            
