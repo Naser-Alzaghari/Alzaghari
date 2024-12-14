@@ -9,7 +9,7 @@
                             <ul class="mainmenu">
                                 <li class="mainmenu__item menu-item-has-children megamenu-holder">
                                     <a href="{{route('landing_page')}}" class="mainmenu__link">
-                                        <span class="mm-text">Home</span>
+                                        <span class="mm-text">Home {{Auth::user()->name ?? ""}}</span>
                                     </a>
                                     
                                 </li>

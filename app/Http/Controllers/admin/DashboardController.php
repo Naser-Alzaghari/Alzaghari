@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 
 class DashboardController extends Controller
 {
@@ -42,6 +45,7 @@ class DashboardController extends Controller
         // Pass data to the dashboard view
         return view('admin.dashboard', compact('totalSales','subscribers', 'orders', 'sales', 'months'));
     }
+
 
     
 

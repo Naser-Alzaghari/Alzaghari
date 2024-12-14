@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name', 191)->nullable();
             $table->text('description')->nullable();
             $table->decimal('price', 10)->nullable();
+            $table->decimal('price_after_discount', 10)->nullable();
             $table->integer('stock')->nullable();
             $table->integer('category_id')->nullable()->index('category_id');
             $table->timestamp('created_at')->nullable()->useCurrent();

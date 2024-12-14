@@ -295,7 +295,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
         </div>
         <span class="profile-username">
           <span class="op-7">Hi,</span>
-          <span class="fw-bold">{{Auth::user()->name}}</span>
+          <span class="fw-bold">{{Auth::guard('admin')->user()->name}}</span>
         </span>
       </a>
       <ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -310,9 +310,9 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
                 />
               </div>
               <div class="u-text">
-                <h4>{{Auth::user()->name}}</h4>
+                <h4>{{Auth::guard('admin')->user()->name}}</h4>
                 <p class="text-muted" style="text-overflow: ellipsis; white-space: nowrap;
-">{{Auth::user()->email}}</p>
+">{{Auth::guard('admin')->user()->email}}</p>
                 <a
                   href="{{route('admin.profile.edit')}}"
                   class="btn btn-xs btn-secondary btn-sm"
@@ -324,7 +324,7 @@ class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bo
           <li>
             <div class="dropdown-divider"></div>
             
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('admin.logout') }}">
                 @csrf
                 <button type="submit" class="dropdown-item">
                     {{ __('Log Out') }}

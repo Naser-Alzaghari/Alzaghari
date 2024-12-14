@@ -15,6 +15,7 @@ use App\Http\Controllers\user\LandingPageController;
 use App\Http\Controllers\user\ShopSidebarController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\user\CartController;
+use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
 // use App\Http\Controllers\OrderController;
 
 /*
@@ -32,55 +33,57 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('admin/dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/dashboard', DashboardController::class);
+// Admin Routes
+Route::prefix('admin')->name('admin.')->group(function () {
 
+        // Admin Authentication Routes
+        Route::get('/login', [AdminAuthenticatedSessionController::class, 'create'])->name('login');
+        Route::post('/login', [AdminAuthenticatedSessionController::class, 'store']);
+        Route::post('/logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+        // Protected Admin Routes (requires admin authentication)
+        Route::middleware(['isAdmin'])->group(function () {
 
-
-
-// Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::prefix('user')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'index'])->name('user.profile');
-//     // Other user-specific routes...
-// });
-
-// Admin Dashboard Routes
-Route::prefix('admin')
-    ->group(function () {
-        Route::middleware('auth')->name('admin.')->group(function () {
+            // Dashboard
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+            Route::get('/api/sales', [DashboardController::class, 'getMonthlySales'])->name('api.sales');
+
+            // Profile Management
             Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
             Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
             Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-            Route::get('/orders', function () {
-                return view('admin/orders');
-            })->middleware(['auth', 'verified'])->name('dashboard');
-        
-            Route::resource('coupons', CouponController::class)->name('index','coupons');
-            Route::patch('/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])->name('coupons.toggle');
-            Route::resource('users', UserController::class)->name('index','users');
-            Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
-            Route::get('/api/sales', [DashboardController::class, 'getMonthlySales']);
-        
-            Route::resource('products', AdminProductController::class)->name('index','products');
-            
-            // Route to display the add stock form
-            Route::get('/products/{id}/addStockForm', [AdminProductController::class, 'addStockForm'])->name('products.addStockForm');
-            Route::put('/products/{id}/add-stock', [AdminProductController::class, 'addStock'])->name('products.addStock');
-        
-            Route::resource('reviews', ReviewController::class)->name('index','reviews');
-            Route::get('/reviews/{review}/toggle', [ReviewController::class, 'toggle'])->name('reviews.toggle');
-        
-            Route::resource('categories', CategoryController::class)->name('index','categories');
-            Route::resource('orders', OrderController::class)->name('index','orders');
-        });
-        
 
+            // Orders Management
+            Route::get('/orders/view', function () {
+                return view('admin/orders');
+            })->name('orders.view');
+            Route::resource('orders', OrderController::class)->except(['create', 'store'])->name('index', 'orders');
+
+            // Coupons Management
+            Route::resource('coupons', CouponController::class)->name('index', 'coupons');
+            Route::patch('/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])->name('coupons.toggle');
+
+            // Users Management
+            Route::resource('users', UserController::class)->name('index', 'users');
+            Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+
+            // Products Management
+            Route::resource('products', AdminProductController::class)->name('index', 'products');
+            Route::get('/products/{id}/add-stock-form', [AdminProductController::class, 'addStockForm'])->name('products.addStockForm');
+            Route::put('/products/{id}/add-stock', [AdminProductController::class, 'addStock'])->name('products.addStock');
+
+            // Reviews Management
+            Route::resource('reviews', ReviewController::class)->name('index', 'reviews');
+            Route::get('/reviews/{review}/toggle', [ReviewController::class, 'toggle'])->name('reviews.toggle');
+
+            // Categories Management
+            Route::resource('categories', CategoryController::class)->name('index', 'categories');
+        });
     });
+
+
+
 
 
 
@@ -258,7 +261,9 @@ Route::prefix('admin')
 
 
 
-// Route::get('/categories', function () {
+
+
+    // Route::get('/categories', function () {
 //     return view('admin/categories');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
