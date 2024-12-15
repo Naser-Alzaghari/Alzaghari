@@ -23,9 +23,13 @@
                     <tr>
                         <td>{{ $item->product->name }}</td> <!-- Assuming there's a `product` relationship -->
                         <td>{{ $item->quantity }}</td>
-                        <td>{{ $item->price }}</td>
+                        <td>{{ $item->price * $item->quantity }}</td>
                     </tr>
                 @endforeach
+                <tr>
+                  <th class="bg-light" colspan="2">total amount:</th>
+                  <th class="bg-light">{{ $order->total_amount }}</th>
+              </tr>
                 </tbody>
                 </table>
             </div>

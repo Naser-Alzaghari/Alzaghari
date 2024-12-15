@@ -16,6 +16,8 @@ use App\Http\Controllers\user\ShopSidebarController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
+use App\Http\Controllers\user\CheckoutController;
+
 // use App\Http\Controllers\OrderController;
 
 /*
@@ -29,9 +31,6 @@ use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
 // Admin Routes
@@ -124,9 +123,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             // Route::get('/cart', function () {
             //     return view('user/cart');
             // })->name('cart');
-            Route::get('/checkout', function () {
-                return view('user/checkout');
-            })->name('checkout');
+            // Route::get('/checkout', function () {
+            //     return view('user/checkout');
+            // })->name('checkout');
             Route::get('/coming-soon', function () {
                 return view('user/coming-soon');
             })->name('coming-soon');
@@ -217,10 +216,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/update-cart-total', [CartController::class, 'updateTotal'])->name('cart.updateTotal');
             Route::post('/remove-cart-item', [CartController::class, 'removeItem'])->name('cart.removeItem');
             Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-            Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');
+            // Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout')->middleware('auth');
             Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place')->middleware('auth');
             Route::get('/product-data', [UserProductController::class, 'getProductData'])->name('getProductData');
             Route::get('/minicartprice', [CartController::class, 'updateCart'])->name('minicartprice');
+            Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
+            Route::post('/placeOrder', [CheckoutController::class, 'placeOrder'])->name('place_order');
 
 
             

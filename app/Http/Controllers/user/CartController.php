@@ -11,10 +11,10 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity', 1);
+        $quantity = (int)$request->input('quantity', 1);
 
         $cart = session()->get('cart', []);
-        
+
         if (isset($cart[$productId])) {
             $cart[$productId]['quantity'] += $quantity;
         } else {
@@ -31,11 +31,12 @@ class CartController extends Controller
 
         // Fetch product details
         $product = Product::with('images')->find($productId);
-        
+
         return response()->json([
+            'cart' => $cart,
             'cartItemCount' => $cartItemCount,
             'product' => $product,
-            'quantity' => (int)$quantity,
+            'quantity' => $quantity,
             'total' => $this->calculateTotal($cart)
         ]);
     }
@@ -65,7 +66,7 @@ class CartController extends Controller
     public function updateQuantity(Request $request)
     {
         $productId = $request->input('product_id');
-        $quantity = $request->input('quantity');
+        $quantity = (int) $request->input('quantity');
 
         $cart = session()->get('cart', []);
 
@@ -75,19 +76,28 @@ class CartController extends Controller
         }
 
         $cartItemCount = array_sum(array_column($cart, 'quantity'));
+        $product = Product::find($productId); // Fetch the product to include its details
+
+        // Ensure we have price information for the product
+        $price = $product->price_after_discount ?? $product->price;
 
         return response()->json([
             'cartItemCount' => $cartItemCount,
             'quantity' => $cart[$productId]['quantity'],
-            'total' => $this->calculateTotal($cart)
+            'total' => $this->calculateTotal($cart),
+            'product' => [
+                'price' => $price,
+            ]
         ]);
     }
+
 
     public function updateTotal()
     {
         $cart = session()->get('cart', []);
         return response()->json([
-            'total' => $this->calculateTotal($cart)
+            'total' => $this->calculateTotal($cart),
+            'cart' => $cart
         ]);
     }
 
@@ -104,6 +114,8 @@ class CartController extends Controller
 
         $cartItemCount = array_sum(array_column($cart, 'quantity'));
 
+
+
         return response()->json([
             'cartItemCount' => $cartItemCount,
             'total' => $this->calculateTotal($cart)
@@ -115,7 +127,8 @@ class CartController extends Controller
         $total = 0;
         foreach ($cart as $item) {
             $product = Product::find($item['product_id']);
-            $total += $product->price * $item['quantity'];
+            $price = (float) ($product->price_after_discount ?? $product->price); // Ensure price is a float
+            $total += $price * (int) $item['quantity']; // Ensure quantity is an integer
         }
         return number_format($total, 2);
     }

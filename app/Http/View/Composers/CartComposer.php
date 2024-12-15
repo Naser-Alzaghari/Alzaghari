@@ -1,7 +1,5 @@
 <?php
 
-// app/Http/View/Composers/CartComposer.php
-
 namespace App\Http\View\Composers;
 
 use Illuminate\View\View;
@@ -12,7 +10,6 @@ class CartComposer
     public function compose(View $view)
     {
         $cart = session()->get('cart', []);
-        // dd($cart);
         $cartItemCount = array_sum(array_column($cart, 'quantity'));
 
         // Fetch product details based on product IDs in the cart

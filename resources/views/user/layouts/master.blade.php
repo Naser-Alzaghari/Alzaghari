@@ -286,33 +286,18 @@
 
     
     <script>
-        $.ajax({
-        url: '{{ route('cart.updateTotal') }}',
-        method: 'POST',
-        data: {
-            _token: '{{ csrf_token() }}',
-        },
-        success: function(response) {
-            console.log(response.total); // Log response data
-            console.log(response); // Log response data
-            $('#cart-total').text('$' + response.total); // Update cart total
-        },
-        error: function(xhr) {
-            alert('Failed to update total.');
-        }
-    });
-        $(document).ready(function() {
+$(document).ready(function() {
+    updateCartTotal();
+
     // Add to Cart
     $('.add_to_cart_btn').click(function(e) {
-
         e.preventDefault();
-
         var $button = $(this);
         var productId = $button.data('product-id');
         var quantity = $button.siblings('.quantity').find('.quantity-input').val() ?? 1;
         var productName = $button.data('product-name');
-        console.log($button.siblings('.quantity').find('.quantity-input').val());
-        
+        console.log("productId=" + productId);
+        console.log("quantity=" + quantity);
         $button.prop('disabled', true);
 
         $.ajax({
@@ -324,151 +309,118 @@
                 quantity: quantity
             },
             success: function(response) {
-                // Show alert with product name
                 showAlert(`${productName ?? 'item'} has been added to cart!`);
-                console.log('Success:', response);
-                // alert('Product added to cart successfully!');
-                $button.prop('disabled', false);
-                $('#cart-item-count').text(response.cartItemCount);
-                $('.mini-cart-count').text(response.cartItemCount); // Update mini cart count
+                $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
                 updateMiniCart(response.product, response.quantity);
             },
-            error: function(xhr) {
+            error: function() {
                 alert('Failed to add product to cart.');
+            },
+            complete: function() {
                 $button.prop('disabled', false);
             }
         });
-        $.ajax({
-        url: '{{ route('cart.updateQuantity') }}',
-        method: 'POST',
-        data: {
-            _token: '{{ csrf_token() }}',
-            product_id: productId,
-            quantity: quantity
-        },
-        success: function(response) {
-            console.log(response.total); // Log response data
-            console.log(response); // Log response data
-            $('#cart-total').text('$' + response.total); // Update cart total
-        },
-        error: function(xhr) {
-            alert('Failed to update total.');
-        }
-    });
+
+        updateCartTotal();
     });
 
     // Update Quantity
     $(document).on('click', '.update-cart-quantity', function(e) {
-    e.preventDefault();
-    console.log('Update Quantity button clicked'); // Log click event
+        e.preventDefault();
 
-    var $button = $(this);
-    var productId = $button.data('product-id');
-    var action = $button.data('action');
-    var $quantityInput = $button.siblings('.mini-cart-quantity');
-    var quantity = parseInt($quantityInput.val());
-
-    if (action === 'increase') {
-        quantity++;
-    } else if (action === 'decrease') {
-        quantity--;
-    }
-
-    if (quantity <= 0) {
-        console.log('Quantity is zero, removing item'); // Log quantity check
-        removeCartItem(productId);
-        return;
-    }
-
-    $.ajax({
-        url: '{{ route('cart.updateQuantity') }}',
-        method: 'POST',
-        data: {
-            _token: '{{ csrf_token() }}',
-            product_id: productId,
-            quantity: quantity
-        },
-        success: function(response) {
-            console.log(response.total); // Log response data
-
-            console.log(response); // Log response data
-            $('#cart-item-count').text(response.cartItemCount);
-            $('.mini-cart-count').text(response.cartItemCount); // Update mini cart count
-            $quantityInput.val(quantity);
-
-            // Update item price and cart total
-            $('#item-price-' + productId).text('$' + response.total); // Update item price
-            $('#cart-total').text('$' + response.total); // Update cart total
-
-            // Update button action and icon
-            var decreaseButton = $button.closest('.quantity-controls').find('button[data-action="decrease"], button[data-action="remove"]');
-            if (quantity === 1) {
-                decreaseButton.attr('data-action', 'remove').html('<i class="fa-solid fa-trash"></i>');
-            } else {
-                decreaseButton.attr('data-action', 'decrease').html('<i class="fa-solid fa-minus"></i>');
-            }
-        },
-        error: function(xhr) {
-            alert('Failed to update quantity.');
-        }
-    });
-});
-
-
-    // Remove Item
-    $(document).on('click', '.update-cart-quantity[data-action="remove"]', function() {
         var $button = $(this);
         var productId = $button.data('product-id');
+        var action = $button.data('action');
 
+        // Determine if the action is from mini-cart or main cart page
+        var $quantityInput = $button.siblings('.mini-cart-quantity').length ? 
+                             $button.siblings('.mini-cart-quantity') : 
+                             $button.siblings('.quantity-input');
+
+        var quantity = parseInt($quantityInput.val());
+        console.log('quantity is ' + quantity);
+
+        if (action === 'increase') quantity++;
+        else if (action === 'decrease') quantity--;
+
+        if (quantity <= 0) {
+            removeCartItem(productId);
+            return;
+        }
+
+        $.ajax({
+            url: '{{ route('cart.updateQuantity') }}',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}',
+                product_id: productId,
+                quantity: quantity
+            },
+            success: function(response) {
+                $quantityInput.val(response.quantity);
+
+                // Fetch the price from the data attribute
+                var price = parseFloat($(`tr[data-product-id="${productId}"] .product-price .money`).data('price'));
+
+                // Calculate the new total
+                var newTotal = (response.quantity * price).toFixed(0);
+
+                // Update the total in the DOM
+                $(`#item-total-${productId}`).html(`<strong>$${newTotal}</strong>`);
+
+                updateCartTotal();
+            },
+            error: function() {
+                alert('Failed to update quantity.');
+            }
+        });
+    });
+
+    // Remove Item
+    $(document).on('click', '.remove-cart-item', function(e) {
+        e.preventDefault();
+
+        var productId = $(this).data('product-id');
         removeCartItem(productId);
     });
 
     function updateMiniCart(product, quantity) {
-        console.log(product.images); // Log product data
         var miniCart = $('.mini-cart-items');
-        var cartItem = miniCart.find('.mini-cart__product[data-product-id="' + product.id + '"]');
+        var cartItem = miniCart.find(`.mini-cart__product[data-product-id="${product.id}"]`);
 
-        if (cartItem.length > 0) {
-            // Update quantity if product is already in the cart
+        if (cartItem.length) {
             var existingQuantity = parseInt(cartItem.find('.mini-cart-quantity').val());
             var newQuantity = existingQuantity + quantity;
             cartItem.find('.mini-cart-quantity').val(newQuantity);
 
-            // Update button action and icon
-            var decreaseButton = cartItem.find('button[data-action="decrease"], button[data-action="remove"]');
-            if (newQuantity === 1) {
-                decreaseButton.attr('data-action', 'remove').html('<i class="fa-solid fa-trash"></i>');
-            } else {
-                decreaseButton.attr('data-action', 'decrease').html('<i class="fa-solid fa-minus"></i>');
-            }
+            updateButtonState(cartItem.find('button[data-action="decrease"]'), newQuantity);
         } else {
-            // Add new product to the cart
-            var productHtml = `
-                <li class="mini-cart__product" data-product-id="${product.id}">
-                    
-                    <div class="mini-cart__product__image">
-                        ${product.images && product.images.length > 0 ? `<img src="{{ asset('storage/') }}/${product.images[0].image_url}" alt="${product.name}">` : '<img src="{{ asset('storage/images/default_product.png')}}" alt="Product Image">'}
-                    </div>
-                    <div class="mini-cart__product__content">
-                        <a class="mini-cart__product__title">${product.name}</a>
-                        <div class="quantity-controls">
-                            <button class="update-cart-quantity" data-product-id="${product.id}" data-action="${quantity === 1 ? 'remove' : 'decrease'}">
-                                <i class="fa-solid ${quantity === 1 ? 'fa-trash' : 'fa-minus'}"></i>
-                            </button>
-                            <input type="number" class="mini-cart-quantity" data-product-id="${product.id}" value="${quantity}" readonly>
-                            <button class="update-cart-quantity" data-product-id="${product.id}" data-action="increase">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </li>
-            `;
-            miniCart.append(productHtml);
+            miniCart.append(generateCartItemHTML(product, quantity));
         }
     }
 
+    function generateCartItemHTML(product, quantity) {
+        return `
+            <li class="mini-cart__product" data-product-id="${product.id}">
+                <div class="mini-cart__product__image">
+                    ${product.images && product.images.length ? `<img src="{{ asset('storage/') }}/${product.images[0].image_url}" alt="${product.name}">` : '<img src="{{ asset('storage/images/default_product.png') }}" alt="Product Image">'}
+                </div>
+                <div class="mini-cart__product__content">
+                    <a class="mini-cart__product__title">${product.name}</a>
+                    <div class="quantity-controls">
+                        <button class="update-cart-quantity" data-product-id="${product.id}" data-action="${quantity === 1 ? 'remove' : 'decrease'}">
+                            <i class="fa-solid ${quantity === 1 ? 'fa-trash' : 'fa-minus'}"></i>
+                        </button>
+                        <input type="number" class="mini-cart-quantity" value="${quantity}" readonly>
+                        <button class="update-cart-quantity" data-product-id="${product.id}" data-action="increase">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>`;
+    }
+
     function removeCartItem(productId) {
-        
         $.ajax({
             url: '{{ route('cart.removeItem') }}',
             method: 'POST',
@@ -477,130 +429,77 @@
                 product_id: productId
             },
             success: function(response) {
-                console.log(response); // Log response data
-                // alert('Product removed from cart.');
-                $('#cart-item-count').text(response.cartItemCount);
-                $('.mini-cart-count').text(response.cartItemCount); // Update mini cart count
-                $('.mini-cart-items .mini-cart__product[data-product-id="' + productId + '"]').remove();
+                $(`.mini-cart__product[data-product-id="${productId}"]`).remove();
+                $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
+                updateCartTotal();
             },
-            error: function(xhr) {
+            error: function() {
                 alert('Failed to remove product from cart.');
             }
         });
-        $.ajax({
-        url: '{{ route('cart.updateTotal') }}',
-        method: 'POST',
-        data: {
-            _token: '{{ csrf_token() }}',
-        },
-        success: function(response) {
-            console.log(response.total); // Log response data
-            console.log(response); // Log response data
-            $('#cart-total').text('$' + response.total); // Update cart total
-        },
-        error: function(xhr) {
-            alert('Failed to update total.');
-        }
-    });
     }
 
+    function updateCartTotal() {
+        $.ajax({
+            url: '{{ route('cart.updateTotal') }}',
+            method: 'POST',
+            data: { _token: '{{ csrf_token() }}' },
+            success: function(response) {
+                $('#cart-subtotal').text('$' + response.total);
+                $('#cart-total').text('$' + response.total);
+            },
+            error: function() {
+                alert('Failed to update total.');
+            }
+        });
+    }
 
-        function showAlert(message) {
+    function updateButtonState($button, quantity) {
+        var decreaseButton = $button.closest('.quantity-controls').find('button[data-action="decrease"], button[data-action="remove"]');
+        if (quantity === 1) {
+            decreaseButton.attr('data-action', 'remove').html('<i class="fa-solid fa-trash"></i>');
+        } else {
+            decreaseButton.attr('data-action', 'decrease').html('<i class="fa-solid fa-minus"></i>');
+        }
+    }
+
+    function showAlert(message) {
         var alertDiv = $('<div class="alert alert-success"></div>').text(message).hide().fadeIn(500);
         $('body').append(alertDiv);
+        setTimeout(() => alertDiv.fadeOut(500, () => alertDiv.remove()), 4000);
+    }
 
-        console.log('Alert Div:', alertDiv); // Debugging step to check if the div is created
-
-        setTimeout(function() {
-            alertDiv.fadeOut(500, function() {
-            $(this).remove();
-            });
-        }, 4000);
-        }
-
-        // // Function to update modal content
-        // function updateProductModal(product) {
-        // $('#product-modal-title').text(product.name);
-        // $('#product-modal-price').text(`$${product.price}`);
-        // $('#product-modal-old-price').text(`$${product.oldPrice}`);
-        // $('#product-modal-description').text(product.description);
-        // $('#product-modal-img').attr('src', product.image);
-        // $('#product-modal-link').attr('href', product.link);
-        // $('#product-modal-badge').text(product.badge);
-        // $('#product-modal-sku').text(product.sku);
-        // $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
-        // }
-
-        // // Example product data
-        // const productData = {
-        // name: 'Waxed-effect pleated skirt',
-        // price: 49.00,
-        // oldPrice: 60.00,
-        // description: 'Donec accu.',
-        // image: 'user_assets/img/products/prod-9-1.jpg',
-        // link: 'product-details.html',
-        // badge: 'sale',
-        // sku: 'REF. LA-887',
-        // category: 'Fashions',
-        // categoryLink: '/shop-sidebar' // Adjust the link as needed
-        // };
-
-        // // Trigger modal and update content
-        // $('#productModal').on('show.bs.modal', function (event) {
-        // var button = $(event.relatedTarget);
-        // var product = productData; // Replace with the actual product data
-        // updateProductModal(product);
-        // });
-
-        $('#productModal').on('show.bs.modal', function(event) {
+    $('#productModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var productId = button.data('product-id');
 
-        // AJAX request to fetch product data from the server
         $.ajax({
-            url: '{{ route('getProductData') }}', // Update with your API endpoint
+            url: '{{ route('getProductData') }}',
             type: 'GET',
             data: { id: productId },
             success: function(product) {
-            // Update the modal with the fetched product data
-            $('#product-modal-title').text(product.name);
-            
-            $('#product-modal-description').text(product.description);
-            $('#product-modal-img').attr('src', 'storage/'+product.images[0]);
-            $('#product-modal-link').attr('href', product.link);
-            $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
-            $('#add_to_cart').attr('data-product-id', productId);
-            $('#add_to_cart').attr('data-product-name', product.name);
-            $('#qty').val(1);
+                $('#product-modal-title').text(product.name);
+                $('#product-modal-description').text(product.description);
+                $('#product-modal-img').attr('src', 'storage/' + product.images[0]);
+                $('#product-modal-link').attr('href', product.link);
+                $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
+                $('#add_to_cart').data('product-id', productId).data('product-name', product.name);
+                $('#qty').val(1);
 
-
-
-            // Conditionally display price and old price
-            if (product.price_after_discount) {
-                $('#product-modal-price').html(`${product.price_after_discount}JD`);
-                $('#product-modal-old-price').html(`${product.price}JD`).show();
-            } else {
-                $('#product-modal-price').html(`${product.price}JD`);
-                $('#product-modal-old-price').hide();
-            }
+                if (product.price_after_discount) {
+                    $('#product-modal-price').html(`${product.price_after_discount}JD`);
+                    $('#product-modal-old-price').html(`${product.price}JD`).show();
+                } else {
+                    $('#product-modal-price').html(`${product.price}JD`);
+                    $('#product-modal-old-price').hide();
+                }
             },
-            error: function(xhr, status, error) {
-            console.error('Error fetching product data:', error);
+            error: function() {
+                console.error('Error fetching product data.');
             }
         });
-
-        
-
-
-
-        });
-
+    });
 });
-
-
-
-
-
 
     </script>
     

@@ -6,6 +6,7 @@
             <div class="mini-cart__content">
                 <ul class="mini-cart__list mini-cart-items">
                     @foreach ($cartItems as $item)
+                    
                     <li class="mini-cart__product" data-product-id="{{$item['product']->id}}">
                         
                         <div class="mini-cart__product__image">
@@ -34,7 +35,7 @@
                 </ul>
                 <div class="mini-cart__total cart-total">
                     <span>Subtotal</span>
-                    <span class="ammount" id="cart-total">$98.00</span>
+                    <span class="ammount" id="cart-total">${{$total ?? 0}}</span>
                 </div>
                 <div class="mini-cart__buttons">
                     <a href="{{route('cart.view')}}" class="btn btn-fullwidth btn-style-1">View Cart</a>

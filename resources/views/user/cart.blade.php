@@ -16,46 +16,50 @@
                                                 <th>&nbsp;</th>
                                                 <th>&nbsp;</th>
                                                 <th class="text-start">Product</th>
-                                                <th>price</th>
-                                                <th>quantity</th>
-                                                <th>total</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach($cartItems as $item)
-                                                <tr>
-                                                    <tr>
-                                                        <td class="product-remove text-start"><a href=""><i
-                                                                    class="dl-icon-close"></i></a></td>
-                                                        <td class="product-thumbnail text-start p-3">
-                                                            @if ($item['product']->images->isNotEmpty())
-                                                                <img src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumnail">
-                                                            @else
-                                                                <img src="{{ asset('storage/images/default_product.png')}}" alt="Product Thumnail">
-                                                            @endif
-                                                        </td>
-                                                        <td class="product-name text-start wide-column">
-                                                            <h3>
-                                                                <a href="product-details.html">{{ $item['product']->name }}</a>
-                                                            </h3>
-                                                        </td>
-                                                        <td class="product-price">
-                                                            <span class="product-price-wrapper">
-                                                                <span class="money">${{ $item['product']->price }}</span>
+                                                <tr data-product-id="{{ $item['product']->id }}">
+                                                    <td class="product-remove text-start">
+                                                        <a href="#" class="remove-cart-item" data-product-id="{{ $item['product']->id }}">
+                                                            <i class="dl-icon-close"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td class="product-thumbnail text-start p-3">
+                                                        @if ($item['product']->images->isNotEmpty())
+                                                            <img src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumbnail">
+                                                        @else
+                                                            <img src="{{ asset('storage/images/default_product.png') }}" alt="Product Thumbnail">
+                                                        @endif
+                                                    </td>
+                                                    <td class="product-name text-start wide-column">
+                                                        <h3>
+                                                            <a href="product-details.html">{{ $item['product']->name }}</a>
+                                                        </h3>
+                                                    </td>
+                                                    <td class="product-price">
+                                                        <span class="product-price-wrapper">
+                                                            <span class="money" data-price="{{ $item['product']->price_after_discount ?? $item['product']->price }}">${{ $item['product']->price_after_discount ?? $item['product']->price }}</span>
+                                                        </span>
+                                                    </td>
+                                                    <td class="product-quantity">
+                                                        <div class="quantity d-flex">
+                                                            <button style="all: unset; cursor: pointer;" class="update-cart-quantity" data-product-id="{{ $item['product']->id }}" data-action="decrease">-</button>
+                                                            <input type="number" class="quantity-input" name="qty" data-product-id="{{ $item['product']->id }}" value="{{ $item['quantity'] }}" min="1">
+                                                            <button style="all: unset; cursor: pointer;" class="update-cart-quantity" data-product-id="{{ $item['product']->id }}" data-action="increase">+</button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-total-price">
+                                                        <span class="product-price-wrapper">
+                                                            <span class="money" id="item-total-{{ $item['product']->id }}">
+                                                                <strong>${{ ($item['product']->price_after_discount ?? $item['product']->price) * $item['quantity'] }}</strong>
                                                             </span>
-                                                        </td>
-                                                        <td class="product-quantity">
-                                                            <div class="quantity">
-                                                                <input type="number" class="quantity-input" name="qty"
-                                                                    id="qty-1" value="{{ $item['quantity'] }}" min="1">
-                                                            </div>
-                                                        </td>
-                                                        <td class="product-total-price">
-                                                            <span class="product-price-wrapper">
-                                                                <span class="money"><strong>${{ $item['product']->price * $item['quantity'] }}</strong></span>
-                                                            </span>
-                                                        </td>
-                                                    </tr>
+                                                        </span>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -66,14 +70,13 @@
                         <div class="row g-0 border-top pt--20 mt--20">
                             <div class="col-sm-6">
                                 <div class="coupon">
-                                    <input type="text" id="coupon" name="coupon" class="cart-form__input"
-                                        placeholder="Coupon Code">
+                                    <input type="text" id="coupon" name="coupon" class="cart-form__input" placeholder="Coupon Code">
                                     <button type="submit" class="cart-form__btn">Apply Coupon</button>
                                 </div>
                             </div>
                             <div class="col-sm-6 text-sm-end">
-                                <button type="submit" class="cart-form__btn">Clear Cart</button>
-                                <button type="submit" class="cart-form__btn">Update Cart</button>
+                                <button type="button" class="cart-form__btn" id="clear-cart">Clear Cart</button>
+                                <button type="button" class="cart-form__btn" id="update-cart">Update Cart</button>
                             </div>
                         </div>
                     </form>
@@ -87,20 +90,17 @@
                                     <tbody>
                                         <tr>
                                             <th>Subtotal</th>
-                                            <td>$196.00</td>
+                                            <td id="cart-subtotal">${{ $total }}</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
-                                            <td>
-                                                <span>Flat rate: $20.00</span>
-                                                
-                                            </td>
+                                            <td><span>$0.00</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Total</th>
                                             <td>
                                                 <span class="product-price-wrapper">
-                                                    <span class="money">$226.00</span>
+                                                    <span class="money" id="cart-total">${{ $total }}</span>
                                                 </span>
                                             </td>
                                         </tr>
@@ -108,9 +108,7 @@
                                 </table>
                             </div>
                         </div>
-                        <a href="checkout.html" class="btn btn-fullwidth btn-style-1">
-                            Proceed To Checkout
-                        </a>
+                        <a href="{{ route('checkout') }}" class="btn btn-fullwidth btn-style-1">Proceed To Checkout</a>
                     </div>
                 </div>
             </div>
