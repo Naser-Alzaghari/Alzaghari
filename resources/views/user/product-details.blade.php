@@ -70,11 +70,16 @@
                                             "arrows": false, 
                                             "asNavFor": ".nav-slider"
                                         }'>
-                                        @foreach ($product->images as $image)
-                                        <figure class="product-gallery__thumb--single">
-                                            <img src="{{asset('Storage/'.$image->image_url)}}" alt="Products" >
-                                        </figure>
-                                    @endforeach
+                                        @if ($product->images->isNotEmpty())
+                                            @foreach ($product->images as $image)
+                                            <figure class="product-gallery__thumb--single">
+                                                <img src="{{asset('Storage/'.$image->image_url)}}" alt="Products" >
+                                            </figure>
+                                            @endforeach
+                                        @else
+                                        <img src="{{ asset('storage/images/default_product.png')}}" alt="Products" >
+                                        @endif
+                                        
                                         </div>
                                         <div class="product-gallery__actions">
                                             <button class="action-btn btn-zoom-popup"><i
@@ -139,15 +144,21 @@
                         <p class="product-short-description mb--45 mb-sm--20">{{$product->description}}</p>
                         <form action="#" class="form--action mb--30 mb-sm--20">
                             <div class="product-action flex-row align-items-center">
-                                <div class="quantity">
+                                <div class="quantity quantitybtn">
                                     <input type="number" class="quantity-input" name="qty" id="qty" value="1"
                                         min="1">
                                 </div>
                                 <button type="button" class="btn btn-style-1 btn-large add-to-cart add_to_cart_btn" data-product-id="{{ $product->id }}">
                                     Add To Cart
                                 </button>
-                                <a href="wishlist.html"><i class="dl-icon-heart2"></i></a>
-                                <a href="compare.html"><i class="dl-icon-compare2"></i></a>
+                                <a class="add_wishlist action-btn {{ $product->wishlists->isNotEmpty() ? 'active' : '' }}" 
+                                    href="javascript:void(0);" 
+                                    data-product-id="{{ $product->id }}" 
+                                    data-bs-toggle="tooltip" 
+                                    data-bs-placement="right" 
+                                    title="{{ $product->wishlists->isNotEmpty() ? 'Remove from Wishlist' : 'Add to Wishlist' }}">
+                                    <i class="dl-icon-heart"></i>
+                                 </a>
                             </div>
                         </form>
                         {{-- <div class="product-extra mb--40 mb-sm--20">

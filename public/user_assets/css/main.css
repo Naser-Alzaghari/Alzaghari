@@ -14864,8 +14864,8 @@ a, button, img, input, span, .main-navigation .mainmenu__item.menu-item-has-chil
   -o-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2); }
   .product-action a i:hover {
-    background-color: #cf987e;
-    color: #fff !important; }
+    
+    }
 
 .product-action a:nth-child(1) {
   transition-delay: 50ms; }
@@ -17216,25 +17216,25 @@ a, button, img, input, span, .main-navigation .mainmenu__item.menu-item-has-chil
       z-index: 11;
       margin-top: 3rem;
       box-shadow: 0 0 32px 0 rgba(0, 0, 0, 0.05); }
-      .shop-toolbar .product-ordering__list li.active a {
+    .shop-toolbar .product-ordering__list li.active a {
+      background-color: #282828;
+      color: #fff; }
+    .shop-toolbar .product-ordering__list li a {
+      padding: 5px 10px;
+      white-space: pre;
+      display: block;
+      border-radius: 4px;
+      font-size: 1.4rem;
+      line-height: 2.4rem; }
+      .shop-toolbar .product-ordering__list li a:hover {
         background-color: #282828;
         color: #fff; }
-      .shop-toolbar .product-ordering__list li a {
-        padding: 5px 10px;
-        white-space: pre;
-        display: block;
-        border-radius: 4px;
-        font-size: 1.4rem;
-        line-height: 2.4rem; }
-        .shop-toolbar .product-ordering__list li a:hover {
-          background-color: #282828;
-          color: #fff; }
-    .shop-toolbar .product-ordering__btn {
-      width: 100%; }
-    .shop-toolbar .product-ordering:hover .product-ordering__btn:after {
-      content: "\f106"; }
-    .shop-toolbar .product-ordering:hover .product-ordering__list {
-      margin-top: .7rem; }
+  .shop-toolbar .product-ordering__btn {
+    width: 100%; }
+  .shop-toolbar .product-ordering:hover .product-ordering__btn:after {
+    content: "\f106"; }
+  .shop-toolbar .product-ordering:hover .product-ordering__list {
+    margin-top: .7rem; }
   .shop-toolbar .product-filter-btn.open {
     color: #cf987e; }
     .shop-toolbar .product-filter-btn.open:after {
@@ -18812,4 +18812,9 @@ a:hover {
   background-color: #d4edda;
   color: #155724;
   border-radius: 4px;
+}
+
+
+.add_wishlist.active i {
+  color: red !important; /* Example: Highlight active wishlist items */
 }

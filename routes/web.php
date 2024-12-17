@@ -1,22 +1,23 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
-use App\Http\Controllers\admin\ProductController as AdminProductController;
-use App\Http\Controllers\user\ProductController as UserProductController;
 use App\Http\Controllers\admin\ProfileController;
+use App\Http\Controllers\user\CheckoutController;
 
+use App\Http\Controllers\user\WishlistController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\user\LandingPageController;
 use App\Http\Controllers\user\ShopSidebarController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
-use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
-use App\Http\Controllers\user\CheckoutController;
+use App\Http\Controllers\user\ProductController as UserProductController;
+use App\Http\Controllers\admin\ProductController as AdminProductController;
 
 // use App\Http\Controllers\OrderController;
 
@@ -90,6 +91,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('')
     ->group(function () {
+            Route::post('/shop-sidebar', [ShopSidebarController::class, 'search_product'])->name('search_product');
             Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
 
             Route::get('/master', function () {
@@ -144,6 +146,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/my-account', function () {
                 return view('user/my-account');
             })->name('my-account');
+            
             Route::get('/order-tracking', function () {
                 return view('user/order-tracking');
             })->name('order-tracking');
@@ -189,6 +192,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
                 return view('user/shop-no-gutter');
             });
             Route::get('/shop-sidebar', [ShopSidebarController::class, 'index'])->name('shop-sidebar');
+            Route::get('/shop/category/{id}', [ShopSidebarController::class, 'filterByCategory'])->name('shop.filterByCategory');
             Route::get('/shop-three-column', function () {
                 return view('user/shop-three-column');
             })->name('shop-three-column');
@@ -209,7 +213,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             })->name('welcome');
             // routes/web.php
 
+            Route::middleware(['auth'])->group(function () {
+                Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+                Route::post('/wishlist/add', [WishlistController::class, 'store'])->name('wishlist.store');
+                Route::delete('/wishlist/remove/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+                Route::post('/wishlist/toggle', [WishlistController::class, 'toggle'])->name('wishlist.toggle');
 
+            });
 
             Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
             Route::post('/update-cart-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');

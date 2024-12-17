@@ -42,23 +42,33 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="shop-toolbar__right">
-                                            <a href="#" class="product-filter-btn shop-toolbar__btn">
+                                            {{-- <a href="#" class="product-filter-btn shop-toolbar__btn">
                                                 <span>Filters</span>
                                                 <i></i>
-                                            </a>
-                                            <div class="product-ordering">
-                                                <a href="" class="product-ordering__btn shop-toolbar__btn">
-                                                    <span>Short By</span>
-                                                    <i></i>
-                                                </a>
-                                                <ul class="product-ordering__list">
-                                                    <li class="active"><a href="#">Sort by popularity</a></li>
-                                                    <li><a href="#">Sort by average rating</a></li>
-                                                    <li><a href="#">Sort by newness</a></li>
-                                                    <li><a href="#">Sort by price: low to high</a></li>
-                                                    <li><a href="#">Sort by price: high to low</a></li>
-                                                </ul>
+                                            </a> --}}
+                                            <div class="shop-toolbar">
+                                                <div class="product-ordering">
+                                                    <a href="#" class="product-ordering__btn shop-toolbar__btn">
+                                                        <span>Sort By</span>
+                                                        <i></i>
+                                                    </a>
+                                                    <ul class="product-ordering__list">
+                                                        <li class="{{ request('sort') == 'rating' ? 'active' : '' }}">
+                                                            <a href="?sort=rating">Sort by average rating</a>
+                                                        </li>
+                                                        <li class="{{ request('sort') == 'newness' ? 'active' : '' }}">
+                                                            <a href="?sort=newness">Sort by newness</a>
+                                                        </li>
+                                                        <li class="{{ request('sort') == 'price_low_high' ? 'active' : '' }}">
+                                                            <a href="?sort=price_low_high">Sort by price: low to high</a>
+                                                        </li>
+                                                        <li class="{{ request('sort') == 'price_high_low' ? 'active' : '' }}">
+                                                            <a href="?sort=price_high_low">Sort by price: high to low</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -244,11 +254,17 @@
                                 <h3 class="widget-title">Categories</h3>
                                 <ul class="prouduct-categories product-widget__list">
                                     @foreach ($categories as $category)
-                                    <li><a href="">{{$category->name}}</a><span class="count">(0)</span></li>
+                                    <li class="{{ isset($currentCategory) && $currentCategory->id == $category->id ? 'active' : '' }}">
+                                        <a href="{{ route('shop.filterByCategory', $category->id) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                        <span class="count">({{ $category->products->count() }})</span>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
-                            <!-- Category Widget Start -->
+                            <!-- Category Widget End -->
+
 
                             <!-- Price Filter Widget Start -->
                             <div class="product-widget product-price-widget mb--40 mb-md--35">
@@ -287,79 +303,8 @@
                             </div>
                             <!-- Price Filter Widget End -->
 
-                            <!-- Product Size Widget Start -->
-                            <div class="product-widget product-widget--size mb--25 mb-md--20">
-                                <h3 class="widget-title">Size</h3>
-                                <ul class="product-widget__list two-column-list">
-                                    <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">S</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">XXl</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">M</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">XL</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">L</a><span class="count">(2)</span></li>
-                                </ul>
-                            </div>
-                            <!-- Product Size Widget End -->
+                            
 
-                            <!-- Product Color Widget Start -->
-                            <div class="product-widget product-widget--Color mb--25 mb-md--20">
-                                <h3 class="widget-title">Color</h3>
-                                <ul class="product-widget__list two-column-list">
-                                    <li><a href="shop-sidebar.html">Blue</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Pink</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">White</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Green</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Red</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Black</a><span class="count">(2)</span></li>
-                                </ul>
-                            </div>
-                            <!-- Product Color Widget End -->
-
-                            <!-- Product Brand Widget Start -->
-                            <div class="product-widget product-widget--brand mb--40 mb-md--30">
-                                <h3 class="widget-title">Brands</h3>
-                                <ul class="product-widget__list">
-                                    <li><a href="shop-sidebar.html">Airi</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Mango</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Valention</a><span class="count">(2)</span></li>
-                                    <li><a href="shop-sidebar.html">Zara</a><span class="count">(2)</span></li>
-                                </ul>
-                            </div>
-                            <!-- Product Brand Widget End -->
-
-                            <!-- Category Widget Start -->
-                            <div class="product-widget tag-widget mb--35 mb-md--30">
-                                <h3 class="widget-title">Categories</h3>
-                                <div class="tagcloud">
-                                    <a href="shop-sidebar.html">chair</a>
-                                    <a href="shop-sidebar.html">deco</a>
-                                    <a href="shop-sidebar.html">dress</a>
-                                    <a href="shop-sidebar.html">fashion</a>
-                                    <a href="shop-sidebar.html">furniture</a>
-                                    <a href="shop-sidebar.html">light</a>
-                                    <a href="shop-sidebar.html">living</a>
-                                    <a href="shop-sidebar.html">sofa</a>
-                                    <a href="shop-sidebar.html">table</a>
-                                    <a href="shop-sidebar.html">women</a>
-                                </div>
-                            </div>
-                            <!-- Category Widget Start -->
-
-                            <!-- Promo Widget Start -->
-                            <div class="product-widget promo-widget">
-                                <div class="banner-box banner-type-3 banner-type-3-2 banner-hover-1">
-                                    <div class="banner-inner">
-                                        <div class="banner-image">
-                                            <img src="user_assets/img/banner/ad-banner.jpg" alt="Banner">
-                                        </div>
-                                        <div class="banner-info">
-                                            <h2 class="banner-title-11">New <br> <strong>Season</strong></h2>
-                                        </div>
-                                        <a class="banner-link banner-overlay" href="shop-sidebar.html">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Promo Widget End -->
                         </div>
                     </div>
                 </div>
@@ -367,4 +312,7 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
+
+
+    
 @endsection

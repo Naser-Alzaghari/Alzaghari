@@ -44,15 +44,18 @@
                         
                         
                         
+                        @auth
+                        <a class="add_wishlist action-btn {{ $product->isInWishlist(auth()->id()) ? 'active' : '' }}" 
+                            href="javascript:void(0);" 
+                            data-product-id="{{ $product->id }}" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="left" 
+                            title="Add to Wishlist">
+                            <i class="dl-icon-heart"></i>
+                        </a>
+                        @endauth
                         
-                        <a class="add_wishlist action-btn" href="wishlist.html"
-                            data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Wishlist">
-                            <i class="dl-icon-heart4"></i>
-                        </a>
-                        <a class="add_compare action-btn" href="compare.html"
-                            data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Compare">
-                            <i class="dl-icon-compare"></i>
-                        </a>
+                        
                     </div>
                 </div>
                 @if (isset($product->price_after_discount))
@@ -80,7 +83,7 @@
             </figure>
             <div class="product-info">
                 <h3 class="product-title">
-                    <a href="product-details.html">{{$product->name}}</a>
+                    <a href="{{ route('product-details', $product->id)  }}">{{$product->name}}</a>
                 </h3>
                 @if (number_format($product->averageRating()) != 0)
                 <div class="product-rating">

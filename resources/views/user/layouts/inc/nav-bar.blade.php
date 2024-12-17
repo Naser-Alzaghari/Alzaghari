@@ -129,16 +129,7 @@
                                                         <span class="mm-text">Wishlist</span>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="{{route('order-tracking')}}">
-                                                        <span class="mm-text">Order tracking</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{route('compare')}}">
-                                                        <span class="mm-text">compare</span>
-                                                    </a>
-                                                </li>
+                                                
                                             </ul>
                                         </li>
                                         <li class="d-none d-lg-block banner-holder">
@@ -271,11 +262,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="mainmenu__item">
-                                    <a href="shop-instagram.html" class="mainmenu__link">
-                                        <span class="mm-text">New Look</span>
-                                    </a>
-                                </li>
+                                
                             </ul>
                         </nav>
                         <!-- Main Navigation End Here -->
@@ -295,34 +282,34 @@
                     <div class="col-xl-5 col-lg-4 col-md-9 col-8">
                         <!-- Header Toolbar Start Here -->
                         <ul class="header-toolbar text-end">
-                            <li class="header-toolbar__item d-none d-lg-block">
-                                <a href="#sideNav" class="toolbar-btn">
-                                    <i class="dl-icon-menu2"></i>
-                                </a>
-                            </li>
+                            
                             <li class="header-toolbar__item user-info-menu-btn">
                                 <a href="#">
                                     <i class="fa fa-user-circle-o"></i>
                                 </a>
                                 <ul class="user-info-menu">
+                                    @guest
+                                        <li>
+                                            <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                    @endguest
+                                    @auth
                                     <li>
                                         <a href="{{route('my-account')}}">My Account</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ route('wishlist') }}">Wishlist</a>
+                                    </li>
+                                    @endauth
                                     <li>
                                         <a href="{{route('cart.view')}}">Shopping Cart</a>
                                     </li>
                                     <li>
                                         <a href="{{route('checkout')}}">Check Out</a>
                                     </li>
-                                    <li>
-                                        <a href="{{route('wishlist')}}">Wishlist</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('order-tracking')}}">Order tracking</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('compare')}}">compare</a>
-                                    </li>
+                                    
+                                    
+                                    
                                 </ul>
                             </li>
                             <li class="header-toolbar__item">
@@ -696,48 +683,7 @@
                                         Collections
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{route('blog')}}">
-                                        Pages
-                                    </a>
-                                    <ul class="dl-submenu">
-                                        <li>
-                                            <a href="{{route('about-us')}}">
-                                                About Us
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('team')}}">
-                                                Our teams
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('contact-us')}}">
-                                                Contact us 1
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="contact-us-02.html">
-                                                Contact us 2
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="404.html">
-                                                404 page
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('faqs-page')}}">
-                                                FAQs page
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('coming-soon')}}">
-                                                Coming Soon
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                
                                 <li>
                                     <a href="{{route('blog')}}">
                                         Blog

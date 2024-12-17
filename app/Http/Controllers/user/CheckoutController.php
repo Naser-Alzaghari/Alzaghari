@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         $paymentMethod = $request->input('payment-method'); // Payment method
         $cartItems = $request->input('cartItems');          // Cart items
         $total = $request->input('total');                 // Total amount
-    
+        // dd($test);
         // Validate the input
         $request->validate([
             'payment-method' => 'required|string',
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
     
         // Start a database transaction
         DB::beginTransaction();
-    
+        
         try {
             // Step 1: Create the order
             $order = new \App\Models\Order();
@@ -68,7 +68,7 @@ class CheckoutController extends Controller
             $order->payment_status = 'unpaid';              // Initial payment status
             $order->pickup_date = null;                     // Set if applicable
             $order->save();
-    
+            
             // Step 2: Insert items into order_items
             foreach ($cartItems as $item) {
                 $orderItem = new \App\Models\OrderItem();
@@ -84,8 +84,9 @@ class CheckoutController extends Controller
     
             // Commit the transaction
             DB::commit();
-    
-            return response()->json(['message' => 'Order placed successfully!']);
+            
+            return view('user.thank-you');
+            // return response()->json(['message' => 'Order placed successfully!']);
         } catch (\Exception $e) {
             // Rollback in case of failure
             DB::rollBack();

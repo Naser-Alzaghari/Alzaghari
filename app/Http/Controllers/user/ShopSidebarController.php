@@ -8,37 +8,65 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 
+use function Laravel\Prompts\search;
+
 class ShopSidebarController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        // Fetch all products
-        // Get the price range from the request, default to '0-0' if not set
-        $priceRange = $request->input('price_range', '0-0');
-        [$minPrice, $maxPrice] = explode('-', $priceRange);
+{
+    // Fetch price range from the request, default to '0-0'
+    $priceRange = $request->input('price_range', '0-0');
+    [$minPrice, $maxPrice] = explode('-', $priceRange);
 
-        // Check if the price range is set or default
-        if ($minPrice == 0 && $maxPrice == 0) {
-            // If the price range is not set, fetch all products
-            $products = Product::all();
-        } else {
-            // If the price range is set, fetch products within that price range
-            $products = Product::where(function($query) use ($minPrice, $maxPrice) {
-                $query->whereBetween('price', [(float)$minPrice, (float)$maxPrice])
-                      ->orWhere(function($query) use ($minPrice, $maxPrice) {
-                          $query->whereNotNull('price_after_discount')
-                                ->whereBetween('price_after_discount', [(float)$minPrice, (float)$maxPrice]);
-                      });
-            })->get();
-        }
-        $colors = Color::all();
-        $categories = Category::all();
-        // Return a view with products
-        return view('user.shop-sidebar', compact('products','colors','categories'));
+    // Fetch sorting criteria from the request, default to 'default'
+    $sort = $request->input('sort', 'default');
+
+    // Base query
+    $query = Product::query();
+
+    // Apply price filtering
+    if ($minPrice != 0 || $maxPrice != 0) {
+        $query->where(function ($query) use ($minPrice, $maxPrice) {
+            $query->whereBetween('price', [(float)$minPrice, (float)$maxPrice])
+                ->orWhere(function ($query) use ($minPrice, $maxPrice) {
+                    $query->whereNotNull('price_after_discount')
+                          ->whereBetween('price_after_discount', [(float)$minPrice, (float)$maxPrice]);
+                });
+        });
     }
+
+    // Apply sorting
+    switch ($sort) {
+        case 'rating':
+            $query->orderBy('average_rating', 'desc');
+            break;
+        case 'newness':
+            $query->orderBy('created_at', 'desc');
+            break;
+        case 'price_low_high':
+            $query->orderBy('price', 'asc');
+            break;
+        case 'price_high_low':
+            $query->orderBy('price', 'desc');
+            break;
+        default:
+            $query->orderBy('id', 'asc'); // Default sorting
+    }
+
+    // Fetch products
+    $products = $query->get();
+
+    // Fetch additional data for the view
+    $colors = Color::all();
+    $categories = Category::all();
+
+    // Return the view with data
+    return view('user.shop-sidebar', compact('products', 'colors', 'categories', 'priceRange', 'sort'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -86,6 +114,38 @@ class ShopSidebarController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function search_product(Request $request)
+    {
+        $search = $request->input('search');
+        $products = Product::where('name', 'LIKE', "%{$search}%")
+        ->orWhere('description', 'LIKE', "%{$search}%")
+        ->get();
+
+        $colors = Color::all();
+        $categories = Category::all();
+        // Return a view with products
+        return view('user.shop-sidebar', compact('products','colors','categories'));
+
+    }
+    
+    public function filterByCategory($id)
+    {
+        // Fetch products belonging to the selected category
+        $products = Product::where('category_id', $id)->get();
+
+        // Fetch all categories to display in the sidebar
+        $categories = Category::all();
+
+        // Fetch all colors (if required in the sidebar)
+        $colors = Color::all();
+
+        // Get the current category
+        $currentCategory = Category::find($id);
+
+        // Return the shop sidebar view with filtered products
+        return view('user.shop-sidebar', compact('products', 'categories', 'colors', 'currentCategory'));
     }
 }
 

@@ -376,7 +376,7 @@
                                         <input type="hidden" name="cartItems[{{ $item['product']->id }}][quantity]" value="{{ $item['quantity'] }}">
                                     @endforeach
 
-                                    <input type="hidden" value="{{$total}}" name="total">
+                                    <input type="hidden" value="{{ str_replace(',', '', $total) }}" name="total">
                                     {{-- <input type="hidden" value="{{$cartItems}}" name="cartItems"> --}}
                                     
                                     <div class="payment-group mb--10">

@@ -72,7 +72,8 @@
             <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
             <div class="searchform__body">
                 <p>Start typing and press Enter to search</p>
-                <form class="searchform">
+                <form class="searchform" method="POST" action="{{route('search_product')}}">
+                    @csrf
                     <input type="text" name="search" id="search" class="searchform__input"
                         placeholder="Search Entire Store...">
                     <button type="submit" class="searchform__submit"><i class="dl-icon-search10"></i></button>
@@ -201,35 +202,17 @@
                 </span>
                 <p class="product-short-description mb--25 mb-md--20" id="product-modal-description"></p>
                 <div class="product-action d-flex flex-row align-items-center mb--30 mb-md--20">
-                    <div class="quantity">
+                    <div class="quantity quantitybtn">
                         <input type="number" class="quantity-input" name="qty" id="qty" value="1"
                             min="1">
                     </div>
                   <button type="button" id="add_to_cart" class="btn btn-style-1 btn-large add-to-cart add_to_cart_btn">
                     Add To Cart
                     </button>
-                  <a href="wishlist.html"><i class="dl-icon-heart2"></i></a>
-                  <a href="compare.html"><i class="dl-icon-compare2"></i></a>
+                    
                 </div>
-                <div class="product-extra mb--30 mb-md--20">
-                  <a href="#" class="font-size-12"><i class="fa fa-map-marker"></i>Find store near you</a>
-                  <a href="#" class="font-size-12"><i class="fa fa-exchange"></i>Delivery and return</a>
-                </div>
-                <div class="product-summary-footer d-flex justify-content-between flex-sm-row flex-column">
-                  <div class="product-meta">
-                    <span class="sku_wrapper font-size-12">SKU: <span class="sku" id="product-modal-sku"></span></span>
-                    <span class="posted_in font-size-12">Categories: <a href="{{route('shop-sidebar')}}" rel="tag" id="product-modal-category">Fashions</a></span>
-                  </div>
-                  <div class="product-share-box">
-                    <span class="font-size-12">Share With</span>
-                    <ul class="social social-small">
-                      <li class="social__item"><a href="https://facebook.com" class="social__link"><i class="fa fa-facebook"></i></a></li>
-                      <li class="social__item"><a href="https://twitter.com" class="social__link"><i class="fa fa-twitter"></i></a></li>
-                      <li class="social__item"><a href="https://plus.google.com" class="social__link"><i class="fa fa-google-plus"></i></a></li>
-                      <li class="social__item"><a href="https://plus.google.com" class="social__link"><i class="fa fa-pinterest-p"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
+                
+                
               </div>
             </div>
           </div>
@@ -480,7 +463,7 @@ $(document).ready(function() {
             success: function(product) {
                 $('#product-modal-title').text(product.name);
                 $('#product-modal-description').text(product.description);
-                $('#product-modal-img').attr('src', 'storage/' + product.images[0]);
+                $('#product-modal-img').attr('src', 'storage/' + (product.images[0] ?? 'images/default_product.png'));
                 $('#product-modal-link').attr('href', product.link);
                 $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
                 $('#add_to_cart').data('product-id', productId).data('product-name', product.name);
@@ -499,7 +482,43 @@ $(document).ready(function() {
             }
         });
     });
+    
+    $('.add_wishlist').on('click', function (e) {
+        e.preventDefault();
+
+        let productId = $(this).data('product-id');
+        let button = $(this);
+
+        $.ajax({
+            url: '{{ route('wishlist.toggle') }}', // Ensure this matches the route in web.php
+            type: 'POST',            // Use POST method
+            data: {
+                product_id: productId,
+                _token: '{{ csrf_token() }}', // Include CSRF token
+            },
+            success: function (response) {
+                if (response.status === 'added') {
+                    button.addClass('active'); // Add active class
+                    button.attr('title', 'Remove from Wishlist');
+                    button.attr('data-bs-original-title', 'Remove from Wishlist');
+                } else if (response.status === 'removed') {
+                    button.removeClass('active');
+                    button.attr('title', 'Add to Wishlist');
+                    button.attr('data-bs-original-title', 'Add to Wishlist');
+                }
+                showAlert(response.message);
+                // alert(response.message); // Show success message
+            },
+            error: function (xhr) {
+                alert('Something went wrong! Please try again.');
+            }
+        });
+    });
 });
+
+
+
+
 
     </script>
     

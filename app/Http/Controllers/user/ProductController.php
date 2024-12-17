@@ -28,7 +28,7 @@ class ProductController extends Controller
                 'price_after_discount' => $product->price_after_discount,
                 'description' => $product->description,
                 'images' => $product->images->pluck('image_url'), // Pluck image URLs from images
-                // 'link' => route('product.details', $product->id),
+                'link' => route('product-details', $product->id),
                 'category' => $product->category->name,
             ]);
         } else {
