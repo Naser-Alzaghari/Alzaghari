@@ -25,7 +25,7 @@
                         <!-- LAYERS -->
 
                         <!-- LAYER NR. 1 -->
-                        <div class="tp-caption     rev_group" id="slide-1-layer-1"
+                        <div class="tp-caption  rev_group" id="slide-1-layer-1"
                             data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                             data-y="['middle','middle','middle','middle']" data-voffset="['0','0','0','0']"
                             data-width="['919','919','712','445']" data-height="['489','489','459','390']"
@@ -38,6 +38,7 @@
                             data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                             style="z-index: 5; min-width: 919px; max-width: 919px; max-width: 489px; max-width: 489px; white-space: nowrap; font-size: 20px; line-height: 22px; font-weight: 400; color: #ffffff; letter-spacing: 0px;">
                             <!-- LAYER NR. 2 -->
+                            
                             <!-- <div class="tp-caption   tp-resizeme" id="slide-1-layer-2"
                                 data-x="['left','left','left','left']" data-hoffset="['111','111','20','0']"
                                 data-y="['top','top','top','top']" data-voffset="['127','127','117','105']"
@@ -54,7 +55,7 @@
                                 <strong>BIG </strong>SUMMER </div> -->
 
                             <!-- LAYER NR. 3 -->
-                            <div class="tp-caption   tp-resizeme" id="slide-2-layer-3"
+                            <div class="tp-caption  tp-resizeme" id="slide-2-layer-3"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                 data-y="['top','top','top','top']" data-voffset="['51','51','51','46']"
                                 data-fontsize="['165','165','120','100']"
@@ -241,43 +242,14 @@
         </div><!-- END REVOLUTION SLIDER -->
     </div>
 
-    <!-- Video section Start Here -->
-    <div class="video-section-area pt--80 pb--40 pt-md--60 pb-md--30">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="text-block">
-                        <figure class="mb--30 mb-md--20 max-w-60">
-                            <img src="user_assets/img/logo/m01-logo.png" alt="logo">
-                        </figure>
-
-                        <p class="font-2 heading-color font-size-16 mb--30 mb-md--20">Integer ut ligula quis
-                            lectus fringilla elementum porttitor sed est. Fringilla efficitur ligula sed
-                            lobortis. Sed tempus faucibus mi, quis fringilla mauris lacinia sed. Integer
-                            vehicula egestas nunc ac facilisis. Nam bibendum non faucibus libero eu. Curabitur
-                            posuere to ullamcorper</p>
-                        <a href="{{route('shop-sidebar')}}" class="heading-button mb-sm--30">Shop Now</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <figure class="image-box image-box-w-video-btn">
-                        <a href="https://www.youtube.com/watch?v=5DGHzzu4MYw" class="video-popup">
-                            <img src="user_assets/img/banner/m01-img1.jpg" alt="banner">
-                            <span class="video-btn"></span>
-                        </a>
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Video section End Here -->
+    
 
     <!-- Trending Products area Start Here -->
     <section class="trending-products-area pt--30 pb--80 pt-md--20 pb-md--60">
         <div class="container-fluid">
             <div class="row mb--40 mb-md--30">
                 <div class="col-12">
-                    <h2 class="heading-secondary text-center">Trending</h2>
+                    <h2 class="heading-secondary text-center">Top Selling</h2>
                 </div>
             </div>
             <div class="row">

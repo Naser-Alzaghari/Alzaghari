@@ -1,4 +1,4 @@
-<header class="header header-transparent header-fullwidth header-style-1">
+<header class="header {{ request()->is('/') ? 'header-transparent' : 'header-fullwidth' }} header-fullwidth header-style-1">
     <div class="header-outer">
         <div class="header-inner fixed-header">
             <div class="container-fluid">
@@ -9,7 +9,7 @@
                             <ul class="mainmenu">
                                 <li class="mainmenu__item menu-item-has-children megamenu-holder">
                                     <a href="{{route('landing_page')}}" class="mainmenu__link">
-                                        <span class="mm-text">Home {{Auth::user()->name ?? ""}}</span>
+                                        <span class="mm-text">Home</span>
                                     </a>
                                     
                                 </li>
@@ -50,7 +50,7 @@
                                 <img src="{{asset('user_assets/img/logo/logo.svg')}}" alt="Logo" />
                             </figure>
                             <figure class="logo--transparency">
-                                <img src="{{asset('user_assets/img/logo/logo-white.png')}}" alt="Logo" />
+                                <img src="{{asset('user_assets/img/logo/logo-white.svg')}}" alt="Logo" />
                             </figure>
                         </a>
                         <!-- Logo End Here -->

@@ -93,8 +93,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('')
     ->group(function () {
-            Route::post('/shop-sidebar', [ShopSidebarController::class, 'search_product'])->name('search_product');
+
             Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
+            Route::get('/shop-sidebara', [ShopSidebarController::class, 'search_product'])->name('search_product');
 
             Route::get('/master', function () {
                 return view('user/master');

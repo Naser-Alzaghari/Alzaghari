@@ -42,6 +42,10 @@ class Product extends Model
     {
         return $this->reviews()->count();
     }
+    public function activeRatingsCount()
+    {
+        return $this->reviews()->where('is_active', 1)->count();
+    }
     public function wishlists()
     {
         return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id');

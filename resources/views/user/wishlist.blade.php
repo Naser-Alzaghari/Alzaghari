@@ -23,11 +23,11 @@
                                 @foreach ($wishlistItems as $item)
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <td class="product-thumbnail text-start">
+                                    <td class="product-thumbnail text-start pe-4">
                                             @if ($item['product']->images->isNotEmpty())
-                                                <img src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumnail">
+                                                <img class="rounded" src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumnail">
                                             @else
-                                                <img src="{{ asset('storage/images/default_product.png')}}" alt="Product Thumnail">
+                                                <img class="rounded" src="{{ asset('storage/images/default_product.png')}}" alt="Product Thumnail">
                                             @endif
                                     </td>
                                     <td class="product-name text-start wide-column">

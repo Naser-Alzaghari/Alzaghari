@@ -72,12 +72,12 @@
             <a href="#" class="btn-close"><i class="dl-icon-close"></i></a>
             <div class="searchform__body">
                 <p>Start typing and press Enter to search</p>
-                <form class="searchform" method="POST" action="{{route('search_product')}}">
-                    @csrf
-                    <input type="text" name="search" id="search" class="searchform__input"
-                        placeholder="Search Entire Store...">
+                <form class="searchform" method="GET" action="{{ route('search_product') }}">
+                    <input type="text" name="search" id="search" class="searchform__input" placeholder="Search Entire Store..." value="{{ request('search') }}">
                     <button type="submit" class="searchform__submit"><i class="dl-icon-search10"></i></button>
                 </form>
+                
+                
             </div>
         </div>
         <!-- Search from End -->

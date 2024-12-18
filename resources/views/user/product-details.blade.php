@@ -225,7 +225,7 @@
                             </button>
                             <button type="button" class="product-data-tab__link nav-link" id="nav-reviews-tab" data-bs-toggle="tab"
                                 data-bs-target="#nav-reviews" role="tab" aria-selected="true">
-                                <span>Reviews ({{$product->ratingsCount()}})</span>
+                                <span>Reviews ({{$product->activeRatingsCount()}})</span>
                             </button>
                         </div>
                         <div class="tab-content product-data-tab__content" id="product-tabContent">
@@ -238,7 +238,6 @@
                             <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
                                 aria-labelledby="nav-reviews-tab">
                                 <div class="product-reviews">
-                                    <h3 class="review__title">1 review for Waxed-effect pleated skirt</h3>
                                     <ul class="review__list">
                                         @foreach ($product->reviews as $review)
                                         <li class="review__item">
@@ -270,6 +269,7 @@
                                         @endforeach
                                         
                                     </ul>
+                                    @auth
                                     <div class="review-form-wrapper">
                                         <span class="reply-title"><strong>Add a review</strong></span>
                                         
@@ -320,7 +320,9 @@
                                             </div>
                                         </form>
                                         
-                                    </div>
+                                    </div> 
+                                    @endauth
+                                    
                                 </div>
                             </div>
                         </div>
