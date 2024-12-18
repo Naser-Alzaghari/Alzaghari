@@ -31,26 +31,24 @@ class OrderController extends Controller
     // Store a newly created user in the database
     public function store(Request $request)
     {
-        
-        // try {
-        //     // Validate the request data
-        //     $request->validate([
-        //         'name' => 'required|string|max:255',
-        //         'email' => 'required|string|email|max:255|unique:users',
-        //         'password' => 'required|string|min:8|confirmed',
-        //         'role_as' => 'nullable|integer', // 'role_as' is optional
-        //     ]);
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     return redirect()->back()->withErrors($e->validator)->withInput();
-        // }
+        $request->validate([
+            'user_id' => 'required|numeric', // Ensure the user exists in the `users` table
+            'status' => 'required', // Match predefined statuses
+            'total_amount' => 'required|numeric|min:0', // Must be numeric and not negative
+            'payment_status' => 'required|in:paid,unpaid,refunded', // Match predefined payment statuses
+            'address' => 'required|string|max:255', // Required, string, max 255 characters
+            'phone_number' => 'required|string|regex:/^\+?[0-9]{7,15}$/', // Validate phone number format
+        ]);
         
         Order::create([
             'user_id' => $request->user_id,
-            'order_date' => $request->order_date,
             'status' => $request->status,
             'total_amount' => $request->total_amount,
             'payment_status' => $request->payment_status,
             'pickup_date' => $request->pickup_date,
+            'address' => $request->address,
+            'phone_number' => $request->phone_number,
+            'order_notes' => $request->order_notes,
         ]);
 
         

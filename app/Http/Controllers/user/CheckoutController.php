@@ -43,17 +43,18 @@ class CheckoutController extends Controller
         $paymentMethod = $request->input('payment-method'); // Payment method
         $cartItems = $request->input('cartItems');          // Cart items
         $total = $request->input('total');                 // Total amount
-        // dd($test);
         // Validate the input
         $request->validate([
             'payment-method' => 'required|string',
+            'address' => 'required|string',
+            'phone_number' => 'required|string',
             'cartItems' => 'required|array',
             'cartItems.*.product_id' => 'required|integer',
             'cartItems.*.quantity' => 'required|integer|min:1',
             'cartItems.*.price' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
         ]);
-    
+        
         // Start a database transaction
         DB::beginTransaction();
         
@@ -61,16 +62,27 @@ class CheckoutController extends Controller
             // Step 1: Create the order
             $order = new \App\Models\Order();
             $order->user_id = auth()->id();                  // Assuming user authentication
-            $order->order_date = now();                     // Current timestamp
             $order->status = 'pending';                     // Initial order status
             $order->total_amount = $total;                  // Total amount
             $order->total_amount_after_discount = $total;   // Adjust this if discounts are applied
             $order->payment_status = 'unpaid';              // Initial payment status
             $order->pickup_date = null;                     // Set if applicable
+            $order->address = $request->input('address');
+            $order->phone_number = $request->input('phone_number');
+            $order->order_notes = $request->input('order_notes');
             $order->save();
             
-            // Step 2: Insert items into order_items
+            // Step 2: Insert items into order_items and check stock
             foreach ($cartItems as $item) {
+                $product = \App\Models\Product::find($item['product_id']);
+                if ($product->stock < $item['quantity']) {
+                    throw new \Exception('Insufficient stock for product: ' . $product->name);
+                }
+                
+                // Subtract the quantity from the product stock
+                $product->stock -= $item['quantity'];
+                $product->save();
+    
                 $orderItem = new \App\Models\OrderItem();
                 $orderItem->order_id = $order->id;           // Link to the created order
                 $orderItem->product_id = $item['product_id'];
@@ -97,6 +109,7 @@ class CheckoutController extends Controller
             ], 500);
         }
     }
+    
 }
 
 

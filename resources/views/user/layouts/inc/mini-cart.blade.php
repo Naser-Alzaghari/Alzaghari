@@ -3,6 +3,7 @@
         <a href="" class="btn-close"><i class="dl-icon-close"></i></a>
         <div class="mini-cart-inner">
             <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
+            @if ($cartItems->isNotEmpty())
             <div class="mini-cart__content">
                 <ul class="mini-cart__list mini-cart-items">
                     @foreach ($cartItems as $item)
@@ -42,6 +43,10 @@
                     <a href="{{route('checkout')}}" class="btn btn-fullwidth btn-style-1">Checkout</a>
                 </div>
             </div>
+            @else
+                <h1 class="text-center">Your cart is empty</h1>
+            @endif
+            
         </div>
     </div>
 </aside>

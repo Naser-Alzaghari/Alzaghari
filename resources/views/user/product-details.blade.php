@@ -151,6 +151,7 @@
                                 <button type="button" class="btn btn-style-1 btn-large add-to-cart add_to_cart_btn" data-product-id="{{ $product->id }}">
                                     Add To Cart
                                 </button>
+                                @auth
                                 <a class="add_wishlist action-btn {{ $product->wishlists->isNotEmpty() ? 'active' : '' }}" 
                                     href="javascript:void(0);" 
                                     data-product-id="{{ $product->id }}" 
@@ -159,6 +160,7 @@
                                     title="{{ $product->wishlists->isNotEmpty() ? 'Remove from Wishlist' : 'Add to Wishlist' }}">
                                     <i class="dl-icon-heart"></i>
                                  </a>
+                                 @endauth
                             </div>
                         </form>
                         {{-- <div class="product-extra mb--40 mb-sm--20">

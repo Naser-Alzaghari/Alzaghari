@@ -10,7 +10,7 @@
                     <p class="mb--30">We appreciate your business. Your order is being processed and you will receive an email confirmation shortly.</p>
                     <div class="btn-group gap-5">
                         <a href="{{ route('landing_page') }}" class="btn btn-style-1">Back to Home</a>
-                        <a href="{{ route('my-account') }}" class="btn btn-style-1">View Your Orders</a>
+                        <a href="{{ route('view_orders') }}" class="btn btn-style-1">View Your Orders</a>
                     </div>
                 </div>
             </div>

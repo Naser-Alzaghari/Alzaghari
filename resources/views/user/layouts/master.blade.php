@@ -294,6 +294,24 @@ $(document).ready(function() {
             success: function(response) {
                 showAlert(`${productName ?? 'item'} has been added to cart!`);
                 $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
+
+                // If the cart was empty, rebuild the mini-cart structure
+            if ($('.mini-cart__content').length === 0) {
+                $('#miniCart .mini-cart-inner').html(`
+                    <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
+                    <div class="mini-cart__content">
+                        <ul class="mini-cart__list mini-cart-items"></ul>
+                        <div class="mini-cart__total cart-total">
+                            <span>Subtotal</span>
+                            <span class="ammount" id="cart-total">$0</span>
+                        </div>
+                        <div class="mini-cart__buttons">
+                            <a href="{{route('cart.view')}}" class="btn btn-fullwidth btn-style-1">View Cart</a>
+                            <a href="{{route('checkout')}}" class="btn btn-fullwidth btn-style-1">Checkout</a>
+                        </div>
+                    </div>
+                `);
+            }
                 updateMiniCart(response.product, response.quantity);
             },
             error: function() {
@@ -383,44 +401,62 @@ $(document).ready(function() {
     }
 
     function generateCartItemHTML(product, quantity) {
-        return `
-            <li class="mini-cart__product" data-product-id="${product.id}">
-                <div class="mini-cart__product__image">
-                    ${product.images && product.images.length ? `<img src="{{ asset('storage/') }}/${product.images[0].image_url}" alt="${product.name}">` : '<img src="{{ asset('storage/images/default_product.png') }}" alt="Product Image">'}
+    return `
+        <li class="mini-cart__product" data-product-id="${product.id}">
+            <div class="mini-cart__product__image">
+                ${product.images && product.images.length 
+                    ? `<img src="/storage/${product.images[0].image_url}" alt="Product Image">` 
+                    : '<img src="/storage/images/default_product.png" alt="Product Image">'}
+            </div>
+            <div class="mini-cart__product__content">
+                <a class="mini-cart__product__title" href="/product-details/${product.id}">${product.name}</a>
+                <div class="quantity-controls">
+                    <button class="update-cart-quantity btn-decrease" data-product-id="${product.id}" data-action="decrease">
+                        <i class="fa-solid ${quantity > 1 ? 'fa-minus' : 'fa-trash'}"></i>
+                    </button>
+                    <input type="number" class="mini-cart-quantity" data-product-id="${product.id}" value="${quantity}" readonly>
+                    <button class="update-cart-quantity btn-increase" data-product-id="${product.id}" data-action="increase">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
-                <div class="mini-cart__product__content">
-                    <a class="mini-cart__product__title">${product.name}</a>
-                    <div class="quantity-controls">
-                        <button class="update-cart-quantity" data-product-id="${product.id}" data-action="${quantity === 1 ? 'remove' : 'decrease'}">
-                            <i class="fa-solid ${quantity === 1 ? 'fa-trash' : 'fa-minus'}"></i>
-                        </button>
-                        <input type="number" class="mini-cart-quantity" value="${quantity}" readonly>
-                        <button class="update-cart-quantity" data-product-id="${product.id}" data-action="increase">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            </li>`;
-    }
+            </div>
+        </li>`;
+}
 
-    function removeCartItem(productId) {
-        $.ajax({
-            url: '{{ route('cart.removeItem') }}',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                product_id: productId
-            },
-            success: function(response) {
-                $(`.mini-cart__product[data-product-id="${productId}"]`).remove();
-                $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
-                updateCartTotal();
-            },
-            error: function() {
-                alert('Failed to remove product from cart.');
+
+function removeCartItem(productId) {
+    $.ajax({
+        url: '{{ route('cart.removeItem') }}',
+        method: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            product_id: productId
+        },
+        success: function(response) {
+            // Remove the item from the cart
+            $(`.mini-cart__product[data-product-id="${productId}"]`).remove();
+            
+            // Update the cart item count
+            $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
+            
+            // Update the cart total
+            updateCartTotal();
+
+            // Check if the cart is empty
+            if (response.cartItemCount === 0) {
+                // Replace mini-cart content with "Cart is empty" message
+                $('.mini-cart-inner').html(`
+                    <h5 class="mini-cart__heading mb--40 mb-lg--30">Shopping Cart</h5>
+                        <h1 class="text-center">Your cart is empty</h1>
+                `);
             }
-        });
-    }
+        },
+        error: function() {
+            alert('Failed to remove product from cart.');
+        }
+    });
+}
+
 
     function updateCartTotal() {
         $.ajax({
@@ -514,7 +550,73 @@ $(document).ready(function() {
             }
         });
     });
+    
 });
+
+$(document).ready(function () {
+        // Handle form submission
+        $('.payment-form').on('submit', function (event) {
+            let isValid = true; // Flag to check form validity
+            let errorMessage = ""; // Error message accumulator
+
+            // Clear previous error messages
+            $('.form__input').removeClass('is-invalid');
+            $('.error-message').remove();
+
+            // Validate Name
+            const name = $('#billing_fname').val().trim();
+            if (!name) {
+                isValid = false;
+                errorMessage = "Name is required.";
+                showError('#billing_fname', errorMessage);
+            }
+
+            // Validate Address
+            const address = $('#address').val().trim();
+            if (!address) {
+                isValid = false;
+                errorMessage = "Address is required.";
+                showError('#address', errorMessage);
+            }
+
+            // Validate Phone Number
+            const phoneNumber = $('#phone_number').val().trim();
+            const phoneRegex = /^\+?[0-9]{7,15}$/; // Basic international phone number format
+            if (!phoneNumber) {
+                isValid = false;
+                errorMessage = "Phone number is required.";
+                showError('#phone_number', errorMessage);
+            } else if (!phoneRegex.test(phoneNumber)) {
+                isValid = false;
+                errorMessage = "Please enter a valid phone number.";
+                showError('#phone_number', errorMessage);
+            }
+
+            // Validate Payment Method
+            const paymentMethod = $('input[name="payment-method"]:checked').val();
+            if (!paymentMethod) {
+                isValid = false;
+                errorMessage = "Please select a payment method.";
+                showError('input[name="payment-method"]', errorMessage);
+            }
+
+            // Prevent form submission if invalid
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        // Function to show error messages
+        function showError(selector, message) {
+            $(selector).addClass('is-invalid'); // Add invalid class to input
+            $(selector).after(`<span class="error-message" style="color:red;">${message}</span>`); // Append error message
+        }
+
+        
+        
+    });
+
+    
 
 
 

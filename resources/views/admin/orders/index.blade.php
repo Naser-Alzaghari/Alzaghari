@@ -112,7 +112,6 @@
                     <thead>
                       <tr>
                         <th>order id</th>
-                        <th>order_date</th>
                         <th>total_amount</th>
                         <th>after discount</th>
                         {{-- <th>status</th>
@@ -123,7 +122,6 @@
                     <tfoot>
                       <tr>
                         <th>order id</th>
-                        <th>order_date</th>
                         <th>total_amount</th>
                         <th>after discount</th>
                         {{-- <th>status</th>
@@ -135,7 +133,6 @@
                       @foreach ($orders as $order)
                       <tr>
                         <td>{{$order->id}}</td>
-                        <td>{{$order->order_date}}</td>
                         <td>{{$order->total_amount}}</td>
                         <td>{{$order->total_amount_after_discount}}</td>
                         {{-- <td>{{$order->status}}</td>

@@ -18,6 +18,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
 use App\Http\Controllers\user\ProductController as UserProductController;
 use App\Http\Controllers\admin\ProductController as AdminProductController;
+use App\Http\Controllers\user\ProfileController as UserProfileController;
+
 
 // use App\Http\Controllers\OrderController;
 
@@ -143,9 +145,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/login-register', function () {
                 return view('user/login-register');
             });
-            Route::get('/my-account', function () {
-                return view('user/my-account');
-            })->name('my-account');
+            // Route::get('/my-account', function () {
+            //     return view('user/my-account');
+            // })->name('my-account');
             
             Route::get('/order-tracking', function () {
                 return view('user/order-tracking');
@@ -232,7 +234,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/minicartprice', [CartController::class, 'updateCart'])->name('minicartprice');
             Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout')->middleware('auth');
             Route::post('/placeOrder', [CheckoutController::class, 'placeOrder'])->name('place_order');
-
+            Route::get('/view_orders', [UserProfileController::class, 'index'])->name('view_orders');
+            Route::get('/view_order/{id}', [UserProfileController::class, 'show'])->name('view_order');
+            Route::get('/my_account', function(){return view('user.my-account');})->name('my_account');
+            Route::put('/profile/update', [UserProfileController::class, 'update'])->name('profile.update');
 
             
         
