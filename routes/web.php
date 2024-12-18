@@ -238,6 +238,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/view_order/{id}', [UserProfileController::class, 'show'])->name('view_order');
             Route::get('/my_account', function(){return view('user.my-account');})->name('my_account');
             Route::put('/profile/update', [UserProfileController::class, 'update'])->name('profile.update');
+            Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
             
         

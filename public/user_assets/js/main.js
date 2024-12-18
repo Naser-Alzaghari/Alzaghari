@@ -740,7 +740,52 @@
 		e.preventDefault();
 		$(this).addClass('active');
 		$(this).siblings().removeClass('active');
+		$('.stars a').on('click', function(e){
+			e.preventDefault();
+			$(this).addClass('active').siblings().removeClass('active');
+	
+			// Update the hidden rating input value
+			var rating = $(this).text();
+			$('#rating').val(rating);
+		});
+	
+		// Form Submission Check
+		$('.form').submit(function(e) {
+			if ($('#rating').val() === '') {
+				e.preventDefault();
+				alert('Please select a rating.');
+			}
+		});
+		
 	})
+
+	$(document).ready(function() {
+        // Star Rating
+        $('.stars a').on('click', function(e){
+            e.preventDefault();
+            $(this).addClass('active').siblings().removeClass('active');
+
+            // Update the hidden rating input value
+            var rating = $(this).index() + 1;
+            $('#rating').val(rating);
+
+            console.log('Rating selected: ' + rating);
+        });
+
+        // Form Submission Check
+        $('.form').submit(function(e) {
+            if ($('#rating').val() === '') {
+                e.preventDefault();
+                alert('Please select a rating.');
+            }
+        });
+
+        // Auto-hide alerts after 5 seconds
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000); // 5000 milliseconds = 5 seconds
+    });
+
 
 
 	/**********************

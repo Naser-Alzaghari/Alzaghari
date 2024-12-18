@@ -71,6 +71,8 @@ class ProfileController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
             // 'cur_pass' => 'nullable|string',
             // 'new_pass' => 'nullable|string|min:8|confirmed',
+            'phone_number' => 'nullable|string|max:14',
+            'address' => 'nullable|string|max:255',
         ]);
         // Get the authenticated user
         $user = auth()->user();
@@ -79,6 +81,12 @@ class ProfileController extends Controller
         // Update user information
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->phone_number = $request->input('phone_number');
+        $user->address = $request->input('address');
+
+
+        $user->address = $request->input('address');
+        $user->phone_number = $request->input('phone_number');
         
         // Update password if provided
         if ($request->filled('cur_pass') && Hash::check($request->input('cur_pass'), $user->password)) {

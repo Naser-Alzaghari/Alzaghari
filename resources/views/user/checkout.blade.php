@@ -38,7 +38,7 @@
                                         <label for="address" class="form__label form__label--2">Address
                                             <span class="required">*</span></label>
                                         <input type="text" name="address" id="address"
-                                            class="form__input form__input--2">
+                                            class="form__input form__input--2" value="{{Auth::user()->address ?? ''}}">
                                     </div>
                                 </div>
                                 
@@ -47,7 +47,7 @@
                                         <label for="phone_number" class="form__label form__label--2">Phone <span
                                                 class="required">*</span></label>
                                         <input type="text" name="phone_number" id="phone_number"
-                                            class="form__input form__input--2">
+                                            class="form__input form__input--2" value="{{Auth::user()->phone_number ?? ''}}">
                                     </div>
                                 </div>
                                 

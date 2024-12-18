@@ -37,10 +37,10 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
-    public function averageRating() { return $this->reviews()->where('is_active', 1)->avg('rating'); }
+    public function averageRating() { return $this->reviews()->avg('rating'); }
     public function ratingsCount()
     {
-        return $this->reviews()->where('is_active', 1)->count();
+        return $this->reviews()->count();
     }
     public function wishlists()
     {

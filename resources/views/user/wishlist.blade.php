@@ -7,6 +7,7 @@
             <div class="row pt--150 pt-md--60 pt-sm--40 pb--65 pb-md--45 pb-sm--25">
                 <div class="col-12" id="main-content">
                     <div class="table-content table-responsive">
+                        @if ($wishlistItems->isNotEmpty())
                         <table class="table table-style-2 wishlist-table text-center">
                             <thead>
                                 <tr>
@@ -61,6 +62,10 @@
                                 
                             </tbody>
                         </table>
+                        @else
+                            <h1 class="text-center">Your Wishlist is empty</h1>
+                        @endif
+                        
                     </div>
                 </div>
             </div>

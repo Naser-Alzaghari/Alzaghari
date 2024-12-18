@@ -51,13 +51,21 @@
                                                 <input type="text" name="name" id="name" class="form__input" value="{{ old('name', auth()->user()->name) }}">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-md-6 mb-sm--20">
+                                        <div class="col-md-6 mb-sm--20">
                                             <div class="form__group">
-                                                <label class="form__label" for="f_name">phone number <span class="required">*</span></label>
-                                                <input type="text" name="f_name" id="f_name" class="form__input" value="{{ old('f_name', auth()->user()->name) }}">
+                                                <label class="form__label" for="phone_number">phone number <span class="required">*</span></label>
+                                                <input type="text" name="phone_number" id="phone_number" class="form__input" value="{{ old('phone_number', auth()->user()->phone_number) }}">
                                             </div>
-                                        </div> --}}
+                                        </div>
                                         
+                                    </div>
+                                    <div class="row mb--20">
+                                        <div class="col-12">
+                                            <div class="form__group">
+                                                <label class="form__label" for="address">Address <span class="required">*</span></label>
+                                                <input type="text" name="address" id="address" class="form__input" value="{{ old('address', auth()->user()->address) }}">
+                                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="row mb--20">
@@ -190,7 +198,7 @@ $(document).ready(function(){
     });
 
     // Ensure the submit button is disabled on page load if the passwords do not match or are weak
-    $('.btn-submit').prop('disabled', true);
+    // $('.btn-submit').prop('disabled', true);
     $('#password-strength-message, #password-match-message').hide();
 });
 </script>

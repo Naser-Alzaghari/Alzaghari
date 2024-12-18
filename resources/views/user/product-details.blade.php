@@ -50,11 +50,11 @@
                                             } 
                                         }
                                     ]'>
-                                    @foreach ($product->images as $image)
+                                        @foreach ($product->images as $image)
                                         <figure class="product-gallery__thumb--single">
                                             <img src="{{asset('Storage/'.$image->image_url)}}" alt="Products">
                                         </figure>
-                                    @endforeach
+                                        @endforeach
                                         
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                         }'>
                                         @if ($product->images->isNotEmpty())
                                             @foreach ($product->images as $image)
-                                            <figure class="product-gallery__thumb--single">
+                                            <figure class="product-gallery__image zoom">
                                                 <img src="{{asset('Storage/'.$image->image_url)}}" alt="Products" >
                                             </figure>
                                             @endforeach
@@ -272,15 +272,18 @@
                                     </ul>
                                     <div class="review-form-wrapper">
                                         <span class="reply-title"><strong>Add a review</strong></span>
-                                        <form action="#" class="form">
+                                        
+                                        <form action="{{ route('reviews.store') }}" method="POST" class="form">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="rating" id="rating" value="">
                                             <div class="form-notes mb--20">
-                                                <p>Your email address will not be published. Required fields are
-                                                    marked <span class="required">*</span></p>
+                                                <p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>
                                             </div>
                                             <div class="form__group mb--30 mb-sm--20">
                                                 <div class="revew__rating">
                                                     <p class="stars selected">
-                                                        <a class="star-1 active" href="#">1</a>
+                                                        <a class="star-1" href="#">1</a>
                                                         <a class="star-2" href="#">2</a>
                                                         <a class="star-3" href="#">3</a>
                                                         <a class="star-4" href="#">4</a>
@@ -291,38 +294,32 @@
                                             <div class="form__group mb--30 mb-sm--20">
                                                 <div class="row">
                                                     <div class="col-sm-6 mb-sm--20">
-                                                        <label class="form__label" for="name">Name<span
-                                                                class="required">*</span></label>
-                                                        <input type="text" name="name" id="name"
-                                                            class="form__input">
+                                                        <label class="form__label" for="name">Name<span class="required">*</span></label>
+                                                        <input type="text" name="name" id="name" class="form__input" value="{{ Auth::user()->name ?? '' }}" disabled>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label class="form__label" for="email">email<span
-                                                                class="required">*</span></label>
-                                                        <input type="email" name="email" id="email"
-                                                            class="form__input">
+                                                        <label class="form__label" for="email">Email<span class="required">*</span></label>
+                                                        <input type="email" name="email" id="email" class="form__input" value="{{ Auth::user()->email ?? '' }}" disabled>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form__group mb--30 mb-sm--20">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <label class="form__label" for="email">Your Review<span
-                                                                class="required">*</span></label>
-                                                        <textarea name="review" id="review"
-                                                            class="form__input form__input--textarea"></textarea>
+                                                        <label class="form__label" for="review">Your Review<span class="required">*</span></label>
+                                                        <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form__group">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <input type="submit" value="Submit"
-                                                            class="btn btn-style-1 btn-submit">
+                                                        <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
                                                     </div>
                                                 </div>
                                             </div>
                                         </form>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -823,4 +820,18 @@
         </div>
     </div>
 </div>
+
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if($errors->any())
+<div class="alert alert-danger">
+    @foreach($errors->all() as $error)
+        <p>{{ $error }}</p>
+    @endforeach
+</div>
+@endif
 @endsection

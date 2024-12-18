@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-use App\Http\Controllers\Controller;
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -26,6 +27,35 @@ class ReviewController extends Controller
     }
 
     
+    public function store(Request $request)
+{
+    // Validate the input
+    $request->validate([
+        'product_id' => 'required|integer|exists:products,id',
+        'rating' => 'required|integer|between:1,5',
+        'review' => 'nullable|string|max:1000',
+    ]);
+
+    // Check if the user has already reviewed the product
+    $existingReview = Review::where('product_id', $request->input('product_id'))
+                            ->where('user_id', Auth::id())
+                            ->first();
+
+    if ($existingReview) {
+        return redirect()->back()->withErrors('You have already reviewed this product.');
+    }
+
+    // Create the review
+    Review::create([
+        'product_id' => $request->input('product_id'),
+        'user_id' => Auth::id(),
+        'rating' => $request->input('rating'),
+        'comment' => $request->input('review') ?? null,
+        'is_active' => false,
+    ]);
+
+    return redirect()->back()->with('success', 'Review submitted successfully!');
+}
 
     
 
