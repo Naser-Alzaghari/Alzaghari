@@ -11,14 +11,15 @@ use App\Http\Controllers\user\CheckoutController;
 
 use App\Http\Controllers\user\WishlistController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\user\ContactUsController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\user\LandingPageController;
 use App\Http\Controllers\user\ShopSidebarController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Auth\AdminAuthenticatedSessionController;
 use App\Http\Controllers\user\ProductController as UserProductController;
-use App\Http\Controllers\admin\ProductController as AdminProductController;
 use App\Http\Controllers\user\ProfileController as UserProfileController;
+use App\Http\Controllers\admin\ProductController as AdminProductController;
 
 
 // use App\Http\Controllers\OrderController;
@@ -93,6 +94,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::prefix('')
     ->group(function () {
+            Route::post('/send_mail', [ContactUsController::class, 'sendMail'])->name('send_mail');
 
             Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
             Route::get('/shop-sidebara', [ShopSidebarController::class, 'search_product'])->name('search_product');

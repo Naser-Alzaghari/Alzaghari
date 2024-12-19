@@ -35,6 +35,7 @@
                         <h3 class="widget-title">Company</h3>
                         <ul class="widget-menu">
                             <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="{{route('contact-us')}}">contact-us</a></li>
                         </ul>
                     </div>
                 </div>

@@ -245,7 +245,7 @@
     
 
     <!-- Trending Products area Start Here -->
-    <section class="trending-products-area pt--30 pb--80 pt-md--20 pb-md--60">
+    <section class="trending-products-area pt--110 pb--80 pt-md--20 pb-md--60">
         <div class="container-fluid">
             <div class="row mb--40 mb-md--30">
                 <div class="col-12">
@@ -269,177 +269,6 @@
     </section>
     <!-- Trending Products area End Here -->
 
-    <!-- partners area Start Here -->
-    <div class="partners-area ptb--40 ptb-md--30 bg--gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="airi-element-carousel partner-carousel" data-slick-options='{
-                            "slidesToShow": 6,
-                            "slidesToScroll": 1
-                        }' data-slick-responsive='[
-                            {"breakpoint":1200, "settings": {"slidesToShow": 5} },
-                            {"breakpoint":991, "settings": {"slidesToShow": 4} },
-                            {"breakpoint":767, "settings": {"slidesToShow": 3} },
-                            {"breakpoint":575, "settings": {"slidesToShow": 2} },
-                            {"breakpoint":380, "settings": {"slidesToShow": 1} }
-                        ]'>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner1.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner2.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner3.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner4.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner5.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner6.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner1.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner2.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner3.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner4.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner5.png" alt="Partner">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="single-partner">
-                                <img src="user_assets/img/partner/logo-partner6.png" alt="Partner">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- partners area End Here -->
-
-    <!-- Top Collections area Start Here -->
-    <section class="top-collection-area ptb--80 pt-md--55 pb-md--60">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="text-block">
-                        <h2 class="heading-secondary mb--40 mb-md--20">Top Collections</h2>
-                        <p class="font-2 heading-color font-size-16 mb--40 mb-md--25">Integer ut ligula quis
-                            lectus fringilla elementum porttitor sed est. Duis fringilla efficitur ligula sed
-                            lobortis. Sed tempus faucibus mi, quis fringilla mauris lacinia sed.</p>
-                        <a href="{{route('shop-sidebar')}}" class="heading-button mb-sm--30">View All</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="banner-box banner-type-1 banner-hover-1 mb--20 mb-md--10 mb-sm--30">
-                                <div class="banner-inner">
-                                    <div class="banner-image">
-                                        <img src="user_assets/img/banner/m01-collection1.jpg" alt="Banner">
-                                    </div>
-                                    <div class="banner-info">
-                                        <a class="banner-btn" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                    </div>
-                                    <a class="banner-link banner-overlay" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                </div>
-                            </div>
-                            <div class="banner-box banner-type-1 banner-hover-1 mb-sm--30">
-                                <div class="banner-inner">
-                                    <div class="banner-image">
-                                        <img src="user_assets/img/banner/m01-collection2.jpg" alt="Banner">
-                                    </div>
-                                    <div class="banner-info">
-                                        <a class="banner-btn" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                    </div>
-                                    <a class="banner-link banner-overlay" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="banner-box banner-type-1 banner-hover-1">
-                                <div class="banner-inner">
-                                    <div class="banner-image">
-                                        <img src="user_assets/img/banner/m01-collection3.jpg" alt="Banner">
-                                    </div>
-                                    <div class="banner-info">
-                                        <a class="banner-btn" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                    </div>
-                                    <a class="banner-link banner-overlay" href="{{route('shop-sidebar')}}">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Top Collections area End Here -->
-
-    <!-- Newsletter area Start Here -->
-    <section class="newsletter-area bg--gray pt--30 pt-md--25 pb--40 pb-md--30">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 col-md-10">
-                    <div class="newsletter-box text-center">
-                        <h2 class="heading-secondary mb--20">Join Our Newsletter</h2>
-                        <p class="heading-color font-size-16 font-bold lts-2 mb--30">GET 15% OFF YOUR FIRST
-                            ORDER</p>
-                        <form
-                            action="https://company.us19.list-manage.com/subscribe/post?u=2f2631cacbe4767192d339ef2&amp;id=24db23e68a"
-                            class="newsletter-form mc-form" method="post" target="_blank">
-                            <input type="email" name="newsletter_email" id="newsletter_email"
-                                placeholder="Enter your email address.." required="required"
-                                class="newsletter-form__input">
-                            <button type="submit" class="newsletter-form__submit">Subscribe</button>
-                        </form>
-                        <!-- mailchimp-alerts Start -->
-                        <div class="mailchimp-alerts">
-                            <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                            <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                            <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                        </div>
-                        <!-- mailchimp-alerts end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Newsletter area End Here -->
 
     <!-- Blog area Start Here -->
     <div class="blog-area ptb--80 ptb-sm--60">
@@ -456,6 +285,7 @@
                             {"breakpoint":991, "settings": {"slidesToShow": 2} },
                             {"breakpoint":767, "settings": {"slidesToShow": 1} }
                         ]'>
+                        @foreach ($categories as $category)
                         <div class="item">
                             <article class="blog">
                                 <div class="blog-media">
@@ -472,7 +302,7 @@
                                         </span>
                                     </div>
                                     <h3 class="blog-title">
-                                        <a href="single-post.html">Monday to Sunday</a>
+                                        <a href="single-post.html">{{$category->name}}</a>
                                     </h3>
                                     <div class="blog-footer-meta">
                                         <a href="blog.html" class="posted-on">September 16, 2018</a>
@@ -482,84 +312,8 @@
                                 </div>
                             </article>
                         </div>
-                        <div class="item">
-                            <article class="blog">
-                                <div class="blog-media">
-                                    <div class="image">
-                                        <a href="single-post.html">
-                                            <img src="user_assets/img/blog/blog-12-545x363.jpg" alt="Blog Thumb">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="blog-info">
-                                    <div class="blog-entry-meta">
-                                        <span class="blog-category">
-                                            <a href="blog.html">Trends</a>
-                                        </span>
-                                    </div>
-                                    <h3 class="blog-title">
-                                        <a href="single-post.html">Dress Time</a>
-                                    </h3>
-                                    <div class="blog-footer-meta">
-                                        <a href="blog.html" class="posted-on">September 16, 2018</a>
-                                        <span class="meta-separator">-</span>
-                                        <a href="blog.html" class="posted-by">By Arya Stark</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="item">
-                            <article class="blog">
-                                <div class="blog-media">
-                                    <div class="image">
-                                        <a href="single-post.html">
-                                            <img src="user_assets/img/blog/blog-13-545x363.jpg" alt="Blog Thumb">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="blog-info">
-                                    <div class="blog-entry-meta">
-                                        <span class="blog-category">
-                                            <a href="blog.html">Trends</a>
-                                        </span>
-                                    </div>
-                                    <h3 class="blog-title">
-                                        <a href="single-post.html">Fashion Vintage</a>
-                                    </h3>
-                                    <div class="blog-footer-meta">
-                                        <a href="blog.html" class="posted-on">September 16, 2018</a>
-                                        <span class="meta-separator">-</span>
-                                        <a href="blog.html" class="posted-by">By Robb Stark</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="item">
-                            <article class="blog">
-                                <div class="blog-media">
-                                    <div class="image">
-                                        <a href="single-post.html">
-                                            <img src="user_assets/img/blog/blog-11-545x363.jpg" alt="Blog Thumb">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="blog-info">
-                                    <div class="blog-entry-meta">
-                                        <span class="blog-category">
-                                            <a href="blog.html">Trends</a>
-                                        </span>
-                                    </div>
-                                    <h3 class="blog-title">
-                                        <a href="single-post.html">Fashion Vintage</a>
-                                    </h3>
-                                    <div class="blog-footer-meta">
-                                        <a href="blog.html" class="posted-on">September 16, 2018</a>
-                                        <span class="meta-separator">-</span>
-                                        <a href="blog.html" class="posted-by">By Brandon Stark</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
+                        @endforeach
+                        
                     </div>
                 </div>
             </div>

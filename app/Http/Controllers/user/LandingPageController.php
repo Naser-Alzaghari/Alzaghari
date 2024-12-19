@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,8 @@ class LandingPageController extends Controller
             ->take(8)
             ->get();
 
+            $categories = Category::all();
         // Return a view with products
-        return view('user.master', compact('products'));
+        return view('user.master', compact('products', 'categories'));
     }
 }
