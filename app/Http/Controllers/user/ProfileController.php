@@ -19,7 +19,7 @@ class ProfileController extends Controller
         $user = auth()->user();
         
         // Retrieve the orders for the logged-in user
-        $orders = $user->orders;
+        $orders = $user->orders()->orderBy('id', 'desc')->get();
         
         return view('user.my-orders', compact('orders'));
     }

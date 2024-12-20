@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\ProfileController;
-use App\Http\Controllers\user\CheckoutController;
 
+use App\Http\Controllers\user\CheckoutController;
 use App\Http\Controllers\user\WishlistController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\user\ContactUsController;
@@ -244,7 +245,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
             
-        
+            Route::post('paypal', [CheckoutController::class, 'paypal'])->name('paypal');
+            Route::get('success', [CheckoutController::class, 'success'])->name('success');
+            Route::get('cancel', [CheckoutController::class, 'cancel'])->name('cancel');
     });
 
     

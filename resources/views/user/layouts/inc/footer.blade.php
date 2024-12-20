@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-md-8 mb-md--30">
                     <div class="footer-widget">
                         <div class="textwidget">
-                            <img src="{{asset('user_assets/img/logo/logo-white.png')}}" alt="Logo" class="mb--10">
+                            <a href="{{route('landing_page')}}"><img src="{{asset('user_assets/img/logo/logo-white.png')}}" alt="Logo" class="mb--10"></a>
                             <p class="font-size-16 font-2 mb--20">Welcome to our store! We pride ourselves on offering a wide range of high-quality products to meet all your needs.</p>
 
                             <!-- Social Icons Start Here -->
@@ -51,7 +51,7 @@
                     <div class="footer-widget">
                         <h3 class="widget-title">SHOPPING</h3>
                         <ul class="widget-menu">
-                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
+                            <li><a href="{{route('shop-sidebar')}}">Shop Sidebar</a></li>
                         </ul>
                     </div>
                 </div>
@@ -69,12 +69,10 @@
                             </li>
                             <li class="contact-info__item">
                                 <i class="fa fa-map-marker"></i>
-                                {{-- <span>Amman/ alquds street</span> --}}
+                                <span>Amman / Jordan</span>
                             </li>
                         </ul>
-                        <div class="textwidget">
-                            <img src="{{asset('user_assets/img/others/payments.png')}}" alt="Payment">
-                        </div>
+                        
                     </div>
                 </div>
             </div>

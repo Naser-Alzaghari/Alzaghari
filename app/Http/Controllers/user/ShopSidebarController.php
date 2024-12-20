@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Models\Color;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -52,10 +51,9 @@ class ShopSidebarController extends Controller
 
     $products = $query->paginate(12);  // Adjust the number of items per page as needed
 
-    $colors = Color::all();
     $categories = Category::all();
 
-    return view('user.shop-sidebar', compact('products', 'colors', 'categories', 'priceRange', 'sort'));
+    return view('user.shop-sidebar', compact('products', 'categories', 'priceRange', 'sort'));
 }
 
     
@@ -116,11 +114,10 @@ class ShopSidebarController extends Controller
             ->orWhere('description', 'LIKE', "%{$search}%")
             ->paginate(12); // Adjust the number of items per page as needed
 
-        $colors = Color::all();
         $categories = Category::all();
 
         // Return a view with products
-        return view('user.shop-sidebar', compact('products', 'colors', 'categories', 'search'));
+        return view('user.shop-sidebar', compact('products', 'categories', 'search'));
     }
 
 
@@ -134,14 +131,11 @@ class ShopSidebarController extends Controller
     // Fetch all categories to display in the sidebar
     $categories = Category::all();
 
-    // Fetch all colors (if required in the sidebar)
-    $colors = Color::all();
-
     // Get the current category
     $currentCategory = Category::find($id);
 
     // Return the shop sidebar view with filtered products
-    return view('user.shop-sidebar', compact('products', 'categories', 'colors', 'currentCategory'));
+    return view('user.shop-sidebar', compact('products', 'categories', 'currentCategory'));
 }
 
 }

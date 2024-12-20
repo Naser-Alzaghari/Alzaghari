@@ -7,7 +7,7 @@
     <div id="content" class="main-content-wrapper">
         <div class="page-content-inner">
             <div class="container">
-                <form action="{{route('place_order')}}" class="payment-form" method="POST">
+                <form action="{{ route('place_order') }}" class="payment-form" method="POST" id="checkout-form">
                 <div class="row pt--150 pb--80 pb-md--60 pb-sm--40">
                     
 <!-- Checkout Area Start -->
@@ -130,16 +130,16 @@
                                             <p>Pay with cash upon delivery.</p>
                                         </div>
                                     </div>
+                                    
                                     <div class="payment-group mb--10">
                                         <div class="payment-radio">
-                                            <input type="radio" value="cheque" name="payment-method" id="cheque">
-                                            <label class="payment-label" for="cheque">
-                                                cheque payments
+                                            <input type="radio" value="paypal" name="payment-method" id="paypal">
+                                            <label class="payment-label" for="paypal">
+                                                Pay with PayPal
                                             </label>
                                         </div>
-                                        <div class="payment-info cheque hide-in-default" data-method="cheque">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store
-                                                State / County, Store Postcode.</p>
+                                        <div class="payment-info paypal hide-in-default" data-method="paypal">
+                                            <div id="paypal-button-container"></div>
                                         </div>
                                     </div>
                                     <div class="payment-group mt--20">
@@ -164,6 +164,25 @@
     <!-- Main Content Wrapper Start -->
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('checkout-form');
+            const cashRadio = document.getElementById('cash');
+            const paypalRadio = document.getElementById('paypal');
+    
+            cashRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    form.action = "{{ route('place_order') }}";
+                }
+            });
+    
+            paypalRadio.addEventListener('change', function() {
+                if (this.checked) {
+                    form.action = "{{ route('paypal') }}";
+                }
+            });
+        });
+    </script>
     
 
 

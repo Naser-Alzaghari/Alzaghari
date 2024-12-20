@@ -114,7 +114,6 @@
                         <th>Name</th>
                         <th>category</th>
                         <th>price</th>
-                        <th>color</th>
                         <th>stock</th>
                         <th>image</th>
                         <th style="width: 10%">Action</th>
@@ -125,7 +124,6 @@
                         <th>Name</th>
                         <th>category</th>
                         <th>price</th>
-                        <th>color</th>
                         <th>stock</th>
                         <th>image</th>
                         <th>Action</th>
@@ -137,20 +135,7 @@
                         <td>{{$product->name}}</td>
                         <td>{{$product->category->name}}</td>
                         <td>{{$product->price}}</td>
-                        <td>@if(isset($product->colors[0]->name)) {{$product->colors[0]->name}} @endif</td>
-                        <td>
-
-                            @if (isset($product->colors[0]))
-                                @foreach ($product->colors as $color)
-                                {{$color->name}}{{"->"}}{{$color->pivot->stock}}<br>
-                                @endforeach
-                                {{"total ->"}}{{$product->stock}}<br>
-                            @endif
-
-                            @if(!isset($product->colors[0]))
-                            {{$product->stock}}
-                            @endif
-                        </td>
+                        <td>{{$product->stock}}</td>
 
                         <td>@foreach($product->images as $image)
                             <div class="avatar">

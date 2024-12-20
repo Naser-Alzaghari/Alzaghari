@@ -75,31 +75,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="color-stocks">Color Stocks</label>
-                                    <div id="color-stocks">
-                                        @if(isset($product))
-                                            @foreach($product->colors as $color)
-                                                <div class="form-group">
-                                                    <label>{{ $color->name }}</label>
-                                                    <input type="text" name="color_stocks[{{ $color->id }}]" class="form-control" value="{{ $color->pivot->stock }}">
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="new-color">Add New Color Stock</label>
-                                        <select class="form-control" id="new-color" name="new_color_id">
-                                            <option value="">Select Color</option>
-                                            @foreach($colors as $color)
-                                                @if(!isset($product) || !$product->colors->contains('id', $color->id))
-                                                    <option value="{{ $color->id }}">{{ $color->name }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                        <input type="text" name="new_color_stock" class="form-control mt-2" placeholder="Stock">
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label for="images">Product Images</label>
                                     <input type="file" class="form-control-file" name="images[]" multiple>
                                 </div>

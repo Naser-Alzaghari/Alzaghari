@@ -290,25 +290,17 @@
                             <article class="blog">
                                 <div class="blog-media">
                                     <div class="image">
-                                        <a href="single-post.html">
-                                            <img src="user_assets/img/blog/image-545x363.jpg" alt="Blog Thumb">
+                                        <a href="{{route('shop.filterByCategory',$category->id)}}">
+                                            <img class="fixed-size" src="{{isset($category->image) ? asset('storage/'.$category->image) : asset('storage/images/default_product.png')}}" alt="Blog Thumb">
                                         </a>
                                     </div>
                                 </div>
                                 <div class="blog-info">
-                                    <div class="blog-entry-meta">
-                                        <span class="blog-category">
-                                            <a href="blog.html">Trends</a>
-                                        </span>
-                                    </div>
+                                    
                                     <h3 class="blog-title">
                                         <a href="single-post.html">{{$category->name}}</a>
                                     </h3>
-                                    <div class="blog-footer-meta">
-                                        <a href="blog.html" class="posted-on">September 16, 2018</a>
-                                        <span class="meta-separator">-</span>
-                                        <a href="blog.html" class="posted-by">By John Snow</a>
-                                    </div>
+                                    
                                 </div>
                             </article>
                         </div>

@@ -89,20 +89,7 @@
 
 
                     
-                    <div class="form-group">
-                        <label for="colors">Select Colors</label>
-                        <select name="colors[]" id="colors" class="form-control" multiple>
-                            @foreach($colors as $color)
-                                <option value="{{ $color->id }}" 
-                                    @if(isset($product))
-                                    {{ $product->colors->contains('id', $color->id) ? 'selected' : '' }}
-                                    @endif
-                                    >
-                                    {{ $color->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                  
                     
 
 

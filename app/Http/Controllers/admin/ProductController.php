@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
-use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\ProductColor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,8 +26,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $colors = Color::all();
-        return view('admin.products.create', compact('categories', 'colors'));
+        return view('admin.products.create', compact('categories'));
     }
 
     // Store a newly created user in the database
@@ -45,23 +42,12 @@ class ProductController extends Controller
             'price_after_discount' => 'nullable|numeric',
             'stock' => 'required|integer',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-            'new_color_id' => 'nullable|integer|exists:colors,id',
-            'new_color_stock' => 'nullable|integer',
         ]);
 
         // Create product
         $product = Product::create($validated);
 
-        // Handle color stocks
-        if ($request->has('color_stocks')) {
-            foreach ($request->input('color_stocks') as $colorId => $stock) {
-                $product->colors()->attach($colorId, ['stock' => $stock]);
-            }
-        }
-
-        if ($request->has('new_color_id') && $request->input('new_color_stock') !== null) {
-            $product->colors()->attach($request->input('new_color_id'), ['stock' => $request->input('new_color_stock')]);
-        }
+        
 
 
         if ($request->hasFile('images')) {
@@ -85,9 +71,8 @@ class ProductController extends Controller
     // Show the form for editing the specified product
     public function edit(Product $product)
     {
-        $colors = Color::all();
         $categories = Category::all();
-        return view('admin.products.create', compact('product', 'categories','colors'));
+        return view('admin.products.create', compact('product', 'categories'));
     }
 
     public function addStockForm(Product $product)
@@ -121,16 +106,7 @@ class ProductController extends Controller
         // Update product details
         $product->update($validated);
 
-        // Handle colors and stocks
-        if ($request->has('color_stocks')) {
-            foreach ($request->input('color_stocks') as $colorId => $stock) {
-                $product->colors()->updateExistingPivot($colorId, ['stock' => $stock]);
-            }
-        }
-
-        if ($request->has('new_color_id') && $request->input('new_color_stock') !== null) {
-            $product->colors()->attach($request->input('new_color_id'), ['stock' => $request->input('new_color_stock')]);
-        }
+    
 
         // Delete selected images
         if ($request->has('delete_images')) {

@@ -6,7 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use App\Models\Payment;
 class CheckoutController extends Controller
 {
     public function index(Request $request){
@@ -48,6 +49,7 @@ class CheckoutController extends Controller
             'payment-method' => 'required|string',
             'address' => 'required|string',
             'phone_number' => 'required|string',
+            'payment-method' => 'required|string',
             'cartItems' => 'required|array',
             'cartItems.*.product_id' => 'required|integer',
             'cartItems.*.quantity' => 'required|integer|min:1',
@@ -65,7 +67,9 @@ class CheckoutController extends Controller
             $order->status = 'pending';                     // Initial order status
             $order->total_amount = $total;                  // Total amount
             $order->total_amount_after_discount = $total;   // Adjust this if discounts are applied
-            $order->payment_status = 'unpaid';              // Initial payment status
+            $order->payment_method = $paymentMethod;
+
+            $order->payment_status = $paymentMethod == 'paypal' ? 'paid' : 'unpaid';              // Initial payment status
             $order->pickup_date = null;                     // Set if applicable
             $order->address = $request->input('address');
             $order->phone_number = $request->input('phone_number');
@@ -96,8 +100,8 @@ class CheckoutController extends Controller
     
             // Commit the transaction
             DB::commit();
-            
-            return view('user.thank-you');
+            $order_id = $order->id;
+            return view('user.thank-you', compact('order_id'));
             // return response()->json(['message' => 'Order placed successfully!']);
         } catch (\Exception $e) {
             // Rollback in case of failure
@@ -108,6 +112,77 @@ class CheckoutController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+    }
+    public function paypal(Request $request)
+    {
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+        $response = $provider->createOrder([
+            "intent" => "CAPTURE",
+            "application_context" => [
+                "return_url" => route('success', $request),
+                "cancel_url" => route('cancel')
+            ],
+            "purchase_units" => [
+                [
+                    "amount" => [
+                        "currency_code" => "USD",
+                        "value" => $request->total
+                    ]
+                ]
+            ]
+        ]);
+        
+        if(isset($response['id']) && $response['id']!=null) {
+            foreach($response['links'] as $link) {
+                if($link['rel'] === 'approve') {
+                    session()->put('product_name', $request->product_name);
+                    session()->put('quantity', $request->quantity);
+                    return redirect()->away($link['href']);
+                }
+            }
+        } else {
+            return redirect()->route('cancel');
+        }
+    }
+    public function success(Request $request)
+    {
+        
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request->token);
+        //dd($response);
+        if(isset($response['status']) && $response['status'] == 'COMPLETED') {
+            
+            // Insert data into database
+            $payment = new Payment;
+            $payment->payment_id = $response['id'];
+            // $payment->product_name = session()->get('product_name');
+            // $payment->quantity = session()->get('quantity');
+            $payment->amount = $response['purchase_units'][0]['payments']['captures'][0]['amount']['value'];
+            $payment->currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'];
+            $payment->payer_name = $response['payer']['name']['given_name'];
+            $payment->payer_email = $response['payer']['email_address'];
+            $payment->payment_status = $response['status'];
+            $payment->payment_method = "PayPal";
+            $payment->save();
+
+            
+            
+            return $this->placeOrder($request);
+
+            // unset($_SESSION['product_name']);
+            // unset($_SESSION['quantity']);
+
+        } else {
+            return redirect()->route('cancel');
+        }
+    }
+    public function cancel()
+    {
+        return "Payment is cancelled.";
     }
     
 }

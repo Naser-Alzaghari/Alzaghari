@@ -109,15 +109,7 @@
                     </span>
                     @else
                     <span class="money">{{$product->price}}JD</span>
-                    @endif
-                    
-                    <div class="product-color-swatch">
-                        @foreach ($product->colors as $color)
-                        <a class="product-color-swatch-btn" style="background-color: {{$color->hex_code}}">
-                            <span class="product-color-swatch-label"></span>
-                        </a>
-                        @endforeach
-                    </div>
+                    @endif 
                 </span>
             </div>
         </div>

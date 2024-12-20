@@ -113,6 +113,7 @@
                       <tr>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>image</th>
                         <th style="width: 10%">Action</th>
                       </tr>
                     </thead>
@@ -120,6 +121,7 @@
                       <tr>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>image</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
@@ -128,6 +130,14 @@
                       <tr>
                         <td>{{$category->name}}</td>
                         <td>{{$category->description}}</td>
+                        <td>
+                          @if ($category->image)
+                          <div class="avatar">
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="avatar-img rounded">
+                        </div>
+                          @endif
+                          
+                        </td>
                         <td>
                           <div class="form-button-action">
                             <a

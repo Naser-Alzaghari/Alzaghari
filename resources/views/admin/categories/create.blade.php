@@ -26,7 +26,7 @@
         </ul>
       </div>
       <div class="row">
-        <form action="{{ !isset($category) ? route('admin.categories.store') : route('admin.categories.update', $category) }}" method="POST" class="col-md-12">
+        <form action="{{ !isset($category) ? route('admin.categories.store') : route('admin.categories.update', $category) }}" method="POST" class="col-md-12" enctype="multipart/form-data">
             @csrf
             @if(isset($category))
                 @method('PUT') <!-- Only include PUT if $category is set (edit mode) -->
@@ -56,23 +56,25 @@
                         
                     </div>
 
-
                     <div class="form-group">
-                        <label for="comment">description</label>
+                        <label for="comment">Description</label>
                         <textarea class="form-control" id="comment" rows="5" name="description">{{ isset($category) ? $category->description : ""}}</textarea>
                     </div>
+
+                    <div class="form-group">
+                        <label for="image">Image</label>
+                        <input type="file" class="form-control" id="image" name="image">
                     </div>
                 </div>
-                
+              </div>
             </div>
             <div class="card-action">
               <button type="submit" class="btn btn-success">Submit</button>
-              <a href="{{route("admin.categories")}}" type="button" class="btn btn-danger">Cancel</a>
+              <a href="{{ route('admin.categories') }}" class="btn btn-danger">Cancel</a>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-
 @endsection

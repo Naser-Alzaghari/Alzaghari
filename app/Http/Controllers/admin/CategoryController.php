@@ -27,18 +27,48 @@ class CategoryController extends Controller
         return view('admin.categories.create', compact('categories'));
     }
 
-    // Store a newly created user in the database
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('categories', 'public');
+        }
+
         Category::create([
             'name' => $request->name,
             'description' => $request->description,
+            'image' => $imagePath,
         ]);
 
-        
         return redirect()->route('admin.categories')->with('success', 'Category created successfully.');
     }
+
+    public function update(Request $request, Category $category)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('categories', 'public');
+            $category->image = $imagePath;
+        }
+
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return redirect()->route('admin.categories')->with('success', 'Category updated successfully.');
+    }
+
 
     // Display the specified user
     public function show(Category $category)
@@ -52,21 +82,7 @@ class CategoryController extends Controller
         return view('admin.Categories.create', compact('category'));
     }
 
-    // Update the specified user in the database
-    public function update(Request $request, Category $category)
-    {
-        
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-        ]);
-
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
-
-        return redirect()->route('admin.categories')->with('success', 'Category updated successfully.');
-    }
+    
 
     // Remove the specified user from the database
     public function destroy($id)
@@ -76,10 +92,4 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories')->with('success', 'Category soft-deleted successfully!');
     }
 
-//     public function restore($id)
-// {
-//     $category = User::onlyTrashed()->findOrFail($id);
-//     $category->restore(); // Restore the user
-//     return redirect()->route('admin.users.trashed')->with('success', 'User restored successfully!');
-// }
 }

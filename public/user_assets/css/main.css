@@ -18825,3 +18825,9 @@ a:hover {
   z-index: 1000;   /* Ensures the header is above other elements */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add the subtle shadow */
 }
+
+.fixed-size {
+  width: 445px; /* Specify the desired width */
+  height: 293px; /* Specify the desired height */
+  object-fit: cover; /* Ensures the image covers the set dimensions without distortion */
+}
