@@ -104,10 +104,11 @@
                             <a href="#" class="next"><i class="dl-icon-right"></i></a>
                         </div> --}}
                         <div class="clearfix"></div>
-                        <div class="d-flex justify-content-between">
-                            <h3 class="product-title m-0">{{$product->name}}</h3>
+                        <div>
+                            <h3 class="product-title">{{$product->name}}</h3>
                             <div class="product-rating float-left">
                                 <span>
+                                    {{number_format($product->averageRating(), 1)}}
                                     @for ($i = 0; $i < number_format($product->averageRating()); $i++)
                                         <i class="dl-icon-star rated"></i>
                                     @endfor

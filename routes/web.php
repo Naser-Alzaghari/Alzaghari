@@ -248,6 +248,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::post('paypal', [CheckoutController::class, 'paypal'])->name('paypal');
             Route::get('success', [CheckoutController::class, 'success'])->name('success');
             Route::get('cancel', [CheckoutController::class, 'cancel'])->name('cancel');
+            Route::fallback(function(){
+                return view('user.404');
+            });
     });
 
     

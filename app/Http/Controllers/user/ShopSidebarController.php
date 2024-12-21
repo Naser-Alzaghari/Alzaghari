@@ -33,9 +33,9 @@ class ShopSidebarController extends Controller
     }
 
     switch ($sort) {
-        case 'rating':
-            $query->orderBy('average_rating', 'desc');
-            break;
+        // case 'rating':
+        //     $query->orderBy('average_rating', 'desc');
+        //     break;
         case 'newness':
             $query->orderBy('created_at', 'desc');
             break;

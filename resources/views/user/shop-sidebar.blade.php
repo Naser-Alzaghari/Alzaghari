@@ -39,9 +39,9 @@
                                                         <i></i>
                                                     </a>
                                                     <ul class="product-ordering__list">
-                                                        <li class="{{ request('sort') == 'rating' ? 'active' : '' }}">
+                                                        {{-- <li class="{{ request('sort') == 'rating' ? 'active' : '' }}">
                                                             <a href="?sort=rating">Sort by average rating</a>
-                                                        </li>
+                                                        </li> --}}
                                                         <li class="{{ request('sort') == 'newness' ? 'active' : '' }}">
                                                             <a href="?sort=newness">Sort by newness</a>
                                                         </li>
