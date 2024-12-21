@@ -31,10 +31,10 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+            // 'description' => 'required|string|max:255',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
         ]);
-
+        
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('categories', 'public');
@@ -53,8 +53,8 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+            // 'description' => 'required|string|max:255',
+            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
         ]);
 
         if ($request->hasFile('image')) {

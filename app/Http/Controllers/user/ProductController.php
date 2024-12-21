@@ -15,7 +15,13 @@ class ProductController extends Controller
             $query->where('is_active', 1);
         }])->findOrFail($id);
 
-        return view('user.product-details', compact('product'));
+        $relatedProducts = Product::where('category_id', $product->category_id)
+                              ->where('id', '!=', $id)
+                              ->take(4) // Limit to 4 products
+                              ->get();
+
+        
+        return view('user.product-details', compact('product', 'relatedProducts'));
     }
 
 

@@ -5,6 +5,7 @@
     <div class="page-content-inner">
         <div class="container">
             <div class="row pt--150 pt-md--60 pt-sm--40 pb--65 pb-md--45 pb-sm--25">
+                <h1 class="mb-3"><b>Wishlist</b></h1>
                 <div class="col-12" id="main-content">
                     <div class="table-content table-responsive">
                         @if ($wishlistItems->isNotEmpty())

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,15 +94,21 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // Validate the request
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category_id' => 'required|integer|exists:categories,id',
-            'price' => 'required|numeric',
-            'price_after_discount' => 'nullable|numeric',
-            'stock' => 'required|integer',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-        ]);
+        
+        try{
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'category_id' => 'required|integer|exists:categories,id',
+                'price' => 'required|numeric',
+                'price_after_discount' => 'nullable|numeric',
+                'stock' => 'required|integer',
+                // 'images.*' => ['image', 'mimes:jpg,jpeg,png' ,'max:10000']
+            ]);
+        } catch(Exception $e) {
+            dd($e);
+        }
+        
 
         // Update product details
         $product->update($validated);
