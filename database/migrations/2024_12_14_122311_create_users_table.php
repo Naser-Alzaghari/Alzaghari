@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password', 191);
             $table->rememberToken();
             $table->timestamps();
-            $table->tinyInteger('role_as')->default(0);
             $table->softDeletes();
         });
     }

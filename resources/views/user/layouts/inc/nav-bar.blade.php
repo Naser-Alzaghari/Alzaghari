@@ -71,7 +71,7 @@
                                     @endguest
                                     @auth
                                     <li>
-                                        <a href="{{route('view_orders')}}">My Account</a>
+                                        <a href="{{route('my_account')}}">My Account</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('wishlist') }}">Wishlist</a>

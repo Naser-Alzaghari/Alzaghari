@@ -84,9 +84,12 @@
                                         <div class="product-gallery__actions">
                                             <button class="action-btn btn-zoom-popup"><i
                                                     class="dl-icon-zoom-in"></i></button>
-                                            {{-- <a href="https://www.youtube.com/watch?v=Rp19QD2XIGM"
-                                                class="action-btn video-popup"><i
-                                                    class="dl-icon-format-video"></i></a> --}}
+                                                    @if (isset($product->video))
+                                                    <a href="{{$product->video}}"
+                                                    class="action-btn video-popup"><i
+                                                        class="dl-icon-format-video"></i></a>
+                                                    @endif
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +333,6 @@
                     </div>
                 </div>
             </div>
-            
             <div class="row pt--35 pt-md--25 pt-sm--15 pb--75 pb-md--55 pb-sm--35">
                 <div class="col-12">
                     <div class="row mb--40 mb-md--30">

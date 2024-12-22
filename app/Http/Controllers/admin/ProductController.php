@@ -43,8 +43,9 @@ class ProductController extends Controller
             'price_after_discount' => 'nullable|numeric',
             'stock' => 'required|integer',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
+            'video' => 'required|url|regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
+            'video.regex' => 'The video URL must be a valid YouTube link.',
         ]);
-
         // Create product
         $product = Product::create($validated);
 
@@ -94,7 +95,10 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // Validate the request
-        
+        $video_url = $request->input('video');
+    
+        // Decode URL if needed (optional)
+        $video_url = urldecode($video_url);
         try{
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -103,7 +107,8 @@ class ProductController extends Controller
                 'price' => 'required|numeric',
                 'price_after_discount' => 'nullable|numeric',
                 'stock' => 'required|integer',
-                // 'images.*' => ['image', 'mimes:jpg,jpeg,png' ,'max:10000']
+                'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
+                'video' => 'nullable',
             ]);
         } catch(Exception $e) {
             dd($e);
@@ -112,7 +117,9 @@ class ProductController extends Controller
 
         // Update product details
         $product->update($validated);
-
+        $product->update([
+            'video' => $video_url,
+        ]);
     
 
         // Delete selected images

@@ -3,28 +3,7 @@
 @section('content')
 <div class="container">
     <div class="page-inner">
-      <div class="page-header">
-        <h3 class="fw-bold mb-3">Forms</h3>
-        <ul class="breadcrumbs mb-3">
-          <li class="nav-home">
-            <a href="#">
-              <i class="icon-home"></i>
-            </a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Forms</a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Basic Form</a>
-          </li>
-        </ul>
-      </div>
+      
       <div class="row">
         <form action="{{ !isset($user) ? route('admin.users.store') : route('admin.users.update', $user) }}" method="POST" class="col-md-12">
             @csrf
@@ -33,7 +12,7 @@
             @endif
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Form Elements</div>
+              <div class="card-title">Users</div>
             </div>
             <div class="card-body">
               <div class="row">
@@ -52,6 +31,9 @@
                             placeholder="Name"
                             value="{{ isset($user) ? $user->name : ""}}"
                           />
+                          @error('name')
+                            <div class="error">{{ $message }}</div>
+                          @enderror                          
                         </div>
                       </div>
                   <div class="form-group">
@@ -64,6 +46,9 @@
                       placeholder="Enter Email"
                       value="{{ isset($user) ? $user->email : ""}}"
                     />
+                    @error('email')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
                     <small id="emailHelp2" class="form-text text-muted"
                       >We'll never share your email with anyone
                       else.</small
@@ -78,48 +63,23 @@
                       name="password"
                       placeholder="Password"
                     />
+                    @error('password')
+                      <div class="error">{{ $message }}</div>
+                    @enderror
                   </div>
-                  
-
-                  <div class="form-group">
-                    <label>role</label><br>
-                    <div class="d-flex">
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role_as" id="flexRadioDefault1" value="0">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                          user
-                        </label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="role_as" id="flexRadioDefault2" value="1">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                          admin
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-
-
-
                 </div>
                 
             </div>
-            <div class="card-action">
-              <button type="submit" class="btn btn-success">Submit</button>
-              <a href="{{route('admin.users')}}" type="button" class="btn btn-danger">Cancel</a>
-            </div>
+            
+          </div>
+          <div class="card-action">
+            <button type="submit" class="btn btn-success">Submit</button>
+            <a href="{{route('admin.users')}}" type="button" class="btn btn-danger">Cancel</a>
           </div>
         </div>
       </form>
     </div>
   </div>
 
-    <script>
-        @if(isset($user))
-        if({{$user->role_as}} == 1)
-        document.getElementById('flexRadioDefault2').setAttribute("checked","");
-        else
-        document.getElementById('flexRadioDefault1').setAttribute("checked","");
-        @endif
-    </script>
+    
 @endsection

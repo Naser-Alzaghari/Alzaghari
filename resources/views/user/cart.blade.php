@@ -5,6 +5,7 @@
     <div class="page-content-inner">
         <div class="container">
             <div class="row pt--150 pb--80 pt-md--45 pt-sm--25 pb-md--60 pb-sm--40">
+                @if ($cartItems->isNotEmpty())
                 <div class="col-lg-8 mb-md--30">
                     <form class="cart-form" action="#">
                         <div class="row g-0">
@@ -111,6 +112,13 @@
                         <a href="{{ route('checkout') }}" class="btn btn-fullwidth btn-style-1">Proceed To Checkout</a>
                     </div>
                 </div>
+                @else
+                <div class="error-text error-container">
+                    <h1 class="error-heading mt--20">Cart is Empty</h1>
+                    <a href="{{route('landing_page')}}" class="btn btn-color-gray btn-medium btn-bordered btn-style-1">Back to home</a>
+                </div>
+                @endif
+                
             </div>
         </div>
     </div>

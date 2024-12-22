@@ -3,28 +3,7 @@
 @section('content')
 <div class="container">
     <div class="page-inner">
-      <div class="page-header">
-        <h3 class="fw-bold mb-3">Forms</h3>
-        <ul class="breadcrumbs mb-3">
-          <li class="nav-home">
-            <a href="#">
-              <i class="icon-home"></i>
-            </a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Forms</a>
-          </li>
-          <li class="separator">
-            <i class="icon-arrow-right"></i>
-          </li>
-          <li class="nav-item">
-            <a href="#">Basic Form</a>
-          </li>
-        </ul>
-      </div>
+      
       <div class="row">
         <form action="{{ route('admin.products.addStock', $product) }}" method="POST" class="col-md-12">
             @csrf
@@ -33,7 +12,7 @@
             
           <div class="card">
             <div class="card-header">
-              <div class="card-title">Form Elements</div>
+              <div class="card-title">Products</div>
             </div>
             <div class="card-body">
               <div class="row">
@@ -117,12 +96,5 @@
     </div>
   </div>
 
-    <script>
-        @if(isset($product))
-        if({{$product->role_as}} == 1)
-        document.getElementById('flexRadioDefault2').setAttribute("checked","");
-        else
-        document.getElementById('flexRadioDefault1').setAttribute("checked","");
-        @endif
-    </script>
+    
 @endsection

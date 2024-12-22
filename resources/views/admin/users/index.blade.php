@@ -7,12 +7,11 @@
             <div class="card">
               <div class="card-header">
                 <div class="d-flex align-items-center">
-                  <h4 class="card-title">Add Row</h4>
                   <a href="{{ route('admin.users.create') }}"
                     class="btn btn-primary btn-round ms-auto"
                   >
                     <i class="fa fa-plus"></i>
-                    Add Row
+                    Add User
                   </a>
                 </div>
               </div>
@@ -113,7 +112,6 @@
                       <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>role</th>
                         <th style="width: 10%">Action</th>
                       </tr>
                     </thead>
@@ -121,7 +119,6 @@
                       <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>role</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
@@ -130,7 +127,6 @@
                       <tr>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->role_as ? "admin" : "user"}}</td>
                         <td>
                           <div class="form-button-action">
                             <a

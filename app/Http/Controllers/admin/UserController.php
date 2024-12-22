@@ -24,23 +24,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         
-        // try {
-        //     // Validate the request data
-        //     $request->validate([
-        //         'name' => 'required|string|max:255',
-        //         'email' => 'required|string|email|max:255|unique:users',
-        //         'password' => 'required|string|min:8|confirmed',
-        //         'role_as' => 'nullable|integer', // 'role_as' is optional
-        //     ]);
-        // } catch (\Illuminate\Validation\ValidationException $e) {
-        //     return redirect()->back()->withErrors($e->validator)->withInput();
-        // }
+        try {
+            // Validate the request data
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        }
         
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role_as' => $request->role_as,
         ]);
         
         return redirect()->route('admin.users')->with('success', 'User created successfully.');
@@ -64,12 +62,11 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8',
         ]);
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role_as = $request->role_as;
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password);
         }

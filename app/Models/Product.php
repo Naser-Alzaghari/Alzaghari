@@ -10,7 +10,7 @@ class Product extends Model
     use SoftDeletes;
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'price', 'price_after_discount', 'stock', 'category_id'];
+    protected $fillable = ['name', 'description', 'price', 'price_after_discount', 'stock', 'category_id', 'video'];
 
     // Belongs-to relationship with Category
     public function category()
@@ -24,12 +24,7 @@ class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
-    // Many-to-Many relationship with Colors (through ProductColors)
-    public function colors()
-    {
-        return $this->belongsToMany(Color::class, 'product_colors', 'product_id', 'color_id')
-                    ->withPivot('stock', 'image_url');
-    }
+    
 
     // One-to-Many relationship with Reviews
     public function reviews()

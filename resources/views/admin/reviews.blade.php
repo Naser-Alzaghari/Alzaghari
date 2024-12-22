@@ -120,7 +120,7 @@
                       <tr>
                         <td>{{$review->user->name}}</td>
                         <td>{{$review->comment}}</td>
-                        <td>{{$review->is_active}}</td>
+                        <td>{{$review->is_active ? "Active" : "Disable"}}</td>
                         <td>
                           <div class="form-button-action">
                             <form action="{{ route('admin.reviews.toggle', $review) }}" method="POST" style="display: inline;">

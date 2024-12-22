@@ -41,11 +41,17 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" name="name" placeholder="Name" value="{{ isset($product) ? $product->name : '' }}">
+                                    @error('name')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea class="form-control" id="description" rows="5" name="description">{{ isset($product) ? $product->description : '' }}</textarea>
                                 </div>
+                                @error('description')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
                                     <select class="form-select" name="category_id">
@@ -54,50 +60,88 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                @error('category_id')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="image">Image</label>
+                                    <input type="file" class="form-control" id="image" name="images[]" multiple>
+                                    @error('images.*')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                
+                                @if (isset($product))
+                                <div class="row mt-3">
+                                    @foreach ($product->images as $image)
+                                        <div class="col-md-4 col-sm-6 mb-3">
+                                            <div class="card shadow-sm">
+                                                <div class="card-body text-center">
+                                                    <img src="{{ asset('storage/' . $image->image_url) }}" 
+                                                         alt="{{ $product->name }}" 
+                                                         class="img-fluid rounded mb-2" 
+                                                         style="max-height: 150px; object-fit: cover;">
+                                                    <div class="mt-2">
+                                                        <input class="" 
+                                                               type="checkbox" 
+                                                               name="delete_images[]" 
+                                                               value="{{ $image->id }}" 
+                                                               id="deleteImage{{ $image->id }}">
+                                                        <label class="m-0" for="deleteImage{{ $image->id }}">
+                                                            Delete
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                            
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="price">Price</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control" name="price" value="{{ isset($product) ? $product->price : '' }}">
+                                        <input type="text" class="form-control" name="price" value="{{ isset($product) ? $product->price : '' }}"/>
                                     </div>
+                                    @error('price')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="price_after_discount">Price After Discount</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text">$</span>
                                         <input type="text" class="form-control" name="price_after_discount" value="{{ isset($product) ? $product->price_after_discount : '' }}">
                                     </div>
+                                    @error('price_after_discount')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stock</label>
                                     <input type="text" class="form-control" name="stock" placeholder="Stock number" value="{{ isset($product) ? $product->stock : '' }}">
+                                    @error('stock')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                            </div>
-                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="images">Product Images</label>
-                                    <input type="file" class="form-control-file" name="images[]" multiple>
+                                    <label for="video">youtube video id</label>
+                                    <input type="text" class="form-control" name="video" placeholder="video link" value="{{ isset($product) ? $product->video : '' }}">
+                                    @error('video')
+                                        <div class="error">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                @if (isset($product))
-                                    @foreach($product->images as $image)
-                                        <div class="form-group mt-2">
-                                            <div class="avatar">
-                                                <img src="{{ asset('storage/' . $image->image_url) }}" alt="{{ $product->name }}" class="avatar-img rounded">
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="delete_images[]" value="{{ $image->id }}">
-                                                <label class="form-check-label">Delete</label>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex justify-content-between">
+                    <div class="card-action">
                         <button type="submit" class="btn btn-success">Submit</button>
-                        <a href="{{ route('admin.products') }}" class="btn btn-danger">Cancel</a>
-                    </div>
+                        <a href="{{ route('admin.products') }}" type="button" class="btn btn-danger">Cancel</a>
+                      </div>
                 </div>
             </form>
         </div>
