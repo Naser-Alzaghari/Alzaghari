@@ -103,14 +103,15 @@ class CheckoutController extends Controller
             $order_id = $order->id;
             return view('user.thank-you', compact('order_id'));
             // return response()->json(['message' => 'Order placed successfully!']);
-        } catch (\Exception $e) {
+        } catch (\Exception $error) {
             // Rollback in case of failure
             DB::rollBack();
-    
-            return response()->json([
-                'message' => 'Failed to place order.',
-                'error' => $e->getMessage(),
-            ], 500);
+
+            return redirect()->back()->with('error', $error->getMessage());
+            // return response()->json([
+            //     'message' => 'Failed to place order.',
+            //     'error' => $e->getMessage(),
+            // ], 500);
         }
     }
     public function paypal(Request $request)

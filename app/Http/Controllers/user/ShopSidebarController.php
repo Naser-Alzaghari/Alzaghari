@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Facades\Route;
 
 use function Laravel\Prompts\search;
 
@@ -16,11 +17,19 @@ class ShopSidebarController extends Controller
      */
     public function index(Request $request)
 {
+    $previousPath = parse_url(url()->previous(), PHP_URL_PATH);
+    if(preg_match('/\/shop\/category\/(\d+)/', $previousPath, $matches)){
+        $categoryId = $matches[1];
+    }
+
     $priceRange = $request->input('price_range', '0-0');
     [$minPrice, $maxPrice] = explode('-', $priceRange);
 
     $sort = $request->input('sort', 'default');
     $query = Product::query();
+    if(isset($categoryId)){
+        $query->where('category_id', $categoryId);
+    }
 
     if ($minPrice != 0 || $maxPrice != 0) {
         $query->where(function ($query) use ($minPrice, $maxPrice) {
@@ -53,7 +62,9 @@ class ShopSidebarController extends Controller
 
     $categories = Category::all();
 
-    return view('user.shop-sidebar', compact('products', 'categories', 'priceRange', 'sort'));
+    $maxPrice = Product::max('price');
+
+    return view('user.shop-sidebar', compact('products', 'categories', 'priceRange', 'sort', 'maxPrice'));
 }
 
     
@@ -133,9 +144,9 @@ class ShopSidebarController extends Controller
 
     // Get the current category
     $currentCategory = Category::find($id);
-
+    $maxPrice = $products->max('price');
     // Return the shop sidebar view with filtered products
-    return view('user.shop-sidebar', compact('products', 'categories', 'currentCategory'));
+    return view('user.shop-sidebar', compact('products', 'categories', 'currentCategory', 'maxPrice'));
 }
 
 }

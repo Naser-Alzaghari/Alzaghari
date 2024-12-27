@@ -102,6 +102,7 @@
                     <thead>
                       <tr>
                         <th>user name</th>
+                        <th>product id</th>
                         <th>comment</th>
                         <th>State</th>
                         <th style="width: 10%">Action</th>
@@ -110,6 +111,7 @@
                     <tfoot>
                       <tr>
                         <th>user name</th>
+                        <th>product id</th>
                         <th>comment</th>
                         <th>State</th>
                         <th>Action</th>
@@ -119,6 +121,7 @@
                       @foreach ($reviews as $review)
                       <tr>
                         <td>{{$review->user->name}}</td>
+                        <td>{{$review->product_id}}</td>
                         <td>{{$review->comment}}</td>
                         <td>{{$review->is_active ? "Active" : "Disable"}}</td>
                         <td>

@@ -43,8 +43,7 @@ class ProductController extends Controller
             'price_after_discount' => 'nullable|numeric',
             'stock' => 'required|integer',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-            'video' => 'required|url|regex:/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/',
-            'video.regex' => 'The video URL must be a valid YouTube link.',
+            'video' => 'nullable',
         ]);
         // Create product
         $product = Product::create($validated);

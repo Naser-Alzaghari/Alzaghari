@@ -9,7 +9,7 @@
                     <div class="user-dashboard-tab flex-column flex-md-row">
                         <div class="user-dashboard-tab__head nav flex-md-column" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link" data-toggle="pill" role="tab" href="{{ route('view_orders') }}"
+                            <a class="nav-link" data-toggle="pill" role="tab" href="{{ route('my_account') }}"
                                 aria-controls="dashboard" aria-selected="true">Account Details</a>
                             <a class="nav-link active" data-toggle="pill" role="tab" href="{{ route('view_orders') }}"
                                 aria-controls="orders" aria-selected="true">Orders</a>
@@ -21,8 +21,8 @@
                                 </button> --}}
                             </form>
                         </div>
-                        <div class="user-dashboard-tab__content tab-content">
-                            <div class="col-xl-5 offset-xl-1 col-lg-6 mt-md--40">
+                        <div class="user-dashboard-tab__content tab-content d-flex justify-content-center">
+                            <div class="col-xl-9 offset-xl-1 col-lg-9 mt-md--40">
                                 <div class="order-details">
                                     <div class="checkout-title mt--10">
                                         <h2>Your Order</h2>

@@ -1,7 +1,7 @@
 
     <div class="airi-product">
         <div class="product-inner">
-            <figure class="product-image" >
+            <figure class="product-image">
                 <div class="
                 product-image--holder
                 ">
@@ -9,6 +9,7 @@
                 <a href="{{ route('product-details', $product->id)  }}" class="d-flex flex-column justify-content-center align-items-center">
                     @if ($product->images->isNotEmpty())
                         <img src="{{ asset('storage/' . $product->images[0]->image_url) }}" alt="Product Image" class="primary-image">
+                        <div class="custom-style" style="background-image: url('{{ asset('storage/' . $product->images[0]->image_url) }}');"></div>
                         @if ($product->images->count() > 1)
                             <img src="{{ asset('storage/' . $product->images[1]->image_url) }}" alt="Product Image" class="secondary-image">
                         @else
@@ -63,22 +64,6 @@
                 @endif
 
 
-                {{-- @switch($n=rand(1,3))
-                    @case(1)
-                    <span class="product-badge new">New</span>
-                        @break
-                    @case(2)
-                    <span class="product-badge hot">hot</span>
-                        @break
-                    @case(3)
-                    <span class="product-badge sale">Sale</span>
-                        @break
-                    @default
-                        
-                @endswitch --}}
-
-                
-                
                 
             </figure>
             <div class="product-info">

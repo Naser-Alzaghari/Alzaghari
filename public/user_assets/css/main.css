@@ -112,6 +112,7 @@ INDEX:
 /*****************************
 00. Global CSS
 *****************************/
+
 html {
   font-size: 62.5%; }
 
@@ -14914,6 +14915,10 @@ a, button, img, input, span, .main-navigation .mainmenu__item.menu-item-has-chil
       margin-bottom: 1rem; }
 
 .airi-product {
+  padding: 0.75rem; /* Equivalent to p-3 (padding: 12px) */
+  background-color: #f1f5f9; /* Equivalent to bg-slate-100 */
+  border-radius: 0.375rem; /* Equivalent to rounded */
+  height: 100%; /* Equivalent to h-100 */
   word-wrap: break-word;
   z-index: 1; }
   .airi-product .product-rating {
@@ -18844,4 +18849,27 @@ a:hover {
 .error-message {
   font-size: 1.5rem;
   color: #666;
+}
+
+@media (max-width: 44.9375em) {
+  .airi-product .product-action a {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    opacity: 1; }
+  }
+
+  .custom-style {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px); /* Equivalent to blur-md, you can adjust the blur level */
+  opacity: 0.4;
+  z-index: -40;
 }

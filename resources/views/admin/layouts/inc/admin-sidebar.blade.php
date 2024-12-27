@@ -1,14 +1,14 @@
 <!-- Sidebar -->
 <div class="sidebar" data-background-color="dark">
-    <div class="sidebar-logo">
+    <div class="sidebar-logo mt-3">
       <!-- Logo Header -->
       <div class="logo-header" data-background-color="dark">
         <a href="{{route('admin.dashboard')}}" class="logo">
           <img
-            src="{{ asset('admin_assets/img/logo/sidebar-logo.png')}}"
+            src="{{ asset('admin_assets/img/logo/logo-white.svg')}}"
             alt="navbar brand"
             class="navbar-brand"
-            height="20"
+            height="45"
           />
         </a>
         <div class="nav-toggle">
@@ -29,7 +29,7 @@
       <div class="sidebar-content">
         
         <ul class="nav nav-secondary">
-          <li class="nav-item {{ Request::is('dashboard') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin') ? 'active' : '' }}">
             <a
               href="{{route('admin.dashboard')}}"
               class="collapsed"
@@ -49,7 +49,7 @@
               </ul>
             </div> --}}
           </li>
-          <li class="nav-item {{ Request::is('categories') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/categories*') ? 'active' : '' }}">
             <a
               href="{{route('admin.categories')}}"
               class="collapsed"
@@ -59,7 +59,7 @@
               <p>categories</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('orders') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/orders*') ? 'active' : '' }}">
             <a
               href="{{route('admin.orders')}}"
               class="collapsed"
@@ -69,7 +69,7 @@
               <p>orders</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('coupons') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/coupons*') ? 'active' : '' }}">
             <a
               href="{{route('admin.coupons')}}"
               class="collapsed"
@@ -79,7 +79,7 @@
               <p>coupons</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('products') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
             <a
               href="{{route('admin.products')}}"
               class="collapsed"
@@ -89,7 +89,7 @@
               <p>products</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('reviews') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/reviews*') ? 'active' : '' }}">
             <a
               href="{{route('admin.reviews')}}"
               class="collapsed"
@@ -99,7 +99,7 @@
               <p>reviews</p>
             </a>
           </li>
-          <li class="nav-item {{ Request::is('users') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::is('admin/users*') ? 'active' : '' }}">
             <a
               href="{{route('admin.users')}}"
               class="collapsed"

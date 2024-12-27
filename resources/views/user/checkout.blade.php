@@ -143,12 +143,16 @@
                                         </div>
                                     </div>
                                     <div class="payment-group mt--20">
-                                        <p class="mb--15">Your personal data will be used to process your order,
-                                            support your experience throughout this website, and for other purposes
-                                            described in our privacy policy.</p>
+                                        @if (session('error'))
+                                        <div class="text-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                        @endif
                                         <button type="submit" class="btn btn-fullwidth btn-style-1">Place
                                             Order</button>
                                     </div>
+                                    
+
                                 
                             </div>
                         </div>

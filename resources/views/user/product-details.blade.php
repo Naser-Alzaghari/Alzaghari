@@ -109,7 +109,7 @@
                         <div class="clearfix"></div>
                         <div>
                             <h3 class="product-title">{{$product->name}}</h3>
-                            <div class="product-rating float-left">
+                            <div class="product-rating">
                                 <span>
                                     {{number_format($product->averageRating(), 1)}}
                                     @for ($i = 0; $i < number_format($product->averageRating()); $i++)
@@ -124,7 +124,7 @@
                                 </span>
                             </div> 
                         </div>
-                        <span class="product-stock in-stock float-right mb-5 mt-5">
+                        <span class="product-stock in-stock mb-5 mt-5">
                             
                             @if ($product->stock > 0)
                             <i class="dl-icon-check-circle1"></i>
@@ -145,7 +145,7 @@
                             @endif
                         </div>
                         <div class="clearfix"></div>
-                        <p class="product-short-description mb--45 mb-sm--20">{{$product->description}}</p>
+                        {{-- <p class="product-short-description mb--45 mb-sm--20">{{$product->description}}</p> --}}
                         <form action="#" class="form--action mb--30 mb-sm--20">
                             <div class="product-action flex-row align-items-center">
                                 <div class="quantity quantitybtn">
@@ -249,7 +249,7 @@
                                                 <img src="{{asset('user_assets/img/others/comment-icon-2.png')}}"
                                                     alt="Review Avatar" class="review__avatar">
                                                 <div class="review__text">
-                                                    <div class="product-rating float-right">
+                                                    <div class="product-rating">
                                                         <span>
                                                             @for ($i = 0; $i < number_format($review->rating); $i++)
                                                                 <i class="dl-icon-star rated"></i>
@@ -342,27 +342,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
-                            <div class="airi-element-carousel product-carousel nav-vertical-center"
-                                data-slick-options='{
-                            "spaceBetween": 30,
-                            "slidesToShow": 4,
-                            "slidesToScroll": 1,
-                            "arrows": true, 
-                            "prevArrow": "dl-icon-left", 
-                            "nextArrow": "dl-icon-right" 
-                            }' data-slick-responsive='[
-                                {"breakpoint":1200, "settings": {"slidesToShow": 3} },
-                                {"breakpoint":991, "settings": {"slidesToShow": 2} },
-                                {"breakpoint":450, "settings": {"slidesToShow": 1} }
-                            ]'>
-                                @foreach ($relatedProducts as $product)
-                                <div class="col-xl-3 col-lg-4 col-sm-6 mb--40 mb-md--30">
-                                    @include('user.layouts.inc.product-card')
-                                </div>
-                                @endforeach
-                            </div>
+                        @foreach ($relatedProducts as $product)
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mb--40 mb-md--30">
+                            @include('user.layouts.inc.product-card')
                         </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

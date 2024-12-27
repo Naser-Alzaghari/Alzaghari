@@ -19,11 +19,21 @@
                                         {{-- <span class="tip">Hot</span> --}}
                                     </a>
                                 </li>
-                                <li class="mainmenu__item">
-                                    <a href="shop-collections.html" class="mainmenu__link">
+                                <li class="mainmenu__item menu-item-has-children has-children">
+                                    <a href="#" class="mainmenu__link">
                                         <span class="mm-text">Collections</span>
                                     </a>
+                                    <ul class="sub-menu">
+                                        @foreach ($categories as $category)
+                                            <li>
+                                                <a href="{{route('shop.filterByCategory',$category->id)}}">
+                                                    <span class="mm-text">{{$category->name}}</span>
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </li>
+                                
                                 <li class="mainmenu__item menu-item-has-children has-children">
                                     <a href="#" class="mainmenu__link">
                                         <span class="mm-text">Pages</span>
@@ -32,6 +42,11 @@
                                         <li>
                                             <a href="{{route('about-us')}}">
                                                 <span class="mm-text">About Us</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{route('contact-us')}}">
+                                                <span class="mm-text">Contact Us</span>
                                             </a>
                                         </li>
                                         

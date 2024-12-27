@@ -9,7 +9,11 @@
         <div class="page-content-inner enable-page-sidebar">
             <div class="container-fluid">
                 <div class="row shop-sidebar pt--150 pt-md--35 pt-sm--20 pb--60 pb-md--50 pb-sm--40">
+                    
                     <div class="col-lg-9 order-lg-2" id="main-content">
+                        @if (!$products->isNotEmpty())
+                        <h4 class="text-center pt--60">No products found</h4>
+                        @else
                         <div class="shop-toolbar">
                             <div class="shop-toolbar__inner">
                                 <div class="row ">
@@ -105,8 +109,9 @@
                                 @endif
                             </ul>
                         </nav>
-                        
+                        @endif
                     </div>
+                    
                     <div class="col-lg-3 order-lg-1 mt--30 mt-md--40" id="primary-sidebar">
                         <div class="sidebar-widget">
                             <!-- Category Widget Start -->
@@ -172,8 +177,31 @@
         </div>
     </div>
     <!-- Main Content Wrapper Start -->
+    <script>
+        (function($){
+        $(document).ready(function() {
+            var maxPrice = @json($maxPrice ?? 800);  // This is the dynamic value passed from the controller
+            // console.log(maxPrice);
+            
+            // Initialize the price slider with dynamic max value
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: maxPrice, // Use the dynamic maxPrice here
+                values: [0, maxPrice],
+                slide: function(event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    $("#price-range").val(ui.values[0] + "-" + ui.values[1]);
+                }
+            });
 
-
+            // Initialize the amount text field with the current slider values
+            $("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+            $("#price-range").val($("#slider-range").slider("values", 0) + "-" + $("#slider-range").slider("values", 1));
+        });
+    })(jQuery);
+    </script>
+    
     
 @endsection
 
