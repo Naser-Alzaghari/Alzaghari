@@ -1,375 +1,86 @@
 @extends('user.layouts.master')
 
 @section('content')
-<div id="content" class="main-content-wrapper">
-    <div class="page-content-inner">
-        <div class="container">
-            <div class="row pt--120 pt-md--60 pt-sm--40">
-                <div class="col-12">
-                    <div class="about-text about-bg-1">
-                        <div class="row">
-                            <div
-                                class="col-xl-5 offset-xl-7 col-md-6 offset-md-6 pt--90 pt-md--80 pb--100 pl-sm--35">
-                                <figure class="mb--40 mb-md--30 max-w-45">
-                                    <img src="user_assets/img/logo/m01-logo.png" alt="logo">
-                                </figure>
-                                <p class="font-size-16 font-2 heading-color">
-                                    Integer ut ligula quis lectus fringilla elementum porttitor sed est.
-                                    Fringilla efficitur ligula sed lobortis. Sed tempus faucibus mi, quis
-                                    fringilla mauris lacinia sed. Integer vehicula egestas nunc ac facilisis.
-                                    Nam bibendum non faucibus libero eu. Curabitur posuere to ullamcorper
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt--80 pt-md--60 pt-sm--35 pb--40 pb-md--30 pb-sm--15">
-                <div class="col-lg-7 col-md-6 mb-sm--30">
-                    <div class="about-text">
-                        <h3 class="heading-tertiary heading-color mb--15">Airi Beautiful eCommerce Online Store
-                        </h3>
-                        <p class="color--light-3 mb--25 mb-md--20">Praesent sed ex vel mauris eleifend mollis.
-                            Vestibulum dictum sodales ante, ac pulvinar urna sollicitudin in. Suspendisse
-                            sodales dolor nec mattis convallis. Quisque ut nulla viverra, posuere lorem eget,
-                            ultrices metus. Nulla facilisi. Duis aliquet, eros in auctor aliquam, tortor justo
-                            laoreet nisi, nec pulvinar lectus diam nec libero. Nullam sit amet Cras porta
-                            posuere lectus, vitae consectetur dolor elementum</p>
-                        <figure>
-                            <img src="user_assets/img/about/about-signature.png" alt="signature">
-                        </figure>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6">
-                    <figure>
-                        <img src="user_assets/img/about/about-bg2.jpg" alt="about">
-                    </figure>
-                </div>
-            </div>
-            <div class="row ptb--40 ptb-md--30 ptb-sm--20">
-                <div class="col-lg-6 offset-lg-1 col-md-6 order-md-2 mb-sm--25">
-                    <div class="about-text">
-                        <h3 class="heading-tertiary heading-color mb--20">Why Work With Us ?</h3>
-                        <p class="color--light-3 mb--25">Praesent sed ex vel mauris eleifend mollis. Vestibulum
-                            dictum sodales ante, ac pulvinar urna sollicitudin in. Suspendisse sodales dolor nec
-                            mattis convallis. Quisque ut nulla viverra, posuere lorem eget, ultrices metus.</p>
-                        <ul class="list-with-icon color--light-3">
-                            <li class="mb--30 mb-md--25">
-                                <i class="fa fa-hourglass"></i>
-                                <span>Praesent sed ex vel mauris ele.</span>
-                            </li>
-                            <li class="mb--30 mb-md--25">
-                                <i class="fa fa-sun-o"></i>
-                                <span>Nam vel luctus nulla, eget interdum metus</span>
-                            </li>
-                            <li class="mb--25 mb-md--20">
-                                <i class="fa fa-bolt"></i>
-                                <span>Nam vel luctus nulla, eget interdum metus</span>
-                            </li>
-                        </ul>
-                        <p class="color--light-3">Dspendisse sodales dolor nec mattis convallis. Quisque ut
-                            nulla viverra, posuere lorem eget, ultrices metus ed maximus neque feugiat magna
-                            pretium, euismod sagittis massa tincidunt.</p>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-6 order-md-1">
-                    <figure class="image-box image-box-w-video-btn btn-right max-w-sm-65 max-w-xs-100">
-                        <a href="https://www.youtube.com/watch?v=Rp19QD2XIGM" class="video-popup">
-                            <img src="user_assets/img/about/about-bg3.jpg" alt="about">
-                            <span class="video-btn video-btn--2"></span>
-                        </a>
-                    </figure>
-                </div>
-            </div>
-            <div class="row pt--30 pt-md--20 pt-sm--15 pb--40 pb-md--30 pb-sm--20">
-                <div class="col-12">
-                    <div class="row justify-content-center mb--35 mb-md--25">
-                        <div class="col-xl-6 text-center">
-                            <h3 class="heading-tertiary heading-color mb--15">Meet Our Team</h3>
-                            <p class="color--light-3">Praesent sed ex vel mauris eleifend mollis. Vestibulum
-                                dictum sodales ante, ac pulvinar urna sollicitudin in. Suspendisse sodales</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="airi-element-carousel team-carousel" data-slick-options='{
-                                    "spaceBetween": 30,
-                                    "slidesToShow": 3,
-                                    "slidesToScroll": 3
-                                }' data-slick-responsive='[
-                                    {"breakpoint":991, "settings": {"slidesToShow": 2} },
-                                    {"breakpoint":479, "settings": {"slidesToShow": 1} }
-                                ]'>
+<div class="container py-5">
+    <!-- Hero Section -->
+    <div class="row align-items-center mb-5 pt--150">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <h1 class="display-4 fw-bold mb-4">About Our Story</h1>
+            <p class="lead text-secondary mb-4">Welcome to our store! We pride ourselves on offering a wide range of high-quality products to meet all your needs. Our journey started with a simple mission: to provide exceptional value to our customers.</p>
+        </div>
+        <div class="col-lg-6 text-center">
+            <img src="{{ asset('user_assets/img/about/about-bg1.jpg') }}" alt="about" class="img-fluid rounded shadow" style="height: 55vh;">
+        </div>
+    </div>
 
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-1.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Dollie Watts</a>
-                                            </h2>
-                                            <p class="team-member__designation">CEO Founder</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-2.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Mitchell Bates</a>
-                                            </h2>
-                                            <p class="team-member__designation">Art Director</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-3.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Leona Bowman</a>
-                                            </h2>
-                                            <p class="team-member__designation">Marketing Manager</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-4.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Amanda
-                                                    Gutierrez</a></h2>
-                                            <p class="team-member__designation">CEO Founder</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-5.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Marc Cook</a></h2>
-                                            <p class="team-member__designation">Art Director</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="airi-team">
-                                    <div class="team-member">
-                                        <div class="team-member__thumbnail">
-                                            <img src="user_assets/img/team/member-6.jpg" alt="Team Member">
-                                            <a href="team.html" class="link-overlay">Team member</a>
-                                            <div class="team-member__overlay">
-                                                <ul class="social social-round">
-                                                    <li class="social__item">
-                                                        <a href="https://www.facebook.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-facebook"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://twitter.com/" class="social__link">
-                                                            <i class="fa fa-twitter"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="social__item">
-                                                        <a href="https://www.pinterest.com/"
-                                                            class="social__link">
-                                                            <i class="fa fa-pinterest-p"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="team-member__info">
-                                            <h2 class="team-member__name"><a href="team.html">Rose Robinson</a>
-                                            </h2>
-                                            <p class="team-member__designation">Marketing Manager</p>
-                                            <p class="team-member__desc">Pellentesque dignissim at ante sed
-                                                iaculis. Pellentesque habitant morbi tristique senectus et netus
-                                                et malesuada fames ac turpis egestas. Sed sod</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Why Choose Us Section -->
+    <div class="row align-items-center my-5">
+        <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
+            <h2 class="fw-bold mb-4">Why Choose Us?</h2>
+            <div class="d-flex align-items-start mb-4">
+                <div class="bg-primary p-3 rounded text-white me-3">
+                    <i class="fas fa-clock fa-2x"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold">Fast Delivery</h5>
+                    <p class="text-secondary">Same day delivery inside Amman & 24 Hour outside Amman.</p>
                 </div>
             </div>
-            <div class="row pt--30 pt-md--20 pt-sm--10 pb--75 pb-md--55 pb-sm--35">
-                <div class="col-12">
-                    <div class="row mb--35 mb-md--25">
-                        <div class="col-12 text-center">
-                            <h3 class="heading-tertiary heading-color">What Client Say ?</h3>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="airi-element-carousel testimonial-carousel" data-slick-options='{
-                                "slidesToShow": 1,
-                                "slidesToScroll": 1
-                            }'>
-                                <div class="testimonial testimonial-style-3">
-                                    <div class="testimonial__inner">
-                                        <img src="user_assets/img/others/happy-client-1.jpg" alt="Client"
-                                            class="testimonial__author--img">
-                                        <p class="testimonial__desc">"Maecenas eu accumsan libero. Fusce id
-                                            imperdiet felis. Cras sed ex vel turpis ultricies blandit nec et
-                                            massa. Pellentesque lectus turpis, vestibulum eu interdum vel.</p>
-                                        <div class="testimonial__author">
-                                            <h3 class="testimonial__author--name">Lura Frazier</h3>
-                                            <p class="testimonial__author--designation">Happy Client</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="testimonial testimonial-style-3">
-                                    <div class="testimonial__inner">
-                                        <img src="user_assets/img/others/happy-client-2.jpg" alt="Client"
-                                            class="testimonial__author--img">
-                                        <p class="testimonial__desc">"Maecenas eu accumsan libero. Fusce id
-                                            imperdiet felis. Cras sed ex vel turpis ultricies blandit nec et
-                                            massa. Pellentesque lectus turpis, vestibulum eu interdum vel.</p>
-                                        <div class="testimonial__author">
-                                            <h3 class="testimonial__author--name">Lura Frazier</h3>
-                                            <p class="testimonial__author--designation">Happy Client</p>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="d-flex align-items-start mb-4">
+                <div class="bg-primary p-3 rounded text-white me-3">
+                    <i class="fas fa-shield-alt fa-2x"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold">Quality Guaranteed</h5>
+                    <p class="text-secondary">All products are guaranteed for a minimum one year.</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-start">
+                <div class="bg-primary p-3 rounded text-white me-3">
+                    <i class="fas fa-headset fa-2x"></i>
+                </div>
+                <div>
+                    <h5 class="fw-bold">24/7 Support</h5>
+                    <p class="text-secondary">Our customer service team is always here to help you.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <a href="{{route('landing_page')}}" class="d-flex justify-content-center shadow ptb--40">
+                <img src="{{asset('user_assets/img/logo/logo.svg')}}" alt="about" class="img-fluid w-75">
+                
+            </a>
+        </div>
+    </div>
+
+   
+    <!-- Testimonials Section -->
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-8">
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="card border-0 shadow-sm p-4">
+                            <div class="text-center mb-4">
+                                <img src="{{ asset('user_assets/img/others/happy-client-1.jpg') }}" alt="Client" class="rounded-circle" style="width: 80px; height: 80px; object-fit: cover;">
+                            </div>
+                            <p class="text-center mb-4">"I found everything I needed for my construction project at great prices. Highly recommend!"</p>
+                            <div class="text-center">
+                                <h5 class="fw-bold mb-1">Lura Frazier</h5>
+                                <p class="text-secondary">Happy Client</p>
                             </div>
                         </div>
                     </div>
+                    <!-- Add more testimonials as needed -->
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </div>

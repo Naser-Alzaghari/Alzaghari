@@ -15,6 +15,10 @@
                 backdrop-filter: blur(10px);
                 border: 1px solid rgba(255, 255, 255, 0.2);
             }
+
+            .error {
+            color: red;
+            }
         </style>
     </head>
     <body class="py-5">    
@@ -28,23 +32,23 @@
                             
                             <!-- Name -->
                             <label for="name" class="mb-2 text-sm text-start text-grey-900">Name*</label>
-                            <input id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <input id="name" type="text" name="name" value="{{old('name')}}" required autofocus autocomplete="name" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+                            <x-input-error :messages="$errors->get('name')" class="mt-2 error" />
                             
                             <!-- Email Address -->
                             <label for="email" class="mb-2 text-sm text-start text-grey-900 mt-5">Email*</label>
-                            <input id="email" type="email" name="email" :value="old('email')" required autocomplete="username" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <input id="email" type="email" name="email" value="{{old('email')}}" required autocomplete="username" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+                            <x-input-error :messages="$errors->get('email')" class="mt-2 error" />
                             
                             <!-- Password -->
                             <label for="password" class="mb-2 text-sm text-start text-grey-900 mt-5">Password*</label>
                             <input id="password" type="password" name="password" required autocomplete="new-password" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('password')" class="mt-2 error" />
                             
                             <!-- Confirm Password -->
                             <label for="password_confirmation" class="mb-2 text-sm text-start text-grey-900 mt-5">Confirm Password*</label>
                             <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 error" />
                             
                             <div class="flex-column items-center justify-end mt-4">
                                 

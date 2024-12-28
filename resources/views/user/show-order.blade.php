@@ -16,10 +16,7 @@
                             <form method="POST" action="{{ route('logout') }}" id="logout_form">
                                 @csrf
                                 <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Logout</a>
-                                {{-- <button class="nav-link" type="submit">
-                                    Logout
-                                </button> --}}
-                            </form>
+                                                            </form>
                         </div>
                         <div class="user-dashboard-tab__content tab-content d-flex justify-content-center">
                             <div class="col-xl-9 offset-xl-1 col-lg-9 mt-md--40">
@@ -37,15 +34,7 @@
                                             </thead>
                                             <tbody>
                                                 
-                                                {{-- @foreach($order->orderItems as $item)
-                    
-                                                    <tr>
-                                                        <td>{{ $item->product->name }}</td> <!-- Assuming there's a `product` relationship -->
-                                                        <td>{{ $item->quantity }}</td>
-                                                        <td>{{ $item->price * $item->quantity }}</td>
-                                                    </tr>
-                                                @endforeach --}}
-                                                @foreach ($order->orderItems as $item)
+                                                                                                @foreach ($order->orderItems as $item)
                                                 <tr>
                                                     <th>{{$item['product']->name}}
                                                         <strong><span>&#10005;</span>{{$item['quantity']}}</strong>

@@ -114,26 +114,12 @@
                             data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                             style="z-index: 5; min-width: 687px; max-width: 687px; max-width: 367px; max-width: 367px; white-space: nowrap; font-size: 20px; line-height: 22px; font-weight: 400; color: #ffffff; letter-spacing: 0px;">
                             <!-- LAYER NR. 6 -->
-                            <div class="tp-caption   tp-resizeme" id="slide-2-layer-2"
-                                data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                data-y="['top','top','top','top']" data-voffset="['0','0','0','0']"
-                                data-fontsize="['50','50','40','30']" data-lineheight="['70','70','50','40']"
-                                data-width="none" data-height="none" data-whitespace="nowrap" data-type="text"
-                                data-responsive_offset="on"
-                                data-frames='[{"delay":"+390","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
-                                data-margintop="[0,0,0,0]" data-marginright="[0,0,0,0]"
-                                data-marginbottom="[0,0,0,0]" data-marginleft="[0,0,0,0]"
-                                data-textAlign="['inherit','inherit','inherit','inherit']"
-                                data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
-                                data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                                style="z-index: 6; white-space: nowrap; font-size: 50px; line-height: 70px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Playfair Display;">
-                                New Summer </div>
-
+                            
                             <!-- LAYER NR. 7 -->
                             <div class="tp-caption   tp-resizeme" id="slide-2-layer-3"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                 data-y="['top','top','top','top']" data-voffset="['51','51','51','46']"
-                                data-fontsize="['165','165','120','100']"
+                                data-fontsize="['105','105','70','70']"
                                 data-lineheight="['220','220','150','120']" data-width="none" data-height="none"
                                 data-whitespace="nowrap" data-type="text" data-responsive_offset="on"
                                 data-frames='[{"delay":"+790","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -143,7 +129,7 @@
                                 data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
                                 data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                                 style="z-index: 7; white-space: nowrap; font-size: 165px; line-height: 220px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Playfair Display;">
-                                Off 30% </div>
+                                New Collection </div>
 
                             <!-- LAYER NR. 8 -->
                             <a class="tp-caption rev-btn " href="{{route('shop-sidebar')}}" id="slide-2-layer-4"
@@ -189,37 +175,9 @@
                             data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
                             style="z-index: 5; min-width: 641px; max-width: 641px; max-width: 268px; max-width: 268px; white-space: nowrap; font-size: 20px; line-height: 22px; font-weight: 400; color: #ffffff; letter-spacing: 0px;">
                             <!-- LAYER NR. 10 -->
-                            <div class="tp-caption   tp-resizeme" id="slide-3-layer-2"
-                                data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                data-y="['top','top','top','top']" data-voffset="['0','0','0','0']"
-                                data-fontsize="['50','50','40','30']" data-lineheight="['50','50','50','40']"
-                                data-width="none" data-height="none" data-whitespace="nowrap" data-type="text"
-                                data-responsive_offset="on"
-                                data-frames='[{"delay":"+390","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","mask":"x:0;y:0;s:inherit;e:inherit;","ease":"Power3.easeInOut"}]'
-                                data-margintop="[0,0,0,0]" data-marginright="[0,0,0,0]"
-                                data-marginbottom="[0,0,0,0]" data-marginleft="[0,0,0,0]"
-                                data-textAlign="['inherit','inherit','inherit','inherit']"
-                                data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
-                                data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                                style="z-index: 6; white-space: nowrap; font-size: 50px; line-height: 50px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Playfair Display;">
-                                Men Blazer </div>
-
+                            
                             <!-- LAYER NR. 11 -->
-                            <div class="tp-caption   tp-resizeme" id="slide-3-layer-3"
-                                data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
-                                data-y="['top','top','top','top']" data-voffset="['50','50','51','51']"
-                                data-fontsize="['120','120','100','80']"
-                                data-lineheight="['120','120','100','80']" data-width="none" data-height="none"
-                                data-whitespace="nowrap" data-type="text" data-responsive_offset="on"
-                                data-frames='[{"delay":"+790","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
-                                data-margintop="[0,0,0,0]" data-marginright="[0,0,0,0]"
-                                data-marginbottom="[0,0,0,0]" data-marginleft="[0,0,0,0]"
-                                data-textAlign="['inherit','inherit','inherit','inherit']"
-                                data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
-                                data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
-                                style="z-index: 7; white-space: nowrap; font-size: 120px; line-height: 120px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Playfair Display;">
-                                New Now </div>
-
+                            
                             <!-- LAYER NR. 12 -->
                             <a class="tp-caption rev-btn " href="{{route('shop-sidebar')}}" id="slide-3-layer-4"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','2']"
@@ -242,10 +200,48 @@
         </div><!-- END REVOLUTION SLIDER -->
     </div>
 
+
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- Fast Delivery Feature -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="feature-title">Fast delivery</h3>
+                    <p class="feature-text">Same day inside Amman & 24 Hour outside Amman.</p>
+                </div>
+            </div>
+
+            <!-- Cash on Delivery Feature -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="feature-title">Cash on Delivery</h3>
+                    <p class="feature-text">Order now and pay when your order deliver.</p>
+                </div>
+            </div>
+
+            <!-- 100% Guarantee Feature -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">100% guarantee</h3>
+                    <p class="feature-text">All products are guaranteed for a minimum one year.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     
 
     <!-- Trending Products area Start Here -->
-    <section class="trending-products-area pt--110 pb--80 pt-md--20 pb-md--60">
+    <section class="trending-products-area pt--30 pb--80 pt-md--20 pb-md--60">
         <div class="container-fluid">
             <div class="row mb--40 mb-md--30">
                 <div class="col-12">
@@ -260,18 +256,17 @@
                 @endforeach
                 
             </div>
-            <div class="row">
+            <div class="row ptb--30">
                 <div class="col-12 text-center">
                     <a href="{{route('shop-sidebar')}}" class="heading-button">Shop Now</a>
                 </div>
             </div>
         </div>
-    </section>
     <!-- Trending Products area End Here -->
 
 
     <!-- Blog area Start Here -->
-    <div class="blog-area ptb--80 ptb-sm--60">
+    <div class="blog-area ptb--30 ptb-sm--60">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -286,19 +281,19 @@
                             {"breakpoint":767, "settings": {"slidesToShow": 1} }
                         ]'>
                         @foreach ($categories as $category)
-                        <div class="item">
+                        <div class="item pb--10">
                             <article class="blog">
                                 <div class="blog-media">
                                     <div class="image">
-                                        <a href="{{route('shop.filterByCategory',$category->id)}}">
-                                            <img class="fixed-size" src="{{isset($category->image) ? asset('storage/'.$category->image) : asset('storage/images/default_product.png')}}" alt="Blog Thumb">
+                                        <a href="{{route('shop.filterByCategory',$category->id)}}" class="w-100">
+                                            <img class="fixed-size shadow" src="{{isset($category->image) ? asset('storage/'.$category->image) : asset('storage/images/default_product.png')}}" alt="Blog Thumb" >
                                         </a>
                                     </div>
                                 </div>
-                                <div class="blog-info">
+                                <div class="blog-info shadow">
                                     
-                                    <h3 class="blog-title">
-                                        <a href="single-post.html">{{$category->name}}</a>
+                                    <h3 class="blog-title m-0">
+                                        <a href="{{route('shop.filterByCategory',$category->id)}}">{{$category->name}}</a>
                                     </h3>
                                     
                                 </div>

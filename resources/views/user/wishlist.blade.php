@@ -64,7 +64,10 @@
                             </tbody>
                         </table>
                         @else
-                            <h1 class="text-center">Your Wishlist is empty</h1>
+                            <div class="text-center">
+                                <h1 class="text-center p-4">Your Wishlist is empty</h1>
+                                <a href="{{route('landing_page')}}" class="btn btn-color-gray btn-medium btn-bordered btn-style-1">Back to home</a>
+                            </div>
                         @endif
                         
                     </div>

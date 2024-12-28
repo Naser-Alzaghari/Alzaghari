@@ -95,18 +95,13 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <span class="product-badge new">New</span> --}}
-                    </div>
+                                            </div>
                 </div>
                 <div class="col-md-6 product-main-details mt--40 mt-md--10 mt-sm--30">
                     <div class="product-summary">
                         
                         
-                        {{-- <div class="product-navigation">
-                            <a href="#" class="prev"><i class="dl-icon-left"></i></a>
-                            <a href="#" class="next"><i class="dl-icon-right"></i></a>
-                        </div> --}}
-                        <div class="clearfix"></div>
+                                                <div class="clearfix"></div>
                         <div>
                             <h3 class="product-title">{{$product->name}}</h3>
                             <div class="product-rating">
@@ -145,77 +140,28 @@
                             @endif
                         </div>
                         <div class="clearfix"></div>
-                        {{-- <p class="product-short-description mb--45 mb-sm--20">{{$product->description}}</p> --}}
-                        <form action="#" class="form--action mb--30 mb-sm--20">
+                                                <form action="#" class="form--action mb--30 mb-sm--20">
                             <div class="product-action flex-row align-items-center">
                                 <div class="quantity quantitybtn">
                                     <input type="number" class="quantity-input" name="qty" id="qty" value="1"
                                         min="1">
                                 </div>
-                                <button type="button" class="btn btn-style-1 btn-large add-to-cart add_to_cart_btn" data-product-id="{{ $product->id }}">
+                                <button type="button" class="btn btn-style-1 btn-large add-to-cart add_to_cart_btn" data-product-name="{{$product->name}}" data-product-id="{{ $product->id }}">
                                     Add To Cart
                                 </button>
                                 @auth
-                                <a class="add_wishlist action-btn {{ $product->wishlists->isNotEmpty() ? 'active' : '' }}" 
+                                <a class="add_wishlist action-btn {{ $product->isInWishlist(auth()->id()) ? 'active' : '' }}" 
                                     href="javascript:void(0);" 
                                     data-product-id="{{ $product->id }}" 
                                     data-bs-toggle="tooltip" 
                                     data-bs-placement="right" 
-                                    title="{{ $product->wishlists->isNotEmpty() ? 'Remove from Wishlist' : 'Add to Wishlist' }}">
+                                    title="{{ $product->isInWishlist(auth()->id()) ? 'Remove from Wishlist' : 'Add to Wishlist' }}">
                                     <i class="dl-icon-heart"></i>
                                  </a>
                                  @endauth
                             </div>
                         </form>
-                        {{-- <div class="product-extra mb--40 mb-sm--20">
-                            <a href="#" class="font-size-12"><i class="fa fa-map-marker"></i>Find store near
-                                you</a>
-                            <a href="#" class="font-size-12"><i class="fa fa-exchange"></i>Delivery and
-                                return</a>
-                        </div>
-                        <div
-                            class="product-summary-footer d-flex justify-content-between flex-sm-row flex-column">
-                            <div class="product-meta">
-                                <span class="sku_wrapper font-size-12">SKU: <span class="sku">REF.
-                                        LA-887</span></span>
-                                <span class="posted_in font-size-12">Categories:
-                                    <a href="shop-sidebar.html">Fashions</a>
-                                </span>
-                                <span class="posted_in font-size-12">Tags:
-                                    <a href="shop-sidebar.html">dress,</a>
-                                    <a href="shop-sidebar.html">fashions,</a>
-                                    <a href="shop-sidebar.html">women</a>
-                                </span>
-                            </div>
-                            <div class="product-share-box">
-                                <span class="font-size-12">Share With</span>
-                                <!-- Social Icons Start Here -->
-                                <ul class="social social-small">
-                                    <li class="social__item">
-                                        <a href="https://facebook.com" class="social__link">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="https://twitter.com" class="social__link">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="https://plus.google.com" class="social__link">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a href="https://plus.google.com" class="social__link">
-                                            <i class="fa fa-pinterest-p"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <!-- Social Icons End Here -->
-                            </div>
-                        </div> --}}
-                    </div>
+                                            </div>
                 </div>
             </div>
             <div class="row justify-content-center pt--45 pt-lg--50 pt-md--55 pt-sm--35">
@@ -241,93 +187,91 @@
                             </div>
                             <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
                                 aria-labelledby="nav-reviews-tab">
-                                <div class="product-reviews">
-                                    <ul class="review__list">
-                                        @foreach ($product->reviews as $review)
-                                        <li class="review__item">
-                                            <div class="review__container">
-                                                <img src="{{asset('user_assets/img/others/comment-icon-2.png')}}"
-                                                    alt="Review Avatar" class="review__avatar">
-                                                <div class="review__text">
-                                                    <div class="product-rating">
-                                                        <span>
-                                                            @for ($i = 0; $i < number_format($review->rating); $i++)
-                                                                <i class="dl-icon-star rated"></i>
-                                                            @endfor
-                                                            @for ($i = number_format($review->rating); $i < 5; $i++)
-                                                                <i class="dl-icon-star"></i>
-                                                            @endfor
-                                                        </span>
-                                                    </div> 
-                                                    
-                                                    <div class="review__meta">
-                                                        <strong class="review__author">{{$review->user->name}}</strong>
-                                                        <span class="review__dash">-</span>
-                                                        <span class="review__published-date">{{$review->created_at}}</span>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                    <p class="review__description">{{$review->comment}}</p>
+                                @if ($product->reviews->isNotEmpty())
+                            <div class="product-reviews">
+                                <ul class="review__list">
+                                    @foreach ($product->reviews as $review)
+                                    <li class="review__item">
+                                        <div class="">
+                                            <div class="review__text">
+                                                <div class="product-rating">
+                                                    @for ($i = 0; $i < number_format($review->rating); $i++)
+                                                        <i class="fas fa-star rated"></i>
+                                                    @endfor
+                                                    @for ($i = number_format($review->rating); $i < 5; $i++)
+                                                        <i class="fas fa-star"></i>
+                                                    @endfor
                                                 </div>
-                                            </div>
-                                        </li>
-                                        @endforeach
-                                        
-                                    </ul>
-                                    @auth
-                                    <div class="review-form-wrapper">
-                                        <span class="reply-title"><strong>Add a review</strong></span>
-                                        
-                                        <form action="{{ route('reviews.store') }}" method="POST" class="form">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <input type="hidden" name="rating" id="rating" value="">
-                                            <div class="form-notes mb--20">
-                                                <p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-                                            </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="revew__rating">
-                                                    <p class="stars selected">
-                                                        <a class="star-1" href="#">1</a>
-                                                        <a class="star-2" href="#">2</a>
-                                                        <a class="star-3" href="#">3</a>
-                                                        <a class="star-4" href="#">4</a>
-                                                        <a class="star-5" href="#">5</a>
-                                                    </p>
+                                                
+                                                <div class="review__meta">
+                                                    <strong class="review__author">{{ $review->user->name }}</strong>
+                                                    <span class="review__dash">-</span>
+                                                    <span class="review__published-date">{{ $review->created_at->format('M d, Y') }}</span>
                                                 </div>
+                                                <p class="review__description">{{ $review->comment }}</p>
                                             </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="row">
-                                                    <div class="col-sm-6 mb-sm--20">
-                                                        <label class="form__label" for="name">Name<span class="required">*</span></label>
-                                                        <input type="text" name="name" id="name" class="form__input" value="{{ Auth::user()->name ?? '' }}" disabled>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label class="form__label" for="email">Email<span class="required">*</span></label>
-                                                        <input type="email" name="email" id="email" class="form__input" value="{{ Auth::user()->email ?? '' }}" disabled>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__group mb--30 mb-sm--20">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <label class="form__label" for="review">Your Review<span class="required">*</span></label>
-                                                        <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form__group">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                        
-                                    </div> 
-                                    @endauth
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @auth
+                                <div class="review-form-wrapper">
+                                    <span class="reply-title"><strong>Add a review</strong></span>
                                     
-                                </div>
+                                    <form action="{{ route('reviews.store') }}" method="POST" class="form">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <input type="hidden" name="rating" id="rating" value="">
+                                        <div class="form-notes mb--20">
+                                            <p>Your email address will not be published. Required fields are marked <span class="required">*</span></p>
+                                        </div>
+                                        <div class="form__group mb--30 mb-sm--20">
+                                            <div class="revew__rating">
+                                                <p class="stars selected">
+                                                    <a class="star-1" href="#">1</a>
+                                                    <a class="star-2" href="#">2</a>
+                                                    <a class="star-3" href="#">3</a>
+                                                    <a class="star-4" href="#">4</a>
+                                                    <a class="star-5" href="#">5</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="form__group mb--30 mb-sm--20">
+                                            <div class="row">
+                                                <div class="col-sm-6 mb-sm--20">
+                                                    <label class="form__label" for="name">Name<span class="required">*</span></label>
+                                                    <input type="text" name="name" id="name" class="form__input" value="{{ Auth::user()->name ?? '' }}" disabled>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="form__label" for="email">Email<span class="required">*</span></label>
+                                                    <input type="email" name="email" id="email" class="form__input" value="{{ Auth::user()->email ?? '' }}" disabled>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form__group mb--30 mb-sm--20">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <label class="form__label" for="review">Your Review<span class="required">*</span></label>
+                                                    <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form__group">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <input type="submit" value="Submit" class="btn btn-style-1 btn-submit">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    
+                                </div> 
+                                @endauth
+                                
+                            </div>
+                            @else
+                                No customer reviews
+                            @endif
                             </div>
                         </div>
                     </div>

@@ -13,15 +13,10 @@
                                     </a>
                                     
                                 </li>
-                                <li class="mainmenu__item menu-item-has-children">
+                                
+                                <li class="mainmenu__item menu-item-has-children has-children">
                                     <a href="{{route('shop-sidebar')}}" class="mainmenu__link">
                                         <span class="mm-text">Shop</span>
-                                        {{-- <span class="tip">Hot</span> --}}
-                                    </a>
-                                </li>
-                                <li class="mainmenu__item menu-item-has-children has-children">
-                                    <a href="#" class="mainmenu__link">
-                                        <span class="mm-text">Collections</span>
                                     </a>
                                     <ul class="sub-menu">
                                         @foreach ($categories as $category)
@@ -95,9 +90,9 @@
                                     <li>
                                         <a href="{{route('cart.view')}}">Shopping Cart</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{route('checkout')}}">Check Out</a>
-                                    </li>
+                                    </li> --}}
                                     
                                     
                                     

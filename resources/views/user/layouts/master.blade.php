@@ -415,10 +415,10 @@ $(document).ready(function() {
                     : '<img src="/storage/images/default_product.png" alt="Product Image">'}
             </div>
             <div class="mini-cart__product__content">
-                <a class="mini-cart__product__title" href="/product-details/${product.id}">${product.name}</a>
+                <a class="mini-cart__product__title" href="/product/${product.id}">${product.name}</a>
                 <div class="quantity-controls">
                     <button class="update-cart-quantity btn-decrease" data-product-id="${product.id}" data-action="decrease">
-                        <i class="fa-solid ${quantity > 1 ? 'fa-minus' : 'fa-trash'}"></i>
+                        <i class="fa-solid fa-minus"></i>
                     </button>
                     <input type="number" class="mini-cart-quantity" data-product-id="${product.id}" value="${quantity}" readonly>
                     <button class="update-cart-quantity btn-increase" data-product-id="${product.id}" data-action="increase">
@@ -440,7 +440,7 @@ function removeCartItem(productId) {
         },
         success: function(response) {
             // Remove the item from the cart
-            $(`.mini-cart__product[data-product-id="${productId}"]`).remove();
+            $(`.mini-cart__product[data-product-id="${productId}"], tr[data-product-id="${productId}"]`).remove();
             
             // Update the cart item count
             $('#cart-item-count, .mini-cart-count').text(response.cartItemCount);
@@ -462,6 +462,15 @@ function removeCartItem(productId) {
                 </div>
             </div>
                 `);
+
+                $('.cart-page-inner').html(
+                `<h1 class="mb-3"><b>Cart</b></h1>
+
+                <div class="text-center">
+                    <h1 class="text-center p-4">Your Cart is empty</h1>
+                    <a href="{{route('landing_page')}}" class="btn btn-color-gray btn-medium btn-bordered btn-style-1">Back to home</a>
+                </div>`
+                );
             }
         },
         error: function() {
@@ -488,11 +497,7 @@ function removeCartItem(productId) {
 
     function updateButtonState($button, quantity) {
         var decreaseButton = $button.closest('.quantity-controls').find('button[data-action="decrease"], button[data-action="remove"]');
-        if (quantity === 1) {
-            decreaseButton.attr('data-action', 'remove').html('<i class="fa-solid fa-trash"></i>');
-        } else {
-            decreaseButton.attr('data-action', 'decrease').html('<i class="fa-solid fa-minus"></i>');
-        }
+        decreaseButton.attr('data-action', 'decrease').html('<i class="fa-solid fa-minus"></i>');
     }
 
     function showAlert(message) {
@@ -504,7 +509,9 @@ function removeCartItem(productId) {
     $('#productModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var productId = button.data('product-id');
-
+        const baseUrl = "{{ asset('') }}";
+        const defaultImage = "{{ asset('images/default_product.png') }}";
+        
         $.ajax({
             url: '{{ route('getProductData') }}',
             type: 'GET',
@@ -512,7 +519,7 @@ function removeCartItem(productId) {
             success: function(product) {
                 $('#product-modal-title').text(product.name);
                 $('#product-modal-description').text(product.description);
-                $('#product-modal-img').attr('src', 'storage/' + (product.images[0] ?? 'images/default_product.png'));
+                $('#product-modal-img').attr('src', product.images[0] ? baseUrl + 'storage/' + product.images[0] : defaultImage);
                 $('#product-modal-link').attr('href', product.link);
                 $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
                 $('#add_to_cart').data('product-id', productId).data('product-name', product.name);

@@ -30,15 +30,7 @@
                             </span>
                           </a>
                           
-                        {{-- <form action="{{route('cart.add')}}" method="post">
-                            @csrf
-                            <input type="hidden" name="product_id" value="{{$product->id}}">
-                            <button class="add_to_cart_btn action-btn"
-                            data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Cart">
-                            <i class="dl-icon-cart29"></i>
-                            </button>
-                        </form> --}}
-
+                        
                         <a href="#" class="add_to_cart_btn action-btn" data-product-name="{{$product->name}}" data-product-id="{{ $product->id }}" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to Cart">
                             <i class="dl-icon-cart29"></i>
                         </a>

@@ -7,8 +7,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="d-flex align-items-center">
-                  {{-- <h4 class="card-title">Add Product</h4> --}}
-                  <a href="{{ route('admin.products.create') }}"
+                                    <a href="{{ route('admin.products.create') }}"
                     class="btn btn-primary btn-round ms-auto"
                   >
                     <i class="fa fa-plus"></i>
@@ -154,17 +153,7 @@
                             >
                               <i class="fa fa-edit"></i>
                             </a>
-                            {{-- <a
-                              href="{{ route('admin.products.addStockForm', $product->id) }}"
-                              type="button"
-                              data-bs-toggle="tooltip"
-                              title=""
-                              class="btn btn-link btn-success btn-lg"
-                              data-original-title="Edit Task"
-                            >
-                              <i class="fa fa-edit"></i>
-                            </a> --}}
-                            <!-- Delete Button -->
+                                                        <!-- Delete Button -->
                           <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');">
                             @csrf
                             @method('DELETE') <!-- Spoof the DELETE method -->
@@ -178,20 +167,7 @@
                               <i class="fa fa-times"></i>
                             </button>
                         </form>
-                        {{-- <form action="{{ route('admin.products.restore', $product->id) }}" method="POST">
-                          @csrf
-                          <button type="submit" class="btn btn-success">Restore</button>
-                      </form> --}}
-                            {{-- <button
-                              type="button"
-                              data-bs-toggle="tooltip"
-                              title=""
-                              class="btn btn-link btn-danger"
-                              data-original-title="Remove"
-                            >
-                              <i class="fa fa-times"></i>
-                            </button> --}}
-                            
+                                                                                
                           </div>
                         </td>
                       </tr>

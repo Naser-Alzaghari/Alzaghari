@@ -21,7 +21,7 @@
                             <a class="mini-cart__product__title" href="{{route('product-details', $item['product']->id)}}">{{$item['product']->name}} </a>
                             <div class="quantity-controls">
                                 <button class="update-cart-quantity btn-decrease" data-product-id="{{ $item['product']->id }}" data-action="decrease">
-                                    <i class="{{ $item['quantity'] > 1 ? 'fa-solid fa-minus' : 'fa-solid fa-trash' }}"></i>
+                                    <i class="fa-solid fa-minus"></i>
                                 </button>
                                 <input type="number" class="mini-cart-quantity" data-product-id="{{ $item['product']->id }}" value="{{ $item['quantity'] }}" readonly>
                                 <button class="update-cart-quantity btn-increase" data-product-id="{{ $item['product']->id }}" data-action="increase">

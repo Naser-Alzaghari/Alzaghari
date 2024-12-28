@@ -17,23 +17,7 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6 col-lg-4">
-                    {{-- <div class="form-group form-inline">
-                        <label
-                          for="inlineinput"
-                          class="col-md-3 col-form-label"
-                          >Name</label>
-
-                        <div class="col-md-9 p-0">
-                          <input
-                            type="text"
-                            class="form-control input-full"
-                            name="name"
-                            placeholder="Name"
-                            value="{{ isset($order) ? $order->name : ""}}"
-                          />
-                        </div>
-                    </div> --}}
-
+                    
 
                     <div class="form-group form-group-default">
                       <label>State</label>

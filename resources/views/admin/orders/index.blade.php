@@ -5,18 +5,7 @@
     <div class="page-inner">
         <div class="col-md-12">
             <div class="card">
-              {{-- <div class="card-header">
-                <div class="d-flex align-items-center">
-                  <h4 class="card-title">Add Row</h4>
-                  <a href="{{ route('admin.orders.create') }}"
-                    class="btn btn-primary btn-round ms-auto"
-                  >
-                    <i class="fa fa-plus"></i>
-                    Add Row
-                  </a>
-                </div>
-              </div> --}}
-              <div class="card-body">
+                            <div class="card-body">
                 <!-- Modal -->
                 <div
                   class="modal fade"
@@ -114,9 +103,7 @@
                         <th>order id</th>
                         <th>total_amount</th>
                         <th>after discount</th>
-                        {{-- <th>status</th>
-                        <th>payment_status</th> --}}
-                        <th style="width: 10%">Action</th>
+                                                <th style="width: 10%">Action</th>
                       </tr>
                     </thead>
                     <tfoot>
@@ -124,9 +111,7 @@
                         <th>order id</th>
                         <th>total_amount</th>
                         <th>after discount</th>
-                        {{-- <th>status</th>
-                        <th>payment_status</th> --}}
-                        <th>Action</th>
+                                                <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -135,9 +120,7 @@
                         <td>{{$order->id}}</td>
                         <td>{{$order->total_amount}}</td>
                         <td>{{$order->total_amount_after_discount}}</td>
-                        {{-- <td>{{$order->status}}</td>
-                        <td>{{$order->payment_status}}</td> --}}
-                        <td>
+                                                <td>
                           <div class="form-button-action">
                             <a
                               href="{{ route('admin.orders.edit', $order) }}"
@@ -177,20 +160,7 @@
                               <i class="fa fa-times"></i>
                             </button>
                         </form>
-                        {{-- <form action="{{ route('admin.orders.restore', $order->id) }}" method="POST">
-                          @csrf
-                          <button type="submit" class="btn btn-success">Restore</button>
-                      </form> --}}
-                            {{-- <button
-                              type="button"
-                              data-bs-toggle="tooltip"
-                              title=""
-                              class="btn btn-link btn-danger"
-                              data-original-title="Remove"
-                            >
-                              <i class="fa fa-times"></i>
-                            </button> --}}
-                            
+                                                                                
                           </div>
                         </td>
                       </tr>

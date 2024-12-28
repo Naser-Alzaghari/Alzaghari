@@ -153,20 +153,7 @@
                               <i class="fa fa-times"></i>
                             </button>
                         </form>
-                        {{-- <form action="{{ route('admin.users.restore', $user->id) }}" method="POST">
-                          @csrf
-                          <button type="submit" class="btn btn-success">Restore</button>
-                      </form> --}}
-                            {{-- <button
-                              type="button"
-                              data-bs-toggle="tooltip"
-                              title=""
-                              class="btn btn-link btn-danger"
-                              data-original-title="Remove"
-                            >
-                              <i class="fa fa-times"></i>
-                            </button> --}}
-                            
+                                                                                
                           </div>
                         </td>
                       </tr>

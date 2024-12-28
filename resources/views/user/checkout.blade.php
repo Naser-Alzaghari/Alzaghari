@@ -117,8 +117,7 @@
                                     @endforeach
 
                                     <input type="hidden" value="{{ str_replace(',', '', $total) }}" name="total">
-                                    {{-- <input type="hidden" value="{{$cartItems}}" name="cartItems"> --}}
-                                    
+                                                                        
                                     <div class="payment-group mb--10">
                                         <div class="payment-radio">
                                             <input type="radio" value="cash" name="payment-method" id="cash" checked>

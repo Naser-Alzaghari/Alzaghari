@@ -7,8 +7,7 @@
             <div class="card">
               <div class="card-header">
                 <div class="d-flex align-items-center">
-                  {{-- <h4 class="card-title">Add Category</h4> --}}
-                  <a href="{{ route('admin.categories.create') }}"
+                                    <a href="{{ route('admin.categories.create') }}"
                     class="btn btn-primary btn-round ms-auto"
                   >
                     <i class="fa fa-plus"></i>
@@ -164,20 +163,7 @@
                               <i class="fa fa-times"></i>
                             </button>
                         </form>
-                        {{-- <form action="{{ route('admin.categories.restore', $category->id) }}" method="POST">
-                          @csrf
-                          <button type="submit" class="btn btn-success">Restore</button>
-                      </form> --}}
-                            {{-- <button
-                              type="button"
-                              data-bs-toggle="tooltip"
-                              title=""
-                              class="btn btn-link btn-danger"
-                              data-original-title="Remove"
-                            >
-                              <i class="fa fa-times"></i>
-                            </button> --}}
-                            
+                                                                                
                           </div>
                         </td>
                       </tr>

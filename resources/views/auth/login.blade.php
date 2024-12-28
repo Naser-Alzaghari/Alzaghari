@@ -19,6 +19,9 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        .error {
+            color: red;
+        }
     </style>
 </head>
 <body class="py-5">    
@@ -43,14 +46,16 @@
                         <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
                         
                         <label for="email" class="mb-2 text-sm text-start text-grey-900">Email*</label>
-                        <input id="email" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 mb-7 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        <input id="email" type="email" name="email" value="{{old('email')}}" required autofocus autocomplete="username" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
                         
-                        <label for="password" class="mb-2 text-sm text-start text-grey-900">Password*</label>
-                        <input id="password" type="password" name="password" required autocomplete="current-password" class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         
-                        <div class="flex flex-row justify-between mb-8">
+                        
+                        <label for="password" class="mb-2 mt-5 text-sm text-start text-grey-900">Password*</label>
+                        <input id="password" type="password" name="password" required autocomplete="current-password" class="flex items-center w-full px-5 py-4 mr-2 text-sm font-medium outline-none focus:bg-grey-400 placeholder:text-grey-700 bg-grey-200 text-dark-grey-900 rounded-2xl"/>
+                        <x-input-error :messages="$errors->get('email')" class="mt-2 error" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2 error" />
+                        
+                        {{-- <div class="flex flex-row justify-between mb-8 mt-5">
                             <label class="relative inline-flex items-center mr-3 cursor-pointer select-none">
                                 <input type="checkbox" name="remember" id="remember_me" class="sr-only peer">
                                 <div class="w-5 h-5 bg-transparent border-2 rounded-sm border-grey-500 peer peer-checked:border-0 peer-checked:bg-purple-blue-500">
@@ -63,8 +68,8 @@
                                     {{ __('Forget password?') }}
                                 </a>
                             @endif
-                        </div>
-                        <button class="w-full px-6 py-5 mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">Sign In</button>
+                        </div> --}}
+                        <button class="w-full px-6 py-5 mb-5 mt-6 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-purple-blue-500">Sign In</button>
                         <p class="text-sm leading-relaxed text-grey-900">Not registered yet? <a href="{{ route('register') }}" class="font-bold text-grey-700">Create an Account</a></p>
                     </form>
                 </div>

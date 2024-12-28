@@ -16,10 +16,7 @@
                             <form method="POST" action="{{ route('logout') }}" id="logout_form">
                                 @csrf
                                 <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Logout</a>
-                                {{-- <button class="nav-link" type="submit">
-                                    Logout
-                                </button> --}}
-                            </form>
+                                                            </form>
                         </div>
                         <div class="user-dashboard-tab__content tab-content">
                             <div class="tab-pane fade show active" id="accountdetails">

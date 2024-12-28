@@ -17,36 +17,16 @@
                         <div class="shop-toolbar">
                             <div class="shop-toolbar__inner">
                                 <div class="row ">
-                                    {{-- <div class="col-md-6 text-md-start text-center mb-sm--20">
-                                        <div class="shop-toolbar__left">
-                                            <p class="product-pages">Showing 1–20 of 42 results</p>
-                                            <div class="product-view-count">
-                                                <p>Show</p>
-                                                <ul>
-                                                    <li><a href="shop-sidebar.html">6</a></li>
-                                                    <li class="active"><a href="shop-sidebar.html">12</a></li>
-                                                    <li><a href="shop-sidebar.html">15</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    <div class="col-12">
+                                                                        <div class="col-12">
                                         <div class="shop-toolbar__right">
-                                            {{-- <a href="#" class="product-filter-btn shop-toolbar__btn">
-                                                <span>Filters</span>
-                                                <i></i>
-                                            </a> --}}
-                                            <div class="shop-toolbar">
+                                                                                        <div class="shop-toolbar">
                                                 <div class="product-ordering">
                                                     <a href="#" class="product-ordering__btn shop-toolbar__btn">
                                                         <span>Sort By</span>
                                                         <i></i>
                                                     </a>
                                                     <ul class="product-ordering__list">
-                                                        {{-- <li class="{{ request('sort') == 'rating' ? 'active' : '' }}">
-                                                            <a href="?sort=rating">Sort by average rating</a>
-                                                        </li> --}}
-                                                        <li class="{{ request('sort') == 'newness' ? 'active' : '' }}">
+                                                                                                                <li class="{{ request('sort') == 'newness' ? 'active' : '' }}">
                                                             <a href="?sort=newness">Sort by newness</a>
                                                         </li>
                                                         <li class="{{ request('sort') == 'price_low_high' ? 'active' : '' }}">
