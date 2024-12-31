@@ -86,13 +86,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 
-
-
-
-
-
-
-
     Route::prefix('')
     ->group(function () {
             Route::post('/send_mail', [ContactUsController::class, 'sendMail'])->name('send_mail');
@@ -135,7 +128,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('cancel', [CheckoutController::class, 'cancel'])->name('cancel');
 
             });
-
             Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
             Route::post('/update-cart-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
             Route::post('/update-cart-total', [CartController::class, 'updateTotal'])->name('cart.updateTotal');
@@ -149,71 +141,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
     });
 
     
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Route::get('/categories', function () {
-//     return view('admin/categories');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/products', function () {
-//     return view('admin/products');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/reviews', function () {
-//     return view('admin/reviews');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-// Route::get('/profile', function () {
-//     return view('profile/edit');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/users', function () {
-//     return view('admin/users/index');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-
-// Route::get('/orders', function () {
-//     return view('admin/orders');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/orders', function () {
-//     return view('admin/orders');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 require __DIR__.'/auth.php';

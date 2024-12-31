@@ -32,10 +32,9 @@
                       </select>
                   </div>
 
-
                   <div class="form-group form-group-default">
                     <label>payment_status</label>
-                    <select class="form-select" name="payment_status">
+                    <select class="form-select" name="payment_status" {{$order->payment_status == 'paid' ? 'disabled' : ""}}>
                         @foreach ($payment_status as $state)
                         <option value="{{$state}}" @if (isset($order))
                             @if ($order->payment_status == $state)
@@ -50,7 +49,7 @@
                 <div class="input-group mb-3">
                   <span class="input-group-text">$</span>
                   
-                  <input type="text" class="form-control" name="total_amount_after_discount" aria-label="Amount (to the nearest dollar)" value="{{ isset($order) ? $order->total_amount_after_discount : ""}}">
+                  <input type="text" class="form-control" name="total_amount_after_discount" aria-label="Amount (to the nearest dollar)" value="{{ isset($order) ? $order->total_amount_after_discount : ""}}" {{$order->payment_status == 'paid' ? 'disabled' : ""}}>
               </div>
 
 

@@ -103,6 +103,9 @@
                         <th>order id</th>
                         <th>total_amount</th>
                         <th>after discount</th>
+                        <th>payment method</th>
+                        <th>payment_status</th>
+
                                                 <th style="width: 10%">Action</th>
                       </tr>
                     </thead>
@@ -111,7 +114,10 @@
                         <th>order id</th>
                         <th>total_amount</th>
                         <th>after discount</th>
-                                                <th>Action</th>
+                        <th>payment method</th>
+                        <th>payment_status</th>
+
+                        <th>Action</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -120,6 +126,9 @@
                         <td>{{$order->id}}</td>
                         <td>{{$order->total_amount}}</td>
                         <td>{{$order->total_amount_after_discount}}</td>
+                        <td>{{$order->payment_method}}</td>
+                        <td>{{$order->payment_status}}</td>
+
                                                 <td>
                           <div class="form-button-action">
                             <a
@@ -147,7 +156,7 @@
 
 
                             <!-- Delete Button -->
-                          <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?');">
+                          {{-- <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?');">
                             @csrf
                             @method('DELETE') <!-- Spoof the DELETE method -->
                             <button
@@ -159,7 +168,7 @@
                             >
                               <i class="fa fa-times"></i>
                             </button>
-                        </form>
+                        </form> --}}
                                                                                 
                           </div>
                         </td>

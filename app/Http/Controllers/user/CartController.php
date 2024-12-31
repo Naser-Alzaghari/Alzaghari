@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 
 class CartController extends Controller
 {
@@ -12,6 +13,13 @@ class CartController extends Controller
     {
         $productId = $request->input('product_id');
         $quantity = (int)$request->input('quantity', 1);
+        // Fetch product details
+        $product = Product::with('images')->find($productId);
+        if ($quantity>$product->stock) {
+            throw ValidationException::withMessages([
+                'stock' => 'no stock available',
+            ]);
+        }
 
         $cart = session()->get('cart', []);
 
@@ -29,9 +37,7 @@ class CartController extends Controller
         // Calculate the new cart item count
         $cartItemCount = array_sum(array_column($cart, 'quantity'));
 
-        // Fetch product details
-        $product = Product::with('images')->find($productId);
-
+        
         return response()->json([
             'cart' => $cart,
             'cartItemCount' => $cartItemCount,
@@ -67,7 +73,14 @@ class CartController extends Controller
     {
         $productId = $request->input('product_id');
         $quantity = (int) $request->input('quantity');
+        $product = Product::find($productId); // Fetch the product to include its details
 
+        if ($quantity>$product->stock) {
+            throw ValidationException::withMessages([
+                'stock' => 'over stock',
+            ]);
+        }
+        
         $cart = session()->get('cart', []);
 
         if (isset($cart[$productId])) {
@@ -76,10 +89,12 @@ class CartController extends Controller
         }
 
         $cartItemCount = array_sum(array_column($cart, 'quantity'));
-        $product = Product::find($productId); // Fetch the product to include its details
+        
 
         // Ensure we have price information for the product
         $price = $product->price_after_discount ?? $product->price;
+
+        
 
         return response()->json([
             'cartItemCount' => $cartItemCount,

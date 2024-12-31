@@ -317,8 +317,17 @@ $(document).ready(function() {
             }
                 updateMiniCart(response.product, response.quantity);
             },
-            error: function() {
-                alert('Failed to add product to cart.');
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                // Validation error
+                const errors = xhr.responseJSON.errors;
+                if (errors.stock) {
+                    alert(errors.stock[0]); // Show the "stock" error
+                }
+                } else {
+                    // Handle other errors
+                    alert('An error occurred. Please try again.');
+                }
             },
             complete: function() {
                 $button.prop('disabled', false);
@@ -342,6 +351,7 @@ $(document).ready(function() {
                              $button.siblings('.quantity-input');
 
         var quantity = parseInt($quantityInput.val());
+        var quantitytemp = parseInt($quantityInput.val());
         console.log('quantity is ' + quantity);
 
         if (action === 'increase') quantity++;
@@ -374,8 +384,17 @@ $(document).ready(function() {
 
                 updateCartTotal();
             },
-            error: function() {
-                alert('Failed to update quantity.');
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                // Validation error
+                const errors = xhr.responseJSON.errors;
+                if (errors.stock) {
+                    alert(errors.stock[0]); // Show the "stock" error
+                }
+                } else {
+                    // Handle other errors
+                    alert('An error occurred. Please try again.');
+                }
             }
         });
     });
@@ -519,7 +538,7 @@ function removeCartItem(productId) {
             success: function(product) {
                 $('#product-modal-title').text(product.name);
                 $('#product-modal-description').text(product.description);
-                $('#product-modal-img').attr('src', product.images[0] ? baseUrl + 'storage/' + product.images[0] : defaultImage);
+                $('#product-modal-img').attr('src', product.images[0] ? baseUrl + 'storage/' + product.images[0] : baseUrl + 'storage/' + defaultImage);
                 $('#product-modal-link').attr('href', product.link);
                 $('#product-modal-category').text(product.category).attr('href', product.categoryLink);
                 $('#add_to_cart').data('product-id', productId).data('product-name', product.name);

@@ -1,6 +1,10 @@
 @extends('admin.layouts.admin-masterpage')
 
 @section('content')
+<style>
+  
+</style>
+
 <div class="container">
     <div class="page-inner">
       <div
@@ -49,7 +53,7 @@
                 <div class="col col-stats ms-3 ms-sm-0">
                   <div class="numbers">
                     <p class="card-category">Sales</p>
-                    <h4 class="card-title">${{$totalSales}}</h4>
+                    <h4 class="card-title">${{number_format($totalSales)}}</h4>
                   </div>
                 </div>
               </div>

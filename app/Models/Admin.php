@@ -44,11 +44,7 @@ class Admin extends Authenticatable
     ];
 
 
-    // One-to-Many relationship with Cart
-    public function carts()
-    {
-        return $this->hasMany(Cart::class);
-    }
+    
 
     // One-to-Many relationship with Order
     public function orders()

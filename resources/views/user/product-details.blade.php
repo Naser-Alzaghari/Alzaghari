@@ -187,7 +187,7 @@
                             </div>
                             <div class="tab-pane fade" id="nav-reviews" role="tabpanel"
                                 aria-labelledby="nav-reviews-tab">
-                                @if ($product->reviews->isNotEmpty())
+                            @if ($product->reviews->isNotEmpty())
                             <div class="product-reviews">
                                 <ul class="review__list">
                                     @foreach ($product->reviews as $review)
@@ -214,7 +214,11 @@
                                     </li>
                                     @endforeach
                                 </ul>
-                                @auth
+                            </div>
+                            @else
+                                <div class="pb--30">No customer reviews</div>
+                            @endif
+                            @auth
                                 <div class="review-form-wrapper">
                                     <span class="reply-title"><strong>Add a review</strong></span>
                                     
@@ -251,7 +255,7 @@
                                         <div class="form__group mb--30 mb-sm--20">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <label class="form__label" for="review">Your Review<span class="required">*</span></label>
+                                                    <label class="form__label" for="review">Your Review</label>
                                                     <textarea name="review" id="review" class="form__input form__input--textarea"></textarea>
                                                 </div>
                                             </div>
@@ -267,11 +271,6 @@
                                     
                                 </div> 
                                 @endauth
-                                
-                            </div>
-                            @else
-                                No customer reviews
-                            @endif
                             </div>
                         </div>
                     </div>

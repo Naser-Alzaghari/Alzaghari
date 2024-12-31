@@ -32,6 +32,7 @@
                                     <p><i class="fa fa-check-circle"></i>No order has been made yet.</p>
                                     <a href="shop-sidebar.html">Go Shop</a>
                                 </div>
+                                @if ($orders->isNotEmpty())
                                 <div class="table-content table-responsive">
                                     <table class="table text-center">
                                         <thead>
@@ -57,7 +58,46 @@
                                             
                                         </tbody>
                                     </table>
+                                    <!-- Pagination Links -->
+                                    <nav class="pagination-wrap">
+                                        <ul class="pagination">
+                                            <!-- Previous Page Link -->
+                                            @if ($orders->onFirstPage())
+                                                <li><span class="prev page-number disabled"><i class="fa fa-angle-double-left"></i></span></li>
+                                            @else
+                                                <li><a href="{{ $orders->appends(request()->query())->previousPageUrl() }}"><span class="prev page-number"><i class="fa fa-angle-double-left"></i></span></a></li>
+                                            @endif
+                                    
+                                            <!-- Pagination Links -->
+                                            @foreach ($orders->appends(request()->query())->links()->elements as $element)
+                                                @if (is_string($element))
+                                                    <li class="disabled"><span>{{ $element }}</span></li>
+                                                @endif
+                                    
+                                                @if (is_array($element))
+                                                    @foreach ($element as $page => $url)
+                                                        @if ($page == $orders->currentPage())
+                                                            <li><span class="current page-number">{{ $page }}</span></li>
+                                                        @else
+                                                            <li><a href="{{ $url }}"><span class="page-number">{{ $page }}</span></a></li>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                    
+                                            <!-- Next Page Link -->
+                                            @if ($orders->hasMorePages())
+                                                <li><a href="{{ $orders->appends(request()->query())->nextPageUrl() }}"><span class="next page-number"><i class="fa fa-angle-double-right"></i></span></a></li>
+                                            @else
+                                                <li><span class="next page-number disabled"><i class="fa fa-angle-double-right"></i></span></li>
+                                            @endif
+                                        </ul>
+                                    </nav>
                                 </div>
+                                @else
+                                    there are no orders yet
+                                @endif
+                                
                             </div>
                             <div class="tab-pane fade" id="downloads">
                                 <div class="message-box mb--30 d-none">

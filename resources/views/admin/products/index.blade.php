@@ -133,7 +133,7 @@
                       <tr>
                         <td>{{$product->name}}</td>
                         <td>{{$product->category->name}}</td>
-                        <td>{{$product->price}}</td>
+                        <td>${{$product->price}}</td>
                         <td>{{$product->stock}}</td>
 
                         <td>@foreach($product->images as $image)

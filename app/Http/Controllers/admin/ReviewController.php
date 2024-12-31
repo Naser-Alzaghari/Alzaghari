@@ -11,7 +11,7 @@ class ReviewController extends Controller
     // Display a listing of reviews
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::orderBy('id', 'desc')->get();
         return view('admin.reviews', compact('reviews'));
     }
 

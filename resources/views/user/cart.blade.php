@@ -1,6 +1,103 @@
 @extends('user.layouts.master')
 
 @section('content')
+
+<style>
+    /* Responsive cart table styles */
+@media screen and (max-width: 767px) {
+    .cart-form .table {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-form .table thead {
+        display: none; /* Hide header on mobile */
+    }
+
+    .cart-form .table tbody {
+        display: block;
+        width: 100%;
+    }
+
+    .cart-form .table tbody tr {
+        display: block;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+    }
+
+    .cart-form .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border: none;
+        text-align: right;
+    }
+
+    /* Product thumbnail styling */
+    .cart-form .table td.product-thumbnail {
+        display: block;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    .cart-form .table td.product-thumbnail img {
+        width: 120px;
+        margin: 0 auto;
+    }
+
+    /* Product name styling */
+    .cart-form .table td.product-name {
+        display: block;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    /* Remove button styling */
+    .cart-form .table td.product-remove {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 0;
+        border: none;
+    }
+
+    /* Add labels for mobile view */
+    .cart-form .table td.product-price:before {
+        content: "Price:";
+        font-weight: 600;
+    }
+
+    .cart-form .table td.product-quantity:before {
+        content: "Quantity:";
+        font-weight: 600;
+    }
+
+    .cart-form .table td.product-total-price:before {
+        content: "Total:";
+        font-weight: 600;
+    }
+
+    /* Quantity input styling */
+    .cart-form .table td.product-quantity {
+        padding: 1rem 0;
+    }
+
+    .cart-form .table .quantity {
+        margin: 0;
+        justify-content: flex-end;
+    }
+
+    /* Ensure proper spacing between elements */
+    .cart-form .table td.product-price,
+    .cart-form .table td.product-quantity,
+    .cart-form .table td.product-total-price {
+        margin: 0.5rem 0;
+    }
+}
+</style>
 <div id="content" class="main-content-wrapper">
     <div class="page-content-inner">
         <div class="container">
@@ -11,7 +108,7 @@
                         <div class="row g-0">
                             <div class="col-12">
                                 <div class="table-content table-responsive">
-                                    <table class="table text-center table-bordered table-hover" style="table-layout: auto; width: 100%;">
+                                    <table class="table text-center table-bordered">
                                         <thead class="table-dark">
                                             <tr>
                                                 <th>&nbsp;</th>
@@ -30,14 +127,14 @@
                                                             <i class="dl-icon-close"></i>
                                                         </a>
                                                     </td>
-                                                    <td class="product-thumbnail text-start p-3">
+                                                    <td class="product-thumbnail text-start">
                                                         @if ($item['product']->images->isNotEmpty())
-                                                            <img src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumbnail" class="img-thumbnail" style="width: 60px;">
+                                                            <img src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumbnail" class="img-thumbnail">
                                                         @else
-                                                            <img src="{{ asset('storage/images/default_product.png') }}" alt="Product Thumbnail" class="img-thumbnail" style="width: 60px;">
+                                                            <img src="{{ asset('storage/images/default_product.png') }}" alt="Product Thumbnail" class="img-thumbnail">
                                                         @endif
                                                     </td>
-                                                    <td class="product-name text-start wide-column">
+                                                    <td class="product-name text-start">
                                                         <h5>
                                                             <a href="product-details.html" class="text-decoration-none">{{ $item['product']->name }}</a>
                                                         </h5>
@@ -47,6 +144,7 @@
                                                             <span class="money" data-price="{{ $item['product']->price_after_discount ?? $item['product']->price }}">${{ $item['product']->price_after_discount ?? $item['product']->price }}</span>
                                                         </span>
                                                     </td>
+                                                    
                                                     <td class="product-quantity" style="min-width: 150px;">
                                                         <div class="quantity d-flex justify-content-center align-items-center">
                                                             <button type="button" class="btn btn-outline-secondary update-cart-quantity d-flex align-items-center justify-content-center" data-product-id="{{ $item['product']->id }}" data-action="decrease" style="width: 32px; height: 32px; padding: 0 1rem; background-color: #212529; color: white; border: none;">-</button>
@@ -65,7 +163,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    
                                 </div>
                             </div>
                         </div>
