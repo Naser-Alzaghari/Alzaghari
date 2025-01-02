@@ -21,7 +21,7 @@ class ProfileController extends Controller
         // Retrieve the orders for the logged-in user
         $orders = $user->orders()->orderBy('id', 'desc')->paginate(10);
         
-
+        // dd($user->orders());
         return view('user.my-orders', compact('orders'));
     }
 

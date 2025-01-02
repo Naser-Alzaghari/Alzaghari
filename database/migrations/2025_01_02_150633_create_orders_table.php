@@ -18,8 +18,12 @@ return new class extends Migration
             $table->enum('status', ['pending', 'shipped', 'delivered', 'cancelled'])->nullable()->default('pending');
             $table->decimal('total_amount', 10)->nullable();
             $table->decimal('total_amount_after_discount', 10);
+            $table->string('payment_method', 50)->default('cash');
             $table->enum('payment_status', ['paid', 'unpaid'])->nullable()->default('unpaid');
-            $table->date('pickup_date');
+            $table->date('pickup_date')->nullable();
+            $table->string('order_notes')->nullable();
+            $table->string('address');
+            $table->string('phone_number', 14);
             $table->timestamp('created_at');
             $table->timestamp('updated_at');
             $table->softDeletes();

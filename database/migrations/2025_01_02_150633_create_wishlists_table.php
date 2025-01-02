@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('colors', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('name', 50)->nullable()->unique('color_name');
-            $table->char('hex_code', 7)->nullable();
+        Schema::create('wishlists', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id')->index('wishlists_user_id_foreign');
+            $table->unsignedBigInteger('product_id')->index('wishlists_product_id_foreign');
+            $table->timestamps();
         });
     }
 
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('colors');
+        Schema::dropIfExists('wishlists');
     }
 };

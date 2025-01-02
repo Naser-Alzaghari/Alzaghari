@@ -21,7 +21,7 @@
                         <label
                           for="inlineinput"
                           class="col-md-3 col-form-label"
-                          >Name</label>
+                          >Name <span class="text-danger">*</span></label>
 
                         <div class="col-12 p-0">
                           <input
@@ -29,20 +29,29 @@
                             class="form-control input-full"
                             name="name"
                             placeholder="Name"
-                            value="{{ isset($category) ? $category->name : ""}}"
+                            value="{{ isset($category) ? $category->name : old('name')}}"
                           />
+                          @error('name')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                         </div>
                         
                     </div>
 
                     <div class="form-group">
-                        <label for="comment">Description</label>
-                        <textarea class="form-control" id="comment" rows="5" name="description">{{ isset($category) ? $category->description : ""}}</textarea>
+                        <label for="comment">Description <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="comment" rows="5" name="description">{{ isset($category) ? $category->description : old('description')}}</textarea>
+                        @error('description')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="form-group">
-                        <label for="image">Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
+                        <label for="image">Image <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg">
+                        @error('image')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
               </div>

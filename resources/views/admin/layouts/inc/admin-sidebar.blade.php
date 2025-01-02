@@ -59,16 +59,7 @@
               <p>orders</p>
             </a>
           </li>
-          {{-- <li class="nav-item {{ Request::is('admin/coupons*') ? 'active' : '' }}">
-            <a
-              href="{{route('admin.coupons')}}"
-              class="collapsed"
-              aria-expanded="false"
-            >
-              <i class="fas fa-tag"></i>
-              <p>coupons</p>
-            </a>
-          </li> --}}
+          
           <li class="nav-item {{ Request::is('admin/products*') ? 'active' : '' }}">
             <a
               href="{{route('admin.products')}}"

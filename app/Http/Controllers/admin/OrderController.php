@@ -10,13 +10,9 @@ class OrderController extends Controller
     // Display a listing of users
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('created_at', 'desc')->get();
         
 
-    //     $order = Order::with('category')->findOrFail($id);
-
-    // // Access the category name
-    // $categoryName = $order->category->name;
         return view('admin.orders.index', compact('orders'));
     }
 
@@ -58,7 +54,9 @@ class OrderController extends Controller
     // Display the specified user
     public function show(Order $order)
     {
-        $order = Order::with('orderItems')->findOrFail($order->id);
+        $order = Order::with(['orderItems.product' => function ($query) {
+            $query->withTrashed();  // Include soft-deleted products
+        }])->findOrFail($order->id);
         return view('admin.orders.show', compact('order'));
     }
 

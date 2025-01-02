@@ -8,8 +8,8 @@
     <meta name="description" content="meta description">
     
     <!-- Favicons -->
-    <link rel="shortcut icon" href="user_assets/img/titleLogo.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="user_assets/img/icon.png">
+    <link rel="shortcut icon" href="{{asset('user_assets/img/titleLogo.png')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{asset('user_assets/img/icon.png')}}">
 
     <!-- Title -->
     <title>Alzaghari - Clean, Minimal eCommerce Bootstrap 5 Template</title>

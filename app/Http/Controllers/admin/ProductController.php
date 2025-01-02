@@ -43,7 +43,9 @@ class ProductController extends Controller
             'price_after_discount' => 'nullable|numeric',
             'stock' => 'required|integer',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-            'video' => 'nullable',
+            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+        ], [
+            'video.regex' => 'The video URL must be a valid YouTube URL.',
         ]);
         // Create product
         $product = Product::create($validated);
@@ -107,7 +109,9 @@ class ProductController extends Controller
                 'price_after_discount' => 'nullable|numeric',
                 'stock' => 'required|integer',
                 'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-                'video' => 'nullable',
+                'video' => ['required', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+            ], [
+                'video.regex' => 'The video URL must be a valid YouTube URL.',
             ]);
         } catch(Exception $e) {
             dd($e);

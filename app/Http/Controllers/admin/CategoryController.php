@@ -31,8 +31,8 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // 'description' => 'required|string|max:255',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+            'description' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
         ]);
         
         $imagePath = null;
@@ -53,8 +53,8 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            // 'description' => 'required|string|max:255',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
+            'description' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation
         ]);
 
         if ($request->hasFile('image')) {
@@ -87,8 +87,19 @@ class CategoryController extends Controller
     // Remove the specified user from the database
     public function destroy($id)
     {
+        // Find the category by ID
         $category = Category::findOrFail($id);
-        $category->delete(); // Soft delete
+
+        // Check if the category has any related products
+        if ($category->products()->exists()) {
+            // If there are products associated with the category, block the deletion
+            return redirect()->route('admin.categories')->with('error', 'Cannot soft delete this category because it has products.');
+        }
+
+        // Soft delete the category
+        $category->delete();
+
+        // Redirect back with a success message
         return redirect()->route('admin.categories')->with('success', 'Category soft-deleted successfully!');
     }
 

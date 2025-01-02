@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('product_id')->nullable()->index('product_id');
             $table->integer('quantity')->nullable();
             $table->decimal('price', 10)->nullable();
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
         });
     }
 

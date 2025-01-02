@@ -16,46 +16,42 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-6">
                     <div class="form-group form-inline">
                         <label
                           for="inlineinput"
                           class="col-md-3 col-form-label"
-                          >Name</label
+                          >Name <span class="text-danger">*</span></label
                         >
-                        <div class="col-md-9 p-0">
                           <input
                             type="text"
                             class="form-control input-full"
                             name="name"
                             placeholder="Name"
-                            value="{{ isset($user) ? $user->name : ""}}"
+                            value="{{ isset($user) ? $user->name : old('name')}}"
                           />
                           @error('name')
                             <div class="error">{{ $message }}</div>
                           @enderror                          
-                        </div>
+                        
                       </div>
                   <div class="form-group">
-                    <label for="email2">Email Address</label>
+                    <label for="email2">Email Address <span class="text-danger">*</span></label>
                     <input
                       type="email"
                       class="form-control"
                       name="email"
                       id="email2"
                       placeholder="Enter Email"
-                      value="{{ isset($user) ? $user->email : ""}}"
+                      value="{{ isset($user) ? $user->email : old('email')}}"
                     />
                     @error('email')
                         <div class="error">{{ $message }}</div>
                     @enderror
-                    <small id="emailHelp2" class="form-text text-muted"
-                      >We'll never share your email with anyone
-                      else.</small
-                    >
+                    
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password <span class="text-danger">*</span></label>
                     <input
                       type="password"
                       class="form-control"

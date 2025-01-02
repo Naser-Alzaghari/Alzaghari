@@ -9,7 +9,67 @@
         <div class="page-content-inner enable-page-sidebar">
             <div class="container-fluid">
                 <div class="row shop-sidebar pt--150 pt-md--35 pt-sm--20 pb--60 pb-md--50 pb-sm--40">
-                    
+                    <div class="col-lg-3 order-lg-1 mt--30 mt-md--40" id="primary-sidebar">
+                        <div class="sidebar-widget">
+                            <!-- Category Widget Start -->
+                            <div class="product-widget categroy-widget mb--35 mb-md--30">
+                                <h3 class="widget-title">Categories</h3>
+                                <ul class="prouduct-categories product-widget__list">
+                                    @foreach ($categories as $category)
+                                    <li class="{{ isset($currentCategory) && $currentCategory->id == $category->id ? 'active' : '' }}">
+                                        <a href="{{ route('shop.filterByCategory', $category->id) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                        <span class="count">({{ $category->products->count() }})</span>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- Category Widget End -->
+
+
+                            <!-- Price Filter Widget Start -->
+                            <div class="product-widget product-price-widget mb--40 mb-md--35">
+                                <h3 class="widget-title">Price</h3>
+                                <div class="widget_content">
+                                    <form action="{{ route('shop-sidebar') }}" method="GET">
+                                        <div id="slider-range"
+                                            class="price-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+                                            <div class="ui-slider-range ui-widget-header ui-corner-all"
+                                                style="left: 16.6667%; width: 79.1667%;">
+
+                                            </div>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                tabindex="0" style="left: 16.6667%;">
+
+                                            </span>
+                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                tabindex="0" style="left: 95.8333%;">
+
+                                            </span>
+                                        </div>
+                                        <div class="filter-price">
+                                            <div class="filter-price__count">
+                                                <div class="filter-price__input-group mb--20">
+                                                    <span>Price: </span>
+                                                    <input type="text" id="amount" class="amount-range" readonly="">
+                                                    <input type="hidden" name="price_range" id="price-range">
+                                                </div>
+                                                <button type="submit" class="btn btn-style-1 sidebar-btn">
+                                                    filter
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Price Filter Widget End -->
+
+                            
+
+                        </div>
+                    </div>
+
                     <div class="col-lg-9 order-lg-2" id="main-content">
                         @if (!$products->isNotEmpty())
                         <h4 class="text-center pt--60">No products found</h4>
@@ -92,66 +152,7 @@
                         @endif
                     </div>
                     
-                    <div class="col-lg-3 order-lg-1 mt--30 mt-md--40" id="primary-sidebar">
-                        <div class="sidebar-widget">
-                            <!-- Category Widget Start -->
-                            <div class="product-widget categroy-widget mb--35 mb-md--30">
-                                <h3 class="widget-title">Categories</h3>
-                                <ul class="prouduct-categories product-widget__list">
-                                    @foreach ($categories as $category)
-                                    <li class="{{ isset($currentCategory) && $currentCategory->id == $category->id ? 'active' : '' }}">
-                                        <a href="{{ route('shop.filterByCategory', $category->id) }}">
-                                            {{ $category->name }}
-                                        </a>
-                                        <span class="count">({{ $category->products->count() }})</span>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <!-- Category Widget End -->
-
-
-                            <!-- Price Filter Widget Start -->
-                            <div class="product-widget product-price-widget mb--40 mb-md--35">
-                                <h3 class="widget-title">Price</h3>
-                                <div class="widget_content">
-                                    <form action="{{ route('shop-sidebar') }}" method="GET">
-                                        <div id="slider-range"
-                                            class="price-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                            <div class="ui-slider-range ui-widget-header ui-corner-all"
-                                                style="left: 16.6667%; width: 79.1667%;">
-
-                                            </div>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
-                                                tabindex="0" style="left: 16.6667%;">
-
-                                            </span>
-                                            <span class="ui-slider-handle ui-state-default ui-corner-all"
-                                                tabindex="0" style="left: 95.8333%;">
-
-                                            </span>
-                                        </div>
-                                        <div class="filter-price">
-                                            <div class="filter-price__count">
-                                                <div class="filter-price__input-group mb--20">
-                                                    <span>Price: </span>
-                                                    <input type="text" id="amount" class="amount-range" readonly="">
-                                                    <input type="hidden" name="price_range" id="price-range">
-                                                </div>
-                                                <button type="submit" class="btn btn-style-1 sidebar-btn">
-                                                    filter
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- Price Filter Widget End -->
-
-                            
-
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

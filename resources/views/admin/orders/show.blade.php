@@ -4,9 +4,7 @@
 <div class="container">
     <div class="page-inner">
         <div class="card">
-            <div class="card-header">
-              <div class="card-title">Basic Table</div>
-            </div>
+            
             <div class="card-body">
               
               <table class="table mt-3">
@@ -32,6 +30,12 @@
               </tr>
                 </tbody>
                 </table>
+                @if ($order->order_notes)
+                <div class="form-group">
+                  <label class="control-label"> Comment: </label>
+                  <p class="form-control-static">{{$order->order_notes}}</p>
+                </div>
+                @endif
             </div>
         </div>
         <a href="{{route('admin.orders')}}" type="button" class="btn btn-danger">back</a>

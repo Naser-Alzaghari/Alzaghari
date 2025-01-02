@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integer('id', true);
             $table->string('name', 100)->nullable()->unique('name');
             $table->text('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent();
             $table->softDeletes();

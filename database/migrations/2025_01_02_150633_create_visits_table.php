@@ -9,10 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('visits', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->integer('count')->default(0);
             $table->timestamps();
         });

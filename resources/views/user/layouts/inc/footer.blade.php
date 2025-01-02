@@ -9,7 +9,6 @@
                     </a>
                     <p>Welcome to our store! We pride ourselves on offering a wide range of high-quality products to meet all your needs.</p>
                     <ul class="social">
-                        <li><a href="https://twitter.com" class="social__link"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="https://facebook.com" class="social__link"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="https://instagram.com" class="social__link"><i class="fab fa-instagram"></i></a></li>
                     </ul>

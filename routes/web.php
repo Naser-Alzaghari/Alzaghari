@@ -5,7 +5,6 @@ use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\ProfileController;
 
@@ -64,10 +63,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             })->name('orders.view');
             Route::resource('orders', OrderController::class)->except(['create', 'store'])->name('index', 'orders');
 
-            // Coupons Management
-            Route::resource('coupons', CouponController::class)->name('index', 'coupons');
-            Route::patch('/coupons/{coupon}/toggle', [CouponController::class, 'toggle'])->name('coupons.toggle');
-
+            
             // Users Management
             Route::resource('users', UserController::class)->name('index', 'users');
             Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');

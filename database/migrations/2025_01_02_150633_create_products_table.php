@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('price_after_discount', 10)->nullable();
             $table->integer('stock')->nullable();
             $table->integer('category_id')->nullable()->index('category_id');
+            $table->string('video')->nullable();
             $table->timestamp('created_at')->nullable()->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable()->useCurrent();
             $table->softDeletes();

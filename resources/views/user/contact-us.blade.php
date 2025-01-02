@@ -30,8 +30,16 @@
                         <div class="error-message"></div>
                     </div>
                 
-                    <button type="submit" class="submit-button">Send Message</button>
-                </form>                
+                    <button type="submit" class="btn btn-style-1 submit-button">Send Message</button>
+                </form>
+                <div class="form-status-messages">
+                    <div class="success-message text-success" style="display: none;">
+                        Message sent successfully! We'll get back to you soon.
+                    </div>
+                    <div class="error-message-global text-danger" style="display: none;">
+                            Oops! Something went wrong and we couldn't send your message.
+                    </div>
+                </div>
             </div>
 
             <!-- Contact Info Section -->
@@ -39,13 +47,8 @@
                 <h2 class="section-title">Contact info</h2>
 
                 <div class="info-card">
-                    <h3>Postal Address</h3>
-                    <p>PO Box 16122 Collins Street West<br>Victoria 8007 Australia</p>
-                </div>
-
-                <div class="info-card">
-                    <h3>Airi HQ</h3>
-                    <p>Postal Address<br>PO Box 16122 Collins Street West<br>Victoria 8007 Australia</p>
+                    <h3>Address</h3>
+                    <p>Jordan - Amman</p>
                 </div>
 
                 <div class="contact-grid">
@@ -61,11 +64,8 @@
                 </div>
 
                 <div class="social-links">
-                    <a href="https://twitter.com" class="social-icon"><i class="fa fa-twitter"></i></a>
                     <a href="https://facebook.com" class="social-icon"><i class="fa fa-facebook"></i></a>
                     <a href="https://instagram.com" class="social-icon"><i class="fa fa-instagram"></i></a>
-                    <a href="https://youtube.com" class="social-icon"><i class="fa fa-youtube"></i></a>
-                    <a href="https://plus.google.com" class="social-icon"><i class="fa fa-google-plus"></i></a>
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
 
 .form-input:focus {
     outline: none;
-    border-bottom-color: #007bff;
+    border-bottom-color: #2D2FC9;
 }
 
 
@@ -135,22 +135,9 @@
     width: 100%;
 }
 
-.submit-button {
-    padding: 15px 40px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
-.submit-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+
+
 
 /* Info Card Styles */
 .info-card {
@@ -170,7 +157,7 @@
 }
 
 .contact-link {
-    color: #007bff;
+    color: #2D2FC9;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -206,7 +193,7 @@
 }
 
 .social-icon:hover {
-    background-color: #007bff;
+    background-color: #2D2FC9;
     color: #fff;
     transform: translateY(-2px);
 }
@@ -238,6 +225,55 @@
     .submit-button {
         width: 100%;
     }
+}
+
+.form-status-messages {
+    margin-top: 20px;
+}
+
+.alert {
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.submit-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+}
+
+
+
+.spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 3px solid #ffffff;
+    border-top: 3px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 </style>
 @endsection

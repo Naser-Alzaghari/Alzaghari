@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\user;
 
+use App\Models\Message;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,12 @@ class ContactUsController extends Controller
 
         try {
             Mail::to($recipient)->send(new ContactMail($name, $email, $phone, $messageContent));
-
+            Message::create([
+                'name' => $request->contact_name,
+                'email' => $request->contact_email,
+                'phone_number' => $request->contact_phone,
+                'message' => $request->contact_message,
+            ]);
             return response()->json(['message' => 'Thank You! Your message has been sent.'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Oops! Something went wrong and we couldn\'t send your message.'], 500);

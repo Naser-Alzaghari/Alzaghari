@@ -3,28 +3,7 @@
 @section('content')
 <div class="container">
     <div class="page-inner">
-        <div class="page-header">
-            <h3 class="fw-bold mb-3">Product Form</h3>
-            <ul class="breadcrumbs mb-3">
-                <li class="nav-home">
-                    <a href="#">
-                        <i class="icon-home"></i>
-                    </a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Forms</a>
-                </li>
-                <li class="separator">
-                    <i class="icon-arrow-right"></i>
-                </li>
-                <li class="nav-item">
-                    <a href="#">Product Form</a>
-                </li>
-            </ul>
-        </div>
+
         <div class="row">
             <form action="{{ !isset($product) ? route('admin.products.store') : route('admin.products.update', $product) }}" method="POST" class="col-12" enctype="multipart/form-data">
                 @csrf
@@ -39,21 +18,21 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{ isset($product) ? $product->name : '' }}">
+                                    <label for="name">Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{ isset($product) ? $product->name :  old('name')  }}">
                                     @error('name')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" rows="5" name="description">{{ isset($product) ? $product->description : '' }}</textarea>
+                                    <textarea class="form-control" id="description" rows="5" name="description">{{ isset($product) ? $product->description : old('description') }}</textarea>
                                 </div>
                                 @error('description')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
                                 <div class="form-group">
-                                    <label for="category_id">Category</label>
+                                    <label for="category_id">Category <span class="text-danger">*</span></label>
                                     <select class="form-select" name="category_id">
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" @if (isset($product) && $category->id == $product->category_id) selected @endif>{{ $category->name }}</option>
@@ -65,7 +44,7 @@
                                 @enderror
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" class="form-control" id="image" name="images[]" multiple>
+                                    <input type="file" class="form-control" id="image" name="images[]" accept="image/png, image/jpeg" multiple>
                                     @error('images.*')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -101,10 +80,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="price">Price</label>
+                                    <label for="price">Price <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control" name="price" value="{{ isset($product) ? $product->price : '' }}"/>
+                                        <input type="text" class="form-control" name="price" value="{{ isset($product) ? $product->price : old('price') }}"/>
                                     </div>
                                     @error('price')
                                         <div class="error">{{ $message }}</div>
@@ -114,22 +93,22 @@
                                     <label for="price_after_discount">Price After Discount</label>
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control" name="price_after_discount" value="{{ isset($product) ? $product->price_after_discount : '' }}">
+                                        <input type="text" class="form-control" name="price_after_discount" value="{{ isset($product) ? $product->price_after_discount : old('price_after_discount') }}">
                                     </div>
                                     @error('price_after_discount')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="stock">Stock</label>
-                                    <input type="text" class="form-control" name="stock" placeholder="Stock number" value="{{ isset($product) ? $product->stock : '' }}">
+                                    <label for="stock">Stock <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="stock" placeholder="Stock number" value="{{ isset($product) ? $product->stock : old('stock') }}">
                                     @error('stock')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="video">youtube video id</label>
-                                    <input type="text" class="form-control" name="video" placeholder="video link" value="{{ isset($product) ? $product->video : '' }}">
+                                    <label for="video">youtube video link</label>
+                                    <input type="text" class="form-control" name="video" placeholder="video link" value="{{ isset($product) ? $product->video : old('video') }}">
                                     @error('video')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
