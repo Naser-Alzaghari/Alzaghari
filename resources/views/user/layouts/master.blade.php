@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="meta description">
+    <meta name="description" content="Explore a wide range of high-quality sinks, mixers, water heaters, and kitchen and bathroom accessories. Upgrade your home with our modern, durable products.">
+
+    <meta name="keywords" content="sinks, kitchen sinks, bathroom sinks, mixers, water heaters, kitchen accessories, bathroom accessories, shower systems, faucets, plumbing fixtures, home improvement, modern sinks, stainless steel sinks, wall-mounted water heaters">
     
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{asset('user_assets/img/titleLogo.png')}}" type="image/x-icon">
@@ -545,10 +547,10 @@ function removeCartItem(productId) {
                 $('#qty').val(1);
 
                 if (product.price_after_discount) {
-                    $('#product-modal-price').html(`${product.price_after_discount}JD`);
-                    $('#product-modal-old-price').html(`${product.price}JD`).show();
+                    $('#product-modal-price').html(`$${product.price_after_discount}`);
+                    $('#product-modal-old-price').html(`$${product.price}`).show();
                 } else {
-                    $('#product-modal-price').html(`${product.price}JD`);
+                    $('#product-modal-price').html(`$${product.price}`);
                     $('#product-modal-old-price').hide();
                 }
             },

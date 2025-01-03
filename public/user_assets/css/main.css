@@ -17018,7 +17018,8 @@ a, button, img, input, span, .main-navigation .mainmenu__item.menu-item-has-chil
       min-width: 3rem; }
     .table tbody td.product-thumbnail {
       width: 9rem;
-      min-width: 9rem; }
+      min-width: 9rem;
+    }
     .table tbody td.product-name h3 {
       font-size: 1.2rem; }
     .table tbody td.product-stock {

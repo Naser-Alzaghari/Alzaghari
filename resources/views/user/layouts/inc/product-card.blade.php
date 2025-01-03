@@ -80,12 +80,12 @@
                 
                 <span class="product-price-wrapper">
                     @if (isset($product->price_after_discount))
-                    <span class="money">{{$product->price_after_discount}}JD</span>
+                    <span class="money">${{$product->price_after_discount}}</span>
                     <span class="product-price-old">
-                        <span class="money">{{$product->price}}JD</span>
+                        <span class="money">${{$product->price}}</span>
                     </span>
                     @else
-                    <span class="money">{{$product->price}}JD</span>
+                    <span class="money">${{$product->price}}</span>
                     @endif 
                 </span>
             </div>

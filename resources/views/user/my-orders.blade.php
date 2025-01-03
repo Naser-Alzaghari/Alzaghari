@@ -33,70 +33,90 @@
                                     <a href="shop-sidebar.html">Go Shop</a>
                                 </div>
                                 @if ($orders->isNotEmpty())
-                                <div class="table-content table-responsive">
-                                    <table class="table text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>Order</th>
-                                                <th>Date</th>
-                                                <th>Status</th>
-                                                <th>Total</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($orders as $order)
-                                            <tr>
-                                                <td>{{$order->id}}</td>
-                                                <td class="wide-column">{{$order->created_at}}</td>
-                                                <td>{{$order->status}}</td>
-                                                <td class="wide-column">${{$order->total_amount_after_discount ?? $order->total}}</td>
-                                                <td><a href="{{ route('view_order', $order->id) }}"
-                                                        class="btn btn-medium btn-style-1">View</a></td>
-                                            </tr>
-                                            @endforeach
-                                            
-                                        </tbody>
-                                    </table>
-                                    <!-- Pagination Links -->
-                                    <nav class="pagination-wrap">
-                                        <ul class="pagination">
-                                            <!-- Previous Page Link -->
-                                            @if ($orders->onFirstPage())
-                                                <li><span class="prev page-number disabled"><i class="fa fa-angle-double-left"></i></span></li>
-                                            @else
-                                                <li><a href="{{ $orders->appends(request()->query())->previousPageUrl() }}"><span class="prev page-number"><i class="fa fa-angle-double-left"></i></span></a></li>
-                                            @endif
-                                    
-                                            <!-- Pagination Links -->
-                                            @foreach ($orders->appends(request()->query())->links()->elements as $element)
-                                                @if (is_string($element))
-                                                    <li class="disabled"><span>{{ $element }}</span></li>
-                                                @endif
-                                    
-                                                @if (is_array($element))
-                                                    @foreach ($element as $page => $url)
-                                                        @if ($page == $orders->currentPage())
-                                                            <li><span class="current page-number">{{ $page }}</span></li>
-                                                        @else
-                                                            <li><a href="{{ $url }}"><span class="page-number">{{ $page }}</span></a></li>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                            @endforeach
-                                    
-                                            <!-- Next Page Link -->
-                                            @if ($orders->hasMorePages())
-                                                <li><a href="{{ $orders->appends(request()->query())->nextPageUrl() }}"><span class="next page-number"><i class="fa fa-angle-double-right"></i></span></a></li>
-                                            @else
-                                                <li><span class="next page-number disabled"><i class="fa fa-angle-double-right"></i></span></li>
-                                            @endif
-                                        </ul>
-                                    </nav>
-                                </div>
-                                @else
-                                    there are no orders yet
-                                @endif
+    <!-- Mobile Cards -->
+    <div class="d-block d-md-none">
+        @foreach ($orders as $order)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="font-weight-bold">Order #{{$order->id}}</span>
+                        <span>${{$order->total_amount_after_discount ?? $order->total}}</span>
+                    </div>
+                    <div class="mb-2">
+                        <small class="text-muted">{{$order->created_at}}</small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge badge-primary">{{$order->status}}</span>
+                        <a href="{{ route('view_order', $order->id) }}" class="btn btn-sm btn-style-1">View</a>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <!-- Desktop Table -->
+    <div class="d-none d-md-block table-responsive">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($orders as $order)
+                <tr>
+                    <td>{{$order->id}}</td>
+                    <td class="wide-column">{{$order->created_at}}</td>
+                    <td>{{$order->status}}</td>
+                    <td class="wide-column">${{$order->total_amount_after_discount ?? $order->total}}</td>
+                    <td><a href="{{ route('view_order', $order->id) }}"
+                            class="btn btn-medium btn-style-1">View</a></td>
+                </tr>
+                @endforeach
+                
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="pagination-wrap">
+        <ul class="pagination">
+            @if ($orders->onFirstPage())
+                <li><span class="prev page-number disabled"><i class="fa fa-angle-double-left"></i></span></li>
+            @else
+                <li><a href="{{ $orders->appends(request()->query())->previousPageUrl() }}"><span class="prev page-number"><i class="fa fa-angle-double-left"></i></span></a></li>
+            @endif
+
+            @foreach ($orders->appends(request()->query())->links()->elements as $element)
+                @if (is_string($element))
+                    <li class="disabled"><span>{{ $element }}</span></li>
+                @endif
+
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $orders->currentPage())
+                            <li><span class="current page-number">{{ $page }}</span></li>
+                        @else
+                            <li><a href="{{ $url }}"><span class="page-number">{{ $page }}</span></a></li>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+
+            @if ($orders->hasMorePages())
+                <li><a href="{{ $orders->appends(request()->query())->nextPageUrl() }}"><span class="next page-number"><i class="fa fa-angle-double-right"></i></span></a></li>
+            @else
+                <li><span class="next page-number disabled"><i class="fa fa-angle-double-right"></i></span></li>
+            @endif
+        </ul>
+    </nav>
+@else
+    <p>There are no orders yet</p>
+@endif
                                 
                             </div>
                             <div class="tab-pane fade" id="downloads">

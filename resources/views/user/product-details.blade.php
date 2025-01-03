@@ -131,12 +131,12 @@
                         </span>
                         <div class="product-price-wrapper mb--40 mb-md--10">
                             @if (isset($product->price_after_discount))
-                                <span class="money">{{$product->price_after_discount}}JD</span>
+                                <span class="money">${{$product->price_after_discount}}</span>
                                 <span class="old-price">
-                                    <span class="money">{{$product->price}}JD</span>
+                                    <span class="money">${{$product->price}}</span>
                                 </span>
                                 @else
-                                <span class="money">{{$product->price}}JD</span>
+                                <span class="money">${{$product->price}}</span>
                             @endif
                         </div>
                         <div class="clearfix"></div>
@@ -167,7 +167,7 @@
             <div class="row justify-content-center pt--45 pt-lg--50 pt-md--55 pt-sm--35">
                 <div class="col-12">
                     <div class="product-data-tab tab-style-1">
-                        <div class="nav nav-tabs product-data-tab__head mb--40 mb-md--30" id="product-tab"
+                        <div class="nav nav-tabs product-data-tab__head mb--40 mb-md--30 gap-4" id="product-tab"
                             role="tablist">
                             <button type="button" class="product-data-tab__link nav-link active" id="nav-description-tab"
                                 data-bs-toggle="tab" data-bs-target="#nav-description" role="tab" aria-selected="true">
@@ -218,6 +218,7 @@
                             @else
                                 <div class="pb--30">No customer reviews</div>
                             @endif
+                            <hr>
                             @auth
                                 <div class="review-form-wrapper">
                                     <span class="reply-title"><strong>Add a review</strong></span>

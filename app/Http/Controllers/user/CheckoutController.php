@@ -56,6 +56,24 @@ class CheckoutController extends Controller
             'cartItems.*.price' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0',
         ]);
+        try {
+            foreach ($cartItems as $item) {
+                $product = \App\Models\Product::find($item['product_id']);
+                if ($product->stock < $item['quantity']) {
+                    throw new \Exception('Insufficient stock for product: ' . $product->name);
+                }
+            }
+        } catch (\Exception $error) {
+            // Rollback in case of failure
+            DB::rollBack();
+
+            return redirect()->back()->with('error', $error->getMessage());
+            // return response()->json([
+            //     'message' => 'Failed to place order.',
+            //     'error' => $e->getMessage(),
+            // ], 500);
+        }
+        
         
         // Start a database transaction
         DB::beginTransaction();
@@ -80,6 +98,7 @@ class CheckoutController extends Controller
             foreach ($cartItems as $item) {
                 $product = \App\Models\Product::find($item['product_id']);
                 if ($product->stock < $item['quantity']) {
+                    DB::rollBack();
                     throw new \Exception('Insufficient stock for product: ' . $product->name);
                 }
                 

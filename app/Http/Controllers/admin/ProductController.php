@@ -47,6 +47,13 @@ class ProductController extends Controller
         ], [
             'video.regex' => 'The video URL must be a valid YouTube URL.',
         ]);
+
+        // Trim the URL at the "&" character if 'video' exists
+        if (!empty($validated['video'])) {
+            $validated['video'] = explode('&', $validated['video'])[0];
+        }
+
+
         // Create product
         $product = Product::create($validated);
 
@@ -96,33 +103,28 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // Validate the request
-        $video_url = $request->input('video');
-    
-        // Decode URL if needed (optional)
-        $video_url = urldecode($video_url);
-        try{
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'nullable|string',
-                'category_id' => 'required|integer|exists:categories,id',
-                'price' => 'required|numeric',
-                'price_after_discount' => 'nullable|numeric',
-                'stock' => 'required|integer',
-                'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
-                'video' => ['required', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
-            ], [
-                'video.regex' => 'The video URL must be a valid YouTube URL.',
-            ]);
-        } catch(Exception $e) {
-            dd($e);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|integer|exists:categories,id',
+            'price' => 'required|numeric',
+            'price_after_discount' => 'nullable|numeric',
+            'stock' => 'required|integer',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validate images
+            'video' => ['nullable', 'regex:/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i'],
+        ], [
+            'video.regex' => 'The video URL must be a valid YouTube URL.',
+        ]);
+
+        // Trim the URL at the "&" character if 'video' exists
+        if (!empty($validated['video'])) {
+            $validated['video'] = explode('&', $validated['video'])[0];
         }
         
 
         // Update product details
         $product->update($validated);
-        $product->update([
-            'video' => $video_url,
-        ]);
+        
     
 
         // Delete selected images

@@ -49,10 +49,12 @@
     .wishlist-table td.product-thumbnail {
         text-align: center;
         padding: 1rem 0;
+        width: 100% !important;
+        min-width: auto;
     }
 
     .wishlist-table td.product-thumbnail img {
-        max-width: 150px;
+        width: 50%;
         margin: 0 auto;
     }
 
@@ -138,11 +140,14 @@
                                 <tr>
                                     <th class="px-2">&nbsp;</th>
                                     <td class="px-2 product-thumbnail">
-                                        @if ($item['product']->images->isNotEmpty())
+                                        <a href="{{ route('product-details', $item['product']->id)  }}">
+                                            @if ($item['product']->images->isNotEmpty())
                                             <img class="rounded" src="{{ asset('storage/' . $item['product']->images[0]->image_url) }}" alt="Product Thumbnail">
                                         @else
                                             <img class="rounded" src="{{ asset('storage/images/default_product.png')}}" alt="Product Thumbnail">
                                         @endif
+                                        </a>
+                                        
                                     </td>
                                     <td class="px-2 product-name">
                                         <h3>
