@@ -34,7 +34,7 @@
 
                   <div class="form-group form-group-default">
                     <label>payment_status</label>
-                    <select class="form-select" name="payment_status" {{$order->payment_status == 'paid' ? 'disabled' : ""}}>
+                    <select class="form-select" id="readonly-select" {{$order->payment_status == 'paid' ? 'disabled' : ""}}>
                         @foreach ($payment_status as $state)
                         <option value="{{$state}}" @if (isset($order))
                             @if ($order->payment_status == $state)
@@ -43,13 +43,14 @@
                         @endif>{{$state}}</option>
                         @endforeach
                     </select>
+                    <!-- Hidden input to store the selected value -->
+                  <input type="hidden" id="hidden-input" name="payment_status" value="{{$order->payment_status}}">
                 </div>
 
                 <p class="mb-0">final price</p>
                 <div class="input-group mb-3">
                   <span class="input-group-text">$</span>
-                  
-                  <input type="text" class="form-control" name="total_amount_after_discount" aria-label="Amount (to the nearest dollar)" value="{{ isset($order) ? $order->total_amount_after_discount : ""}}" {{$order->payment_status == 'paid' ? 'disabled' : ""}}>
+                  <input type="text" class="form-control" name="total_amount_after_discount" aria-label="Amount (to the nearest dollar)" value="{{ isset($order) ? $order->total_amount_after_discount : ""}}" {{$order->payment_status == 'paid' ? 'readonly' : ""}}>
               </div>
 
 
@@ -66,5 +67,18 @@
       </form>
     </div>
   </div>
+
+  <script>
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function () {
+      const selectElement = document.getElementById("readonly-select");
+      const hiddenInput = document.getElementById("hidden-input");
+
+      // Keep the hidden input in sync if the value changes programmatically
+      selectElement.addEventListener("change", function () {
+        hiddenInput.value = selectElement.value; // Update the hidden input
+      });
+    });
+  </script>
 
 @endsection

@@ -123,7 +123,7 @@
                         <td>{{$review->user->name}}</td>
                         <td>{{$review->product_id}}</td>
                         <td>{{$review->comment}}</td>
-                        <td>{{$review->is_active ? "Active" : "Disable"}}</td>
+                        <td class="{{$review->is_active ? "text-success" : "text-danger"}}">{{$review->is_active ? "Actived" : "Disabled"}}</td>
                         <td>
                           <div class="form-button-action">
                             <form action="{{ route('admin.reviews.toggle', $review) }}" method="POST" style="display: inline;">
@@ -164,14 +164,8 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+  
   <script>
-    document.getElementById("alert_demo_7").addEventListener("click",()=>{
-console.log(111);
-
-});
-  </script>
-  <script>
-    console.log(111);
     // $("#alert_demo_7").click(function (e) {
     //         swal({
     //           title: "Are you sure?",

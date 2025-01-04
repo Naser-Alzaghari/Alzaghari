@@ -324,7 +324,8 @@ $(document).ready(function() {
                 // Validation error
                 const errors = xhr.responseJSON.errors;
                 if (errors.stock) {
-                    alert(errors.stock[0]); // Show the "stock" error
+                    showErrorAlert(errors.stock[0]);
+                    // alert(errors.stock[0]); // Show the "stock" error
                 }
                 } else {
                     // Handle other errors
@@ -391,7 +392,8 @@ $(document).ready(function() {
                 // Validation error
                 const errors = xhr.responseJSON.errors;
                 if (errors.stock) {
-                    alert(errors.stock[0]); // Show the "stock" error
+                    showErrorAlert(errors.stock[0]);
+                    // alert(errors.stock[0]); // Show the "stock" error
                 }
                 } else {
                     // Handle other errors
@@ -526,6 +528,12 @@ function removeCartItem(productId) {
         $('body').append(alertDiv);
         setTimeout(() => alertDiv.fadeOut(500, () => alertDiv.remove()), 4000);
     }
+
+    function showErrorAlert(message) {
+        var alertDiv = $('<div class="alert alert-danger" style="color:red; background-color: #FFCCCC;"></div>').text(message).hide().fadeIn(500);
+        $('body').append(alertDiv);
+        setTimeout(() => alertDiv.fadeOut(500, () => alertDiv.remove()), 4000);
+      }
 
     $('#productModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);

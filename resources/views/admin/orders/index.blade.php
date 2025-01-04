@@ -101,10 +101,11 @@
                     <thead>
                       <tr>
                         <th>order id</th>
-                        <th>total_amount</th>
+                        <th>total amount</th>
                         <th>after discount</th>
+                        <th>order state</th>
                         <th>payment method</th>
-                        <th>payment_status</th>
+                        <th>payment status</th>
 
                                                 <th style="width: 10%">Action</th>
                       </tr>
@@ -112,10 +113,11 @@
                     <tfoot>
                       <tr>
                         <th>order id</th>
-                        <th>total_amount</th>
+                        <th>total amount</th>
                         <th>after discount</th>
+                        <th>order state</th>
                         <th>payment method</th>
-                        <th>payment_status</th>
+                        <th>payment status</th>
 
                         <th>Action</th>
                       </tr>
@@ -126,6 +128,7 @@
                         <td>{{$order->id}}</td>
                         <td>{{$order->total_amount}}</td>
                         <td>{{$order->total_amount_after_discount}}</td>
+                        <td>{{$order->status}}</td>
                         <td>{{$order->payment_method}}</td>
                         <td>{{$order->payment_status}}</td>
 
@@ -187,12 +190,7 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
-  <script>
-    document.getElementById("alert_demo_7").addEventListener("click",()=>{
-console.log(111);
-
-});
-  </script>
+  
   <script>
     console.log(111);
     // $("#alert_demo_7").click(function (e) {

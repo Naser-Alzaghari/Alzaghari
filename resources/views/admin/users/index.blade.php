@@ -171,12 +171,7 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
-  <script>
-    document.getElementById("alert_demo_7").addEventListener("click",()=>{
-console.log(111);
-
-});
-  </script>
+  
   <script>
     console.log(111);
     // $("#alert_demo_7").click(function (e) {

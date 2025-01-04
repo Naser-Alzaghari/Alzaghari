@@ -46,16 +46,29 @@
               </tr>
                 </tbody>
                 </table>
-                @if ($order->order_notes)
-                <div class="form-group">
-                  <label class="control-label"> Comment: </label>
-                  <p class="form-control-static">{{$order->order_notes}}</p>
-                </div>
-                @endif
+                
+                
             </div>
+            @if ($order->order_notes)
+              <div class="card pb-0">
+                <div class="card-body">
+                  <div class="form-group">
+                    <label class="control-label"> Comment: </label>
+                    <hr>
+                    <p class="form-control-static">{{$order->order_notes}}</p>
+                  </div>
+              </div>
+              </div>
+            @endif
+            
             <a href="{{route('admin.orders')}}" type="button" class="btn btn-danger">back</a>
         </div>
     </div>
+
+    
+
+    
+    
     
   </div>
 

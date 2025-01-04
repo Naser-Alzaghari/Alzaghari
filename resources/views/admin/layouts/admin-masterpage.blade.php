@@ -85,6 +85,11 @@
                       </div>
 
     </div>
+
+    
+
+  
+
     <!--   Core JS Files   -->
     <script src="{{ asset('admin_assets/js/core/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('admin_assets/js/core/popper.min.js') }}"></script>
@@ -205,6 +210,35 @@
             $("#addRowModal").modal("hide");
           });
         });
+
+
+        function showAlert(message) {
+        var alertDiv = $('<div class="alert alert-success"></div>').text(message).hide().fadeIn(500);
+        $('body').append(alertDiv);
+        setTimeout(() => alertDiv.fadeOut(500, () => alertDiv.remove()), 4000);
+      }
+      function showErrorAlert(message) {
+        var alertDiv = $('<div class="alert alert-danger" style="color:red; background-color: #FFCCCC;"></div>').text(message).hide().fadeIn(500);
+        $('body').append(alertDiv);
+        setTimeout(() => alertDiv.fadeOut(500, () => alertDiv.remove()), 4000);
+      }
+
+      
       </script>
+
+      @if (session('success'))
+      <script>showAlert("{{session('success')}}")
+        console.log(1);
+        
+      </script>
+      @endif
+
+      @if (session('error'))
+      <script>showErrorAlert("{{session('error')}}")
+        console.log(1);
+        
+      </script>
+      @endif
+      
   </body>
 </html>

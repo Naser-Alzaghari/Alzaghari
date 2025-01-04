@@ -29,24 +29,19 @@
                                     </ul>
                                 </li>
                                 
-                                <li class="mainmenu__item menu-item-has-children has-children">
-                                    <a href="#" class="mainmenu__link">
-                                        <span class="mm-text">Pages</span>
+                                <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                    <a href="{{route('contact-us')}}" class="mainmenu__link">
+                                        <span class="mm-text">Contact Us</span>
                                     </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="{{route('about-us')}}">
-                                                <span class="mm-text">About Us</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{route('contact-us')}}">
-                                                <span class="mm-text">Contact Us</span>
-                                            </a>
-                                        </li>
-                                        
-                                    </ul>
+                                    
                                 </li>
+                                <li class="mainmenu__item menu-item-has-children megamenu-holder">
+                                    <a href="{{route('about-us')}}" class="mainmenu__link">
+                                        <span class="mm-text">About Us</span>
+                                    </a>
+                                    
+                                </li>
+                                
                                 
                                 
                             </ul>
@@ -77,6 +72,9 @@
                                     @guest
                                         <li>
                                             <a href="{{ route('login') }}">Login</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('register') }}">Register</a>
                                         </li>
                                     @endguest
                                     @auth
@@ -147,6 +145,9 @@
                                         <li>
                                             <a href="{{ route('login') }}">Login</a>
                                         </li>
+                                        <li>
+                                            <a href="{{ route('register') }}">Register</a>
+                                        </li>
                                     @endguest
                                     @auth
                                     <li>
@@ -201,6 +202,18 @@
                                     <a href="{{route('shop-sidebar')}}">
                                         Collections
                                     </a>
+                                </li>
+                                <li >
+                                    <a href="{{route('contact-us')}}">
+                                        Contact Us
+                                    </a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="{{route('about-us')}}">
+                                        About Us
+                                    </a>
+                                    
                                 </li>
 
                             </ul>

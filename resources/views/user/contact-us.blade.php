@@ -21,7 +21,7 @@
                     </div>
                 
                     <div class="form-group">
-                        <input type="text" id="contact_phone" name="contact_phone" class="form-input" placeholder="Your Phone*" value="{{Auth::user()->phone_number ?? ''}}">
+                        <input type="text" id="contact_phone" name="contact_phone" class="form-input" placeholder="Your Phone*" value="{{Auth::user()->phone_number ?? ''}}" maxlength="14">
                         <div class="error-message"></div>
                     </div>
                 

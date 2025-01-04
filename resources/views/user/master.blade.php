@@ -58,7 +58,7 @@
                             <div class="tp-caption  tp-resizeme" id="slide-2-layer-3"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
                                 data-y="['top','top','top','top']" data-voffset="['51','51','51','46']"
-                                data-fontsize="['145','165','120','100']"
+                                data-fontsize="['145','165','70','70']"
                                 data-lineheight="['220','220','150','120']" data-width="none" data-height="none"
                                 data-whitespace="nowrap" data-type="text" data-responsive_offset="on"
                                 data-frames='[{"delay":"+790","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
@@ -177,7 +177,21 @@
                             <!-- LAYER NR. 10 -->
                             
                             <!-- LAYER NR. 11 -->
-                            
+                            <div class="tp-caption   tp-resizeme" id="slide-3-layer-3"
+                                        data-x="['center','center','center','center']" data-hoffset="['0','0','0','0']"
+                                        data-y="['top','top','top','top']" data-voffset="['50','50','51','51']"
+                                        data-fontsize="['120','120','100','80']"
+                                        data-lineheight="['120','120','100','80']" data-width="none" data-height="none"
+                                        data-whitespace="nowrap" data-type="text" data-responsive_offset="on"
+                                        data-frames='[{"delay":"+790","speed":1500,"frame":"0","from":"x:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'
+                                        data-margintop="[0,0,0,0]" data-marginright="[0,0,0,0]"
+                                        data-marginbottom="[0,0,0,0]" data-marginleft="[0,0,0,0]"
+                                        data-textAlign="['inherit','inherit','inherit','inherit']"
+                                        data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]"
+                                        data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
+                                        style="z-index: 7; white-space: nowrap; font-size: 120px; line-height: 120px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Playfair Display; text-shadow: 0 0 0.1em black;">
+                                        Free Shipping </div>
+
                             <!-- LAYER NR. 12 -->
                             <a class="tp-caption rev-btn " href="{{route('shop-sidebar')}}" id="slide-3-layer-4"
                                 data-x="['center','center','center','center']" data-hoffset="['0','0','0','2']"

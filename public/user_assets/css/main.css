@@ -17607,7 +17607,8 @@ a, button, img, input, span, .main-navigation .mainmenu__item.menu-item-has-chil
 .quantity {
   margin-right: 1rem;
   height: 7rem;
-  width: 8rem; }
+  /* width: 8rem; */
+}
   .quantity-input {
     background: none;
     padding: 1rem;

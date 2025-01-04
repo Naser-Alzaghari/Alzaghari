@@ -71,15 +71,12 @@ class OrderController extends Controller
     // Update the specified user in the database
     public function update(Request $request, Order $order)
     {
+        $request->validate([
+            'status' => 'required', // Match predefined statuses
+            'total_amount_after_discount' => 'required|numeric|min:0', // Must be numeric and not negative
+            'payment_status' => 'required|in:paid,unpaid,refunded', // Match predefined payment statuses
+        ]);
         
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'description' => 'required|string|max:255',
-        //     'stock' => 'required',
-        //     'category_id' => 'required',
-        //     'price' => 'required',
-        // ]);
-
 
         $order->status = $request->status;
         $order->payment_status = $request->payment_status;

@@ -96,6 +96,10 @@
     .cart-form .table td.product-total-price {
         margin: 0.5rem 0;
     }
+
+    .table tbody td.product-quantity .quantity {
+      margin-right: 0;
+      }
 }
 </style>
 <div id="content" class="main-content-wrapper">

@@ -13,7 +13,7 @@
                                 aria-controls="dashboard" aria-selected="true">Account Details</a>
                             <a class="nav-link active" data-toggle="pill" role="tab" href="{{ route('view_orders') }}"
                                 aria-controls="orders" aria-selected="true">Orders</a>
-                            <form method="POST" action="{{ route('logout') }}" id="logout_form">
+                            <form method="POST" action="{{ route('user.logout') }}" id="logout_form">
                                 @csrf
                                 <a class="nav-link" href="javascript:{}" onclick="document.getElementById('logout_form').submit();">Logout</a>
                                                             </form>

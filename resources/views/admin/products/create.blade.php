@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Description</label>
-                                    <textarea class="form-control" id="description" rows="5" name="description">{{ isset($product) ? $product->description : old('description') }}</textarea>
+                                    <textarea maxlength="254" class="form-control" id="description" rows="5" name="description">{{ isset($product) ? $product->description : old('description') }}</textarea>
                                 </div>
                                 @error('description')
                                     <div class="error">{{ $message }}</div>
